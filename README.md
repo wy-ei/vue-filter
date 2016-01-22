@@ -60,7 +60,7 @@ It's very easy to use.
 
 ## Filters List
 
-### Array Filters
+### Collection Filters
 
 + [first](#first)
 + [last](#last)
@@ -68,6 +68,9 @@ It's very easy to use.
 + [size](#size)
 + [at](#at)
 + [reverse](#reverse)
++ [concat](#concat)
++ [map](#map)
++ [random](#random)
 
 ### Math Filters
 
@@ -82,11 +85,12 @@ It's very easy to use.
 + [floor](#math-method-filters)
 + [log](#math-method-filters)
 + [pow](#math-method-filters)
-+ [random](#math-method-filters)
 + [round](#math-method-filters)
 + [sin](#math-method-filters)
 + [sqrt](#math-method-filters)
 + [tan](#math-method-filters)
++ [sum](#sum)
++ [mean](#mean)
 + [min](#min)
 + [max](#max)
 + [+](#plus)
@@ -104,6 +108,8 @@ It's very easy to use.
 + [truncate](#truncate)
 + [split](#split)
 + [trim](#trim)
++ [test](#test)
+
 
 ### Other Filters
 
@@ -114,7 +120,7 @@ It's very easy to use.
 
 ## Document 
 
-### Array Filters
+### Collection Filters
 
 ---
 
@@ -172,20 +178,73 @@ reverse an array or a string
 {{ [1,2,3] | reverse }} => [3,2,1]
 ```
 
+#### concat
+
+Concatenates an array into another one.
+
+ 
+```  
+{{ [1,2,3] | concat [4,5,6] }} => [1,2,3,4,5,6]
+```
+
+#### map
+
+returns a new collection of the results of each expression execution. 
+
+```javascript
+new Vue({
+  ... 
+  methods:{
+    increase:function(val){return val+1;}
+  }
+});
+```
+
+``` 
+{{ [1,2,3] | map increase }} => [2,3,4]
+```
+
+#### random
+
+get a random value from a collection
+
+```
+{{ [1,2,3,4] | random }} => 1 or 2 or 3 or 4
+```
+
 ### Math Filters
 
 ---
 
 #### Math method filters
 
-abs,acos,asin,atan,atan2,ceil,cos,exp,floor,log,pow,random,round,sin,sqrt,tan
+abs,acos,asin,atan,atan2,ceil,cos,exp,floor,log,pow,round,sin,sqrt,tan
+
+**Notice:** random filter use to get a random value from a collection
 
 ```
 {{ -1.2 | abs }}  => 1.2
 {{ 1 | acos }}  => 0
 {{ 1.3 | ceil }} => 2
-{{ anything | random }}  => a number between 0 ~ 1
 {{ 3 | pow 2 }} => 9  i.e: Math.pow(3,2)
+```
+
+#### sum
+
+Get sum of all values in an array.
+
+```
+{{ [1,2,3] | sum }} => 6
+you can give an option argument as initial value
+{{ [1,2,3] | sum 10 }} = 16
+```
+
+#### mean
+
+return mean value of a array
+
+```
+{{ [1,2,3,4] | mean }} => 2.5
 ```
 
 #### min
@@ -308,6 +367,14 @@ Strips tabs, spaces, and newlines (all whitespace) from the left or right or bot
 {{ '   some spaces   ' | trim }} => 'some spaces'
 {{ '   some spaces   ' | trim 'r' }} => '   some spaces'
 {{ '   some spaces   ' | trim 'l' }} => 'some spaces   '
+```
+
+#### test
+
+test if a string match a pattern
+
+```
+{{ "http://vuejs.org" | test /^http/ }} => true
 ```
 
 ### Other Filters
