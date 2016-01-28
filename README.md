@@ -93,11 +93,11 @@ It's very easy to use.
 + [mean](#mean)
 + [min](#min)
 + [max](#max)
-+ [+](#plus)
-+ [-](#minus)
-+ [*](#multi)
-+ [/](#divide)
-+ [%](#modulo)
++ [plus](#plus)
++ [minis](#minus)
++ [multiply](#multiply)
++ [divide](#divide)
++ [mod](#mod)
 
 ### String Filters
 
@@ -114,7 +114,7 @@ It's very easy to use.
 ### Other Filters
 
 + [date](#date)
-+ [default](#default)
++ [defaults](#defaults)
 
 **see [Document](#document) below to learn how to use those filters**
 
@@ -266,44 +266,44 @@ list:[
 return maximum value in an array.It will compare two item by a certain key
 if key provide.
 
-#### + <span id='plus'></span>
+#### plus
 
 Adds a number to an output.
 
 ```
-{{ 10 | + 2 }} => 12
+{{ 10 | plus 2 }} => 12
 ```
 
-#### <span id='minus'>-</span>
+#### minus
 
 Subtracts a number from an output.
 
 ```
-{{ 12 | - 2 }} => 10
+{{ 12 | minus 2 }} => 10
 ```
 
-#### <span id='multi'>*</span>
+#### multiply
 
 Multiplies an output by a number.
 
 ```
-{{ 10 | * 2 }} => 20
+{{ 10 | multiply 2 }} => 20
 ```
 
-#### <span id='divide'>/</span>
+#### divide
 
 Divides an output by a number
 
 ```
-{{ 10 | / 4 }} => 2.5
+{{ 10 | divide 4 }} => 2.5
 ```
 
-#### <span id='modulo'>%</span>
+#### mod
 
 Divides an output by a number and returns the remainder.
 
 ```
-{{ 10 | % 3 }} => 1
+{{ 10 | mod 3 }} => 1
 ```
 
 ### String Filters
@@ -425,14 +425,14 @@ Converts a timestamp into another date format.
 |%y |Year without a century (00.99). |`{{ timestamp | date "%y" }} => "14" `| 
 |%Y |Year with a century. |`{{ timestamp | date "%Y" }} => "2014" `| 
 
-### default
+### defaults
 
 Sets a default value for any variable with no assigned value.
 
 The default value is returned if the variable resolves to null ,undefined or an empty string ''.A string containing whitespace characters and a number has value 0 will not resolve to the default value.
 
 ```html
-{{ customer.name | default "customer" }}
+{{ customer.name | defaults "customer" }}
 
 <!--if customer.name is null or empty,will use "customer" instead-->
 ```

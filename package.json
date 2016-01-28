@@ -2,9 +2,10 @@
   "name": "vue-filter",
   "version": "0.1.0",
   "description": "A plugin for Vue.js. It can enhance vue filter system.",
-  "main": "vue-filter.js",
+  "main": "dist/vue-filter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build/build.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/wy-ei/vue-filter/issues"
   },
-  "homepage": "https://github.com/wy-ei/vue-filter#readme"
+  "homepage": "https://github.com/wy-ei/vue-filter#readme",
+  "devDependencies": {
+    "rollup": "^0.25.1",
+    "uglify-js": "^2.6.1"
+  }
 }
