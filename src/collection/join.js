@@ -9,8 +9,10 @@ import util from '../util/index';
 function join(arr, c) {
   if (util.isArray(arr)) {
     return arr.join(c);
-  } else {
-    return arr;
+  } else if(util.isArrayLike(arr)){
+    return util.toArray(arr).join(c);
+  }else{
+  	return arr;
   }
 };
 

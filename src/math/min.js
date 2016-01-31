@@ -16,7 +16,7 @@ import util from '../util/index';
 function min(arr, key) {
   var ret, min, computed;
   if (util.isArray(arr)) {
-    min = util.get(arr[0], key);
+    min = Infinity;
     util.each(arr, function(val) {
       computed = util.get(val, key);
       if (computed < min) {
@@ -24,7 +24,7 @@ function min(arr, key) {
         ret = val;
       }
     });
-    return min;
+    return ret;
   } else {
     return arr;
   }

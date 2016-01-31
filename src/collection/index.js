@@ -7,6 +7,8 @@ import map from './map';
 import random from './random';
 import reverse from './reverse';
 import size from './size';
+import range from './range';
+import contains from './contains';
 
 export {
 	at,
@@ -17,5 +19,7 @@ export {
 	map,
 	random,
 	reverse,
-	size
+	size,
+	range,
+	contains
 };

@@ -27,4 +27,5 @@ rollup.rollup({
   }).code;
   minified = banner + '\n' + minified;
   fs.writeFileSync('dist/vue-filter.min.js', minified);
+  console.log('done!');
 });

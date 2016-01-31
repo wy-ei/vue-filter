@@ -1,0 +1,68 @@
+var test = require('tape');
+//import * as collectionFilters from '../collection/index';
+//import * as mathFilters from './math/index';
+import * as methods from '../src/string/index';
+//import * as otherFilters from './other/index';
+test('trim', function(t) {
+	var trim = methods.trim;
+	t.equal(trim("    abc ",'l'),"abc ");
+	t.equal(trim(" abc  ",'r')," abc");
+	t.equal(trim("  abc  "),"abc");
+	t.end();
+});
+
+test('append', function(t) {
+	var append = methods.append;
+	t.equal(append("abc",'-123'),"abc-123");
+	t.equal(append(1,'-123'),"1-123");
+	t.equal(append('','-123'),"-123");
+	t.equal(append(null,'-123'),"-123");
+	t.end();
+});
+
+test('prepend', function(t) {
+	var prepend = methods.prepend;
+	t.equal(prepend("abc",'123-'),"123-abc");
+	t.equal(prepend(1,'123-'),"123-1");
+	t.equal(prepend('','123-'),"123-");
+	t.equal(prepend(null,'123-'),"123-");
+	t.end();
+});
+
+test('camelcase', function(t) {
+	var camelcase = methods.camelcase;
+	t.equal(camelcase("some_one"),"SomeOne");
+	t.equal(camelcase("some-one"),"SomeOne");
+	t.end();
+});
+
+test('remove', function(t) {
+	var remove = methods.remove;
+	t.equal(remove("a-b-c-d-e","-"),"abcde");
+	t.equal(remove("a-b-c-d-e","="),"a-b-c-d-e");
+	t.equal(remove(123,"="),123);
+	t.end();
+});
+
+test('split', function(t) {
+	var split = methods.split;
+	t.deepEqual(split("1-2-3","-"),["1","2","3"]);
+	t.equal(split(123,"-"),123);
+	t.end();
+});
+
+test('test', function(t) {
+	var test = methods.test;
+	t.equal(test('http://vue.org',"^http"),true);
+	t.equal(test('http://vue.org',"^https"),false);
+	t.end();
+});
+
+test('truncate',function(t){
+	var truncate = methods.truncate;
+	t.equal(truncate("abcdefg",10),"abcdefg...");
+	t.equal(truncate("abcdefghigk",10),"abcdefg...");
+	t.equal(truncate("abcdefg",10,"---"),"abcdefg---");
+	t.equal(truncate("abc",10,"-"),"abc-");
+	t.end();
+});

@@ -18,14 +18,13 @@ var
 var util = {};
 
 util.isArray = function(obj) {
-  return Array.isArray ? Array.isArray(obj) :
-    Object.prototype.toString.call(obj) === '[object Array]';
+  return Array.isArray(obj);
 }
 
+var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
 util.isArrayLike = function(obj) {
-  var length = obj['length'],
-    MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-  return typeof length === 'number' && length > 0 && length < MAX_ARRAY_INDEX;
+  var length = obj['length'];
+  return typeof length === 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
 }
 
 util.isObject = function(obj) {
@@ -89,7 +88,7 @@ util.toArray = function(obj) {
   if (!obj) {
     return [];
   }
-  if (util.isArray(obj)) {
+  if (util.isArrayLike(obj)) {
     return slice.call(obj);
   }
   return util.values(obj);
@@ -107,21 +106,25 @@ util.map = function(obj, cb) {
 };
 
 util.get = function(obj, property) {
+  var ret = undefined;
   if (!util.isObject(obj)) {
     return obj;
   }
   if (property == undefined) {
     return obj;
   }
-  property = '' + property;
-  var property = property.split('.'),
-    ret = obj;
-  try {
-    for (var i = 0; i < property.length; i++) {
-      ret = ret[property[i]];
+  if (util.isString(property)) {
+    var property = property.split('.'),
+      ret = obj;
+    try {
+      for (var i = 0; i < property.length; i++) {
+        ret = ret[property[i]];
+      }
+    } catch (e) {
+      ret = undefined;
     }
-  } catch (e) {
-    ret = undefined;
+  } else if (util.isFunction(property)) {
+    ret = property(obj);
   }
   return ret;
 }

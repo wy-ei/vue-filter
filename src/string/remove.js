@@ -7,7 +7,7 @@ import util from '../util/index';
 
 function remove(str, substr) {
   if (util.isString(str)) {
-    str = str.replace(str, '');
+    str = str.split(substr).join('');
   }
   return str;
 };

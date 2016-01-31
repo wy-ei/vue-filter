@@ -71,6 +71,8 @@ It's very easy to use.
 + [concat](#concat)
 + [map](#map)
 + [random](#random)
++ [range](#range)
++ [contains](#contains)
 
 ### Math Filters
 
@@ -210,6 +212,22 @@ get a random value from a collection
 
 ```
 {{ [1,2,3,4] | random }} => 1 or 2 or 3 or 4
+```
+
+#### range
+
+Return a new collection from a given length
+
+```
+{{ [] | range 4 }} => [0,1,2,3]
+```
+
+#### contains
+
+Checks if given expression or value is present in the collection
+
+```
+{{ [2,3,4] | contains 3 }} => true;
 ```
 
 ### Math Filters

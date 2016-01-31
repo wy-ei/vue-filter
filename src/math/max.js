@@ -16,15 +16,15 @@ import util from '../util/index';
 function max(arr, key) {
   var ret, max, computed;
   if (util.isArray(arr)) {
-    max = util.get(arr[0],key);
+    max = -Infinity;
     util.each(arr, function (val) {
       computed = util.get(val,key);
-      if(computed < max){
+      if(computed > max){
         max = computed;
         ret = val;
       }
     });
-    return max;
+    return ret;
   } else {
     return arr;
   }

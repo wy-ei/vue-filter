@@ -2,6 +2,7 @@ import base from './base';
 import { plus , minus , multiply, divide, mod } from './operator';
 import max from './max';
 import min from './min';
+import sum from './sum';
 import mean from './mean';
 
 
@@ -41,6 +42,7 @@ export {
 	max,
 	min,
 	mean,
+	sum,
 	
 	// + , - , * , / , %
 	plus,
