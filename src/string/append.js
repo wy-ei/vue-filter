@@ -5,12 +5,12 @@
  */
 
 function append(str, postfix) {
-  if (!str && str !== 0) {
-    str = ''
-  } else {
-    str = str.toString();
-  }
-  return str + postfix;
-};
+    if (!str && str !== 0) {
+        str = '';
+    } else {
+        str = str.toString();
+    }
+    return str + postfix;
+}
 
 export default append;

@@ -7,11 +7,11 @@ import util from '../util/index';
  */
 
 function at(arr, index) {
-  if (util.isArrayLike(arr)) {
-    return arr[index];
-  } else {
-    return arr;
-  }
+    if (util.isArrayLike(arr)) {
+        return arr[index];
+    } else {
+        return arr;
+    }
 }
 
 export default at;

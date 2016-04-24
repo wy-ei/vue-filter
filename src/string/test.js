@@ -5,8 +5,8 @@
  */
 
 function test(str, re, flag) {
-  var re = new RegExp(re, flag);
-  return re.test(str);
-};
+    re = new RegExp(re, flag);
+    return re.test(str);
+}
 
 export default test;

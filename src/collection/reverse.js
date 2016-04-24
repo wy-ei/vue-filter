@@ -7,15 +7,15 @@ import util from '../util/index';
  */
 
 function reverse(arr) {
-  if (util.isArray(arr)) {
-    // make a copy
-    var arr = arr.concat();
-    return arr.reverse();
-  } else if (util.isString(arr)) {
-    return arr.split('').reverse().join('');
-  } else {
-    return arr;
-  }
-};
+    if (util.isArray(arr)) {
+        // make a copy
+        arr = arr.concat();
+        return arr.reverse();
+    } else if (util.isString(arr)) {
+        return arr.split('').reverse().join('');
+    } else {
+        return arr;
+    }
+}
 
 export default reverse;

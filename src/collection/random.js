@@ -6,19 +6,19 @@ import util from '../util/index';
  */
 
 function random(collection) {
-  if (!collection) {
-    return undefined;
-  }
-  if (util.isObject(collection)) {
-    collection = util.toArray(collection)
-  }
-  if (util.isArrayLike(collection) && collection.length != 0) {
-    var i = Math.floor(collection.length * Math.random());
-    return collection[i];
-  } else {
-    // not arrayLike and object or is a empty array or object
-    return collection;
-  }
-};
+    if (!collection) {
+        return undefined;
+    }
+    if (util.isObject(collection)) {
+        collection = util.toArray(collection);
+    }
+    if (util.isArrayLike(collection) && collection.length != 0) {
+        var i = Math.floor(collection.length * Math.random());
+        return collection[i];
+    } else {
+        // not arrayLike and object or is a empty array or object
+        return collection;
+    }
+}
 
 export default random;

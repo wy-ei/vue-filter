@@ -5,9 +5,9 @@
  */
 
 function truncate(str, length, truncation) {
-  length = length || 30;
-  truncation = typeof truncation === "string" ? truncation : "...";
-  return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
-};
+    length = length || 30;
+    truncation = typeof truncation === 'string' ? truncation : '...';
+    return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
+}
 
 export default truncate;

@@ -12,19 +12,19 @@ import util from '../util/index';
  */
 
 function trim(str, rightOrleft) {
-  if (util.isString(str)) {
-    var re;
-    if (rightOrleft == 'r') {
-      re = /\s+$/;
-    } else if (rightOrleft == 'l') {
-      re = /^\s+/;
+    if (util.isString(str)) {
+        var re;
+        if (rightOrleft == 'r') {
+            re = /\s+$/;
+        } else if (rightOrleft == 'l') {
+            re = /^\s+/;
+        } else {
+            re = /^\s+|\s+$/g;
+        }
+        return str.replace(re, '');
     } else {
-      re = /^\s+|\s+$/g;
+        return str;
     }
-    return str.replace(re, '');
-  } else {
-    return str;
-  }
-};
+}
 
 export default trim;

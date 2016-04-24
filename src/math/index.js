@@ -1,5 +1,11 @@
 import base from './base';
-import { plus , minus , multiply, divide, mod } from './operator';
+import {
+    plus,
+    minus,
+    multiply,
+    divide,
+    mod
+} from './operator';
 import max from './max';
 import min from './min';
 import sum from './sum';
@@ -23,31 +29,31 @@ var sqrt = base.sqrt;
 var tan = base.tan;
 
 export {
-	abs,
-	acos,
-	asin,
-	atan,
-	atan2,
-	ceil,
-	cos,
-	exp,
-	floor,
-	log,
-	pow,
-	round,
-	sin,
-	sqrt,
-	tan,
+    abs,
+    acos,
+    asin,
+    atan,
+    atan2,
+    ceil,
+    cos,
+    exp,
+    floor,
+    log,
+    pow,
+    round,
+    sin,
+    sqrt,
+    tan,
 
-	max,
-	min,
-	mean,
-	sum,
-	
-	// + , - , * , / , %
-	plus,
-	minus,
-	multiply,
-	divide,
-	mod
+    max,
+    min,
+    mean,
+    sum,
+
+    // + , - , * , / , %
+    plus,
+    minus,
+    multiply,
+    divide,
+    mod
 };

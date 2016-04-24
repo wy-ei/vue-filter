@@ -14,20 +14,20 @@ import util from '../util/index';
  */
 
 function min(arr, key) {
-  var ret, min, computed;
-  if (util.isArray(arr)) {
-    min = Infinity;
-    util.each(arr, function(val) {
-      computed = util.get(val, key);
-      if (computed < min) {
-        min = computed;
-        ret = val;
-      }
-    });
-    return ret;
-  } else {
-    return arr;
-  }
-};
+    var ret, min, computed;
+    if (util.isArray(arr)) {
+        min = Infinity;
+        util.each(arr, function(val) {
+            computed = util.get(val, key);
+            if (computed < min) {
+                min = computed;
+                ret = val;
+            }
+        });
+        return ret;
+    } else {
+        return arr;
+    }
+}
 
 export default min;

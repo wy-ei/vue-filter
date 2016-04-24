@@ -6,10 +6,10 @@
  */
 
 function camelcase(str) {
-  var re = /(?:^|[-_\/])(\w)/g;
-  return str.toString().replace(re, function (_, c) {
-    return c.toUpperCase();
-  });
-};
+    var re = /(?:^|[-_\/])(\w)/g;
+    return str.toString().replace(re, function(_, c) {
+        return c.toUpperCase();
+    });
+}
 
 export default camelcase;

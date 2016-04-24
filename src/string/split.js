@@ -7,12 +7,12 @@ import util from '../util/index';
  */
 
 function split(str, separator) {
-  separator = separator || '';
-  if (util.isString(str)) {
-    return str.split(separator);
-  } else {
-    return str;
-  }
-};
+    separator = separator || '';
+    if (util.isString(str)) {
+        return str.split(separator);
+    } else {
+        return str;
+    }
+}
 
 export default split;

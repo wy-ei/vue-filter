@@ -7,12 +7,12 @@ import util from '../util/index';
  */
 
 function divide(value, n) {
-  if (util.isNumber(value)) {
-    return value / n;
-  } else {
-    return value;
-  }
-};
+    if (util.isNumber(value)) {
+        return value / n;
+    } else {
+        return value;
+    }
+}
 
 
 /**
@@ -22,12 +22,12 @@ function divide(value, n) {
  */
 
 function minus(value, n) {
-  if (util.isNumber(value)) {
-    return value - n;
-  } else {
-    return value;
-  }
-};
+    if (util.isNumber(value)) {
+        return value - n;
+    } else {
+        return value;
+    }
+}
 
 /**
  * Adds a number to an output.
@@ -36,12 +36,12 @@ function minus(value, n) {
  */
 
 function plus(value, n) {
-  if (util.isNumber(value)) {
-    return value + n;
-  } else {
-    return value;
-  }
-};
+    if (util.isNumber(value)) {
+        return value + n;
+    } else {
+        return value;
+    }
+}
 
 /**
  * Multiplies an output by a number.
@@ -50,12 +50,12 @@ function plus(value, n) {
  */
 
 function multiply(value, n) {
-  if (util.isNumber(value)) {
-    return value * n;
-  } else {
-    return value;
-  }
-};
+    if (util.isNumber(value)) {
+        return value * n;
+    } else {
+        return value;
+    }
+}
 
 /**
  * Divides an output by a number and returns the remainder.
@@ -64,17 +64,17 @@ function multiply(value, n) {
  */
 
 function mod(value, n) {
-  if (util.isNumber(value)) {
-    return value % n;
-  } else {
-    return value;
-  }
-};
+    if (util.isNumber(value)) {
+        return value % n;
+    } else {
+        return value;
+    }
+}
 
 export {
-  plus,
-  minus,
-  multiply,
-  divide,
-  mod
+    plus,
+    minus,
+    multiply,
+    divide,
+    mod
 };

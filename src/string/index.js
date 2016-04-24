@@ -8,12 +8,12 @@ import trim from './trim';
 import truncate from './truncate';
 
 export {
-  append,
-  camelcase,
-  prepend,
-  remove,
-  split,
-  test,
-  trim,
-  truncate
+    append,
+    camelcase,
+    prepend,
+    remove,
+    split,
+    test,
+    trim,
+    truncate
 };

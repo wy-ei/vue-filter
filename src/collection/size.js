@@ -6,8 +6,8 @@
  */
 
 function size(arr) {
-  var length = arr['length'];
-  return length ? length : 0;
-};
+    var length = arr['length'];
+    return length ? length : 0;
+}
 
 export default size;

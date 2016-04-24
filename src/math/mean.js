@@ -6,20 +6,20 @@ import util from '../util/index';
  */
 
 function mean(arr) {
-  if (util.isArray(arr)) {
-    var sum = arr.reduce(function (prev, curr) {
-      return prev + curr;
-    }, 0);
+    if (util.isArray(arr)) {
+        var sum = arr.reduce(function(prev, curr) {
+            return prev + curr;
+        }, 0);
 
-    var len = arr.length;
-    if (util.isNumber(sum) && len != 0) {
-      return sum / len;
+        var len = arr.length;
+        if (util.isNumber(sum) && len != 0) {
+            return sum / len;
+        } else {
+            return 0;
+        }
     } else {
-      return 0;
+        return arr;
     }
-  } else {
-    return arr;
-  }
-};
+}
 
 export default mean;

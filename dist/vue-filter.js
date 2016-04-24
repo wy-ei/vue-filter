@@ -8,123 +8,121 @@
 
     var ArrayProto = Array.prototype;
     var ObjProto = Object.prototype;
-    var push = ArrayProto.push;
     var slice = ArrayProto.slice;
     var toString = ObjProto.toString;
-    var hasOwnProperty = ObjProto.hasOwnProperty;
     var util = {};
 
     util.isArray = function(obj) {
-      return Array.isArray(obj);
-    }
+        return Array.isArray(obj);
+    };
 
     var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
     util.isArrayLike = function(obj) {
-      var length = obj['length'];
-      return typeof length === 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
-    }
+        var length = obj['length'];
+        return typeof length === 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+    };
 
     util.isObject = function(obj) {
-      var type = typeof obj;
-      return type === 'function' || type === 'object' && !!obj;
-    }
+        var type = typeof obj;
+        return type === 'function' || type === 'object' && !!obj;
+    };
 
 
     util.each = function(obj, callback) {
-      var i,
-        len;
-      if (util.isArray(obj)) {
-        for (i = 0, len = obj.length; i < len; i++) {
-          if (callback(obj[i], i, obj) === false) {
-            break;
-          }
+        var i,
+            len;
+        if (util.isArray(obj)) {
+            for (i = 0, len = obj.length; i < len; i++) {
+                if (callback(obj[i], i, obj) === false) {
+                    break;
+                }
+            }
+        } else {
+            for (i in obj) {
+                if (callback(obj[i], i, obj) === false) {
+                    break;
+                }
+            }
         }
-      } else {
-        for (i in obj) {
-          if (callback(obj[i], i, obj) === false) {
-            break;
-          }
-        }
-      }
-      return obj;
+        return obj;
     };
 
     util.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
-      util['is' + name] = function(obj) {
-        return toString.call(obj) === '[object ' + name + ']';
-      };
+        util['is' + name] = function(obj) {
+            return toString.call(obj) === '[object ' + name + ']';
+        };
     });
 
     util.keys = function(obj) {
-      if (!util.isObject(obj)) {
-        return [];
-      }
-      if (Object.keys) {
-        return Object.keys(obj);
-      }
-      var keys = [];
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          keys.push(key);
+        if (!util.isObject(obj)) {
+            return [];
         }
-      }
-      return keys;
+        if (Object.keys) {
+            return Object.keys(obj);
+        }
+        var keys = [];
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                keys.push(key);
+            }
+        }
+        return keys;
     };
 
     util.values = function(obj) {
-      var keys = util.keys(obj);
-      var length = keys.length;
-      var values = Array(length);
-      for (var i = 0; i < length; i++) {
-        values[i] = obj[keys[i]];
-      }
-      return values;
-    }
+        var keys = util.keys(obj);
+        var length = keys.length;
+        var values = Array(length);
+        for (var i = 0; i < length; i++) {
+            values[i] = obj[keys[i]];
+        }
+        return values;
+    };
 
     util.toArray = function(obj) {
-      if (!obj) {
-        return [];
-      }
-      if (util.isArrayLike(obj)) {
-        return slice.call(obj);
-      }
-      return util.values(obj);
+        if (!obj) {
+            return [];
+        }
+        if (util.isArrayLike(obj)) {
+            return slice.call(obj);
+        }
+        return util.values(obj);
     };
 
     util.map = function(obj, cb) {
-      var keys = !util.isArrayLike(obj) && util.keys(obj),
-        length = (keys || obj).length,
-        results = Array(length);
-      for (var index = 0; index < length; index++) {
-        var currentKey = keys ? keys[index] : index;
-        results[index] = cb(obj[currentKey], currentKey, obj);
-      }
-      return results;
+        var keys = !util.isArrayLike(obj) && util.keys(obj),
+            length = (keys || obj).length,
+            results = Array(length);
+        for (var index = 0; index < length; index++) {
+            var currentKey = keys ? keys[index] : index;
+            results[index] = cb(obj[currentKey], currentKey, obj);
+        }
+        return results;
     };
 
-    util.get = function(obj, property) {
-      var ret = undefined;
-      if (!util.isObject(obj)) {
-        return obj;
-      }
-      if (property == undefined) {
-        return obj;
-      }
-      if (util.isString(property)) {
-        var property = property.split('.'),
-          ret = obj;
-        try {
-          for (var i = 0; i < property.length; i++) {
-            ret = ret[property[i]];
-          }
-        } catch (e) {
-          ret = undefined;
+    util.get = function(obj, accessor) {
+        var ret = undefined;
+        if (!util.isObject(obj)) {
+            return obj;
         }
-      } else if (util.isFunction(property)) {
-        ret = property(obj);
-      }
-      return ret;
-    }
+        if (accessor == undefined) {
+            return obj;
+        }
+        if (util.isString(accessor)) {
+            accessor = accessor.split('.');
+            ret = obj;
+            try {
+                for (var i = 0; i < accessor.length; i++) {
+                    ret = ret[accessor[i]];
+                }
+            } catch (e) {
+                ret = undefined;
+            }
+        } else if (util.isFunction(accessor)) {
+            ret = accessor(obj);
+        }
+        return ret;
+    };
 
     /**
      * Returns the item at the specified index location in an array or a string.
@@ -134,34 +132,34 @@
      */
 
     function at(arr, index) {
-      if (util.isArrayLike(arr)) {
-        return arr[index];
-      } else {
-        return arr;
-      }
+        if (util.isArrayLike(arr)) {
+            return arr[index];
+        } else {
+            return arr;
+        }
     }
 
     /**
      * Concatenates an array into another one.
-     *  
+     *
      * {{ [1,2,3] | concat [4,5,6] }} => [1,2,3,4,5,6]
      */
 
-    function concat (arr1, arr2) {
-      if (util.isArray(arr1)) {
-        if (util.isArray(arr2)) {
-          return arr1.concat(arr2);
+    function concat(arr1, arr2) {
+        if (util.isArray(arr1)) {
+            if (util.isArray(arr2)) {
+                return arr1.concat(arr2);
+            } else {
+                return arr1.concat(util.toArray(arr2));
+            }
         } else {
-          return arr1.concat(util.toArray(arr2));
+            if (util.isArray(arr2)) {
+                return util.toArray(arr1).concat(arr2);
+            } else {
+                return util.toArray(arr1).concat(util.toArray(arr2));
+            }
         }
-      } else {
-        if (util.isArray(arr2)) {
-          return util.toArray(arr1).concat(arr2);
-        } else {
-          return util.toArray(arr1).concat(util.toArray(arr2));
-        }
-      }
-    };
+    }
 
     /**
      * Returns the first element of an array,or first charactor of a string.
@@ -171,12 +169,12 @@
      */
 
     function first(value) {
-      if (util.isArrayLike(value)) {
-        return value[0];
-      } else {
-        return value;
-      }
-    };
+        if (util.isArrayLike(value)) {
+            return value[0];
+        } else {
+            return value;
+        }
+    }
 
     /**
      * Joins the elements of an array with the character passed as the parameter.
@@ -186,14 +184,14 @@
      */
 
     function join(arr, c) {
-      if (util.isArray(arr)) {
-        return arr.join(c);
-      } else if(util.isArrayLike(arr)){
-        return util.toArray(arr).join(c);
-      }else{
-      	return arr;
-      }
-    };
+        if (util.isArray(arr)) {
+            return arr.join(c);
+        } else if (util.isArrayLike(arr)) {
+            return util.toArray(arr).join(c);
+        } else {
+            return arr;
+        }
+    }
 
     /**
      *  Returns the last element of an array,or last charactor of a string.
@@ -203,29 +201,29 @@
      */
 
     function last(value) {
-      if (util.isArrayLike(value)) {
-        return value[value.length - 1];
-      } else {
-        return value;
-      }
-    };
+        if (util.isArrayLike(value)) {
+            return value[value.length - 1];
+        } else {
+            return value;
+        }
+    }
 
     /*
-     * returns a new collection of the results of each expression execution. 
-     * 
+     * returns a new collection of the results of each expression execution.
+     *
      * {{ [1,2,3] | map increase }}
-     * 
+     *
      * new Vue({
-     *   ... 
+     *   ...
      *   methods:{
      *     increase:function(val){return val+1;}
      *   }
      * })
      */
 
-    function map(arr, cb){
-      return util.map(arr, cb);
-    };
+    function map(arr, cb) {
+        return util.map(arr, cb);
+    }
 
     /*
      * get a random value from a collection
@@ -234,20 +232,20 @@
      */
 
     function random(collection) {
-      if (!collection) {
-        return undefined;
-      }
-      if (util.isObject(collection)) {
-        collection = util.toArray(collection)
-      }
-      if (util.isArrayLike(collection) && collection.length != 0) {
-        var i = Math.floor(collection.length * Math.random());
-        return collection[i];
-      } else {
-        // not arrayLike and object or is a empty array or object
-        return collection;
-      }
-    };
+        if (!collection) {
+            return undefined;
+        }
+        if (util.isObject(collection)) {
+            collection = util.toArray(collection);
+        }
+        if (util.isArrayLike(collection) && collection.length != 0) {
+            var i = Math.floor(collection.length * Math.random());
+            return collection[i];
+        } else {
+            // not arrayLike and object or is a empty array or object
+            return collection;
+        }
+    }
 
     /**
      * reverse an array or a string
@@ -257,16 +255,16 @@
      */
 
     function reverse(arr) {
-      if (util.isArray(arr)) {
-        // make a copy
-        var arr = arr.concat();
-        return arr.reverse();
-      } else if (util.isString(arr)) {
-        return arr.split('').reverse().join('');
-      } else {
-        return arr;
-      }
-    };
+        if (util.isArray(arr)) {
+            // make a copy
+            arr = arr.concat();
+            return arr.reverse();
+        } else if (util.isString(arr)) {
+            return arr.split('').reverse().join('');
+        } else {
+            return arr;
+        }
+    }
 
     /**
      * Returns the size of a string or an array.
@@ -276,9 +274,9 @@
      */
 
     function size(arr) {
-      var length = arr['length'];
-      return length ? length : 0;
-    };
+        var length = arr['length'];
+        return length ? length : 0;
+    }
 
     /**
      *  Return a new collection from a given length
@@ -286,8 +284,8 @@
      *  {{ [] | range 4 }} => [0,1,2,3]
      */
 
-    function range(arr,n) {
-        var arr = [];
+    function range(arr, n) {
+        arr = [];
         for (var i = 0; i < n; i++) {
             arr.push(i);
         }
@@ -302,26 +300,26 @@
      */
 
     function contains(arr, item) {
-    	var ret = false;
+        var ret = false;
         if (util.isArrayLike(arr)) {
-        	if(util.isFunction(item)){
-        		var fun = item;
-        		util.each(arr, function (val) {
-    	            if (fun(val) === true) {
-    	                ret = true;
-    	                // stop each
-    	                return false;
-    	            }
-    	        });
-        	}else{
-    	        util.each(arr, function (val) {
-    	            if (val === item) {
-    	                ret = true;
-    	                // stop each
-    	                return false;
-    	            }
-    	        });
-        	}
+            if (util.isFunction(item)) {
+                var fun = item;
+                util.each(arr, function(val) {
+                    if (fun(val) === true) {
+                        ret = true;
+                        // stop each
+                        return false;
+                    }
+                });
+            } else {
+                util.each(arr, function(val) {
+                    if (val === item) {
+                        ret = true;
+                        // stop each
+                        return false;
+                    }
+                });
+            }
         }
         return ret;
     }
@@ -329,17 +327,17 @@
 
 
     var collectionFilters = Object.freeze({
-    	at: at,
-    	concat: concat,
-    	first: first,
-    	join: join,
-    	last: last,
-    	map: map,
-    	random: random,
-    	reverse: reverse,
-    	size: size,
-    	range: range,
-    	contains: contains
+        at: at,
+        concat: concat,
+        first: first,
+        join: join,
+        last: last,
+        map: map,
+        random: random,
+        reverse: reverse,
+        size: size,
+        range: range,
+        contains: contains
     });
 
     /**
@@ -354,16 +352,16 @@
     var base = {};
 
     ['abs', 'acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'exp', 'floor',
-      'log', 'pow', 'round', 'sin', 'sqrt', 'tan'
+        'log', 'pow', 'round', 'sin', 'sqrt', 'tan'
     ]
-    .forEach(function (method) {
-      base[method] = function (value, n) {
-        if (typeof value === 'number') {
-          return Math[method](value, n);
-        } else {
-          return value;
-        }
-      };
+    .forEach(function(method) {
+        base[method] = function(value, n) {
+            if (typeof value === 'number') {
+                return Math[method](value, n);
+            } else {
+                return value;
+            }
+        };
     });
 
     /**
@@ -373,12 +371,12 @@
      */
 
     function divide(value, n) {
-      if (util.isNumber(value)) {
-        return value / n;
-      } else {
-        return value;
-      }
-    };
+        if (util.isNumber(value)) {
+            return value / n;
+        } else {
+            return value;
+        }
+    }
 
 
     /**
@@ -388,12 +386,12 @@
      */
 
     function minus(value, n) {
-      if (util.isNumber(value)) {
-        return value - n;
-      } else {
-        return value;
-      }
-    };
+        if (util.isNumber(value)) {
+            return value - n;
+        } else {
+            return value;
+        }
+    }
 
     /**
      * Adds a number to an output.
@@ -402,12 +400,12 @@
      */
 
     function plus(value, n) {
-      if (util.isNumber(value)) {
-        return value + n;
-      } else {
-        return value;
-      }
-    };
+        if (util.isNumber(value)) {
+            return value + n;
+        } else {
+            return value;
+        }
+    }
 
     /**
      * Multiplies an output by a number.
@@ -416,12 +414,12 @@
      */
 
     function multiply(value, n) {
-      if (util.isNumber(value)) {
-        return value * n;
-      } else {
-        return value;
-      }
-    };
+        if (util.isNumber(value)) {
+            return value * n;
+        } else {
+            return value;
+        }
+    }
 
     /**
      * Divides an output by a number and returns the remainder.
@@ -430,12 +428,12 @@
      */
 
     function mod(value, n) {
-      if (util.isNumber(value)) {
-        return value % n;
-      } else {
-        return value;
-      }
-    };
+        if (util.isNumber(value)) {
+            return value % n;
+        } else {
+            return value;
+        }
+    }
 
     /**
      * return maximum value in an array.It will compare two item by a certain key
@@ -451,21 +449,21 @@
 
 
     function max(arr, key) {
-      var ret, max, computed;
-      if (util.isArray(arr)) {
-        max = -Infinity;
-        util.each(arr, function (val) {
-          computed = util.get(val,key);
-          if(computed > max){
-            max = computed;
-            ret = val;
-          }
-        });
-        return ret;
-      } else {
-        return arr;
-      }
-    };
+        var ret, max, computed;
+        if (util.isArray(arr)) {
+            max = -Infinity;
+            util.each(arr, function(val) {
+                computed = util.get(val, key);
+                if (computed > max) {
+                    max = computed;
+                    ret = val;
+                }
+            });
+            return ret;
+        } else {
+            return arr;
+        }
+    }
 
     /**
      * return minimum value in an array.It will compare two item by a certain key
@@ -480,38 +478,38 @@
      */
 
     function min(arr, key) {
-      var ret, min, computed;
-      if (util.isArray(arr)) {
-        min = Infinity;
-        util.each(arr, function(val) {
-          computed = util.get(val, key);
-          if (computed < min) {
-            min = computed;
-            ret = val;
-          }
-        });
-        return ret;
-      } else {
-        return arr;
-      }
-    };
+        var ret, min, computed;
+        if (util.isArray(arr)) {
+            min = Infinity;
+            util.each(arr, function(val) {
+                computed = util.get(val, key);
+                if (computed < min) {
+                    min = computed;
+                    ret = val;
+                }
+            });
+            return ret;
+        } else {
+            return arr;
+        }
+    }
 
     function sum(arr, initial) {
-      if (util.isArrayLike(arr) && !util.isString(arr)) {
-        var ret = initial || 0;
-        util.each(arr, function(val) {
-          if (!util.isNumber(val)) {
-            ret = undefined;
-            // stop each
-            return false;
-          } else {
-            ret = ret + val;
-          }
-        });
-        return ret;
-      } else {
-        return arr;
-      }
+        if (util.isArrayLike(arr) && !util.isString(arr)) {
+            var ret = initial || 0;
+            util.each(arr, function(val) {
+                if (!util.isNumber(val)) {
+                    ret = undefined;
+                    // stop each
+                    return false;
+                } else {
+                    ret = ret + val;
+                }
+            });
+            return ret;
+        } else {
+            return arr;
+        }
     }
 
     /**
@@ -521,21 +519,21 @@
      */
 
     function mean(arr) {
-      if (util.isArray(arr)) {
-        var sum = arr.reduce(function (prev, curr) {
-          return prev + curr;
-        }, 0);
+        if (util.isArray(arr)) {
+            var sum = arr.reduce(function(prev, curr) {
+                return prev + curr;
+            }, 0);
 
-        var len = arr.length;
-        if (util.isNumber(sum) && len != 0) {
-          return sum / len;
+            var len = arr.length;
+            if (util.isNumber(sum) && len != 0) {
+                return sum / len;
+            } else {
+                return 0;
+            }
         } else {
-          return 0;
+            return arr;
         }
-      } else {
-        return arr;
-      }
-    };
+    }
 
     var abs = base.abs;
     var acos = base.acos;
@@ -556,30 +554,30 @@
 
 
     var mathFilters = Object.freeze({
-    	abs: abs,
-    	acos: acos,
-    	asin: asin,
-    	atan: atan,
-    	atan2: atan2,
-    	ceil: ceil,
-    	cos: cos,
-    	exp: exp,
-    	floor: floor,
-    	log: log,
-    	pow: pow,
-    	round: round,
-    	sin: sin,
-    	sqrt: sqrt,
-    	tan: tan,
-    	max: max,
-    	min: min,
-    	mean: mean,
-    	sum: sum,
-    	plus: plus,
-    	minus: minus,
-    	multiply: multiply,
-    	divide: divide,
-    	mod: mod
+        abs: abs,
+        acos: acos,
+        asin: asin,
+        atan: atan,
+        atan2: atan2,
+        ceil: ceil,
+        cos: cos,
+        exp: exp,
+        floor: floor,
+        log: log,
+        pow: pow,
+        round: round,
+        sin: sin,
+        sqrt: sqrt,
+        tan: tan,
+        max: max,
+        min: min,
+        mean: mean,
+        sum: sum,
+        plus: plus,
+        minus: minus,
+        multiply: multiply,
+        divide: divide,
+        mod: mod
     });
 
     /**
@@ -589,13 +587,13 @@
      */
 
     function append(str, postfix) {
-      if (!str && str !== 0) {
-        str = ''
-      } else {
-        str = str.toString();
-      }
-      return str + postfix;
-    };
+        if (!str && str !== 0) {
+            str = '';
+        } else {
+            str = str.toString();
+        }
+        return str + postfix;
+    }
 
     /**
      * Converts a string into CamelCase.
@@ -605,11 +603,11 @@
      */
 
     function camelcase(str) {
-      var re = /(?:^|[-_\/])(\w)/g;
-      return str.toString().replace(re, function (_, c) {
-        return c.toUpperCase();
-      });
-    };
+        var re = /(?:^|[-_\/])(\w)/g;
+        return str.toString().replace(re, function(_, c) {
+            return c.toUpperCase();
+        });
+    }
 
     /**
      * Prepends characters to a string.
@@ -618,13 +616,13 @@
      */
 
     function prepend(str, prefix) {
-      if (!str && str !== 0) {
-        str = ''
-      } else {
-        str = str.toString();
-      }
-      return prefix + str;
-    };
+        if (!str && str !== 0) {
+            str = '';
+        } else {
+            str = str.toString();
+        }
+        return prefix + str;
+    }
 
     /**
      * Removes all occurrences of a substring from a string.
@@ -633,11 +631,11 @@
      */
 
     function remove(str, substr) {
-      if (util.isString(str)) {
-        str = str.split(substr).join('');
-      }
-      return str;
-    };
+        if (util.isString(str)) {
+            str = str.split(substr).join('');
+        }
+        return str;
+    }
 
     /**
      * The split filter takes on a substring as a parameter.
@@ -647,13 +645,13 @@
      */
 
     function split(str, separator) {
-      separator = separator || '';
-      if (util.isString(str)) {
-        return str.split(separator);
-      } else {
-        return str;
-      }
-    };
+        separator = separator || '';
+        if (util.isString(str)) {
+            return str.split(separator);
+        } else {
+            return str;
+        }
+    }
 
     /**
      * Test if a string match a pattern
@@ -662,9 +660,9 @@
      */
 
     function test(str, re, flag) {
-      var re = new RegExp(re, flag);
-      return re.test(str);
-    };
+        re = new RegExp(re, flag);
+        return re.test(str);
+    }
 
     /**
      * Strips tabs, spaces, and newlines (all whitespace)
@@ -679,20 +677,20 @@
      */
 
     function trim(str, rightOrleft) {
-      if (util.isString(str)) {
-        var re;
-        if (rightOrleft == 'r') {
-          re = /\s+$/;
-        } else if (rightOrleft == 'l') {
-          re = /^\s+/;
+        if (util.isString(str)) {
+            var re;
+            if (rightOrleft == 'r') {
+                re = /\s+$/;
+            } else if (rightOrleft == 'l') {
+                re = /^\s+/;
+            } else {
+                re = /^\s+|\s+$/g;
+            }
+            return str.replace(re, '');
         } else {
-          re = /^\s+|\s+$/g;
+            return str;
         }
-        return str.replace(re, '');
-      } else {
-        return str;
-      }
-    };
+    }
 
     /**
      * truncate text to a specified length.
@@ -701,22 +699,22 @@
      */
 
     function truncate(str, length, truncation) {
-      length = length || 30;
-      truncation = typeof truncation === "string" ? truncation : "...";
-      return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
-    };
+        length = length || 30;
+        truncation = typeof truncation === 'string' ? truncation : '...';
+        return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
+    }
 
 
 
     var stringFilters = Object.freeze({
-      append: append,
-      camelcase: camelcase,
-      prepend: prepend,
-      remove: remove,
-      split: split,
-      test: test,
-      trim: trim,
-      truncate: truncate
+        append: append,
+        camelcase: camelcase,
+        prepend: prepend,
+        remove: remove,
+        split: split,
+        test: test,
+        trim: trim,
+        truncate: truncate
     });
 
     /**
@@ -724,194 +722,194 @@
      *
      */
     var weekdays = ['Sunday', 'Monday', 'Tuesday',
-      'Wednesday', 'Thursday', 'Friday', 'Saturday'
+        'Wednesday', 'Thursday', 'Friday', 'Saturday'
     ];
     var months = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+        'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
     function date(date, formatString) {
-      var d = new Date(date);
+        var d = new Date(date);
 
-      var zeroize = function (value, length) {
+        var zeroize = function(value, length) {
 
-        if (!length) length = 2;
+            if (!length) length = 2;
 
-        value = '' + value;
+            value = '' + value;
 
-        for (var i = 0, zeros = ''; i < (length - value.length); i++) {
-          zeros += '0';
+            for (var i = 0, zeros = ''; i < (length - value.length); i++) {
+                zeros += '0';
+            }
+
+            return zeros + value;
+        };
+
+        function getDays() {
+            var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+                year = d.getFullYear(),
+                month = d.getMonth(),
+                day = d.getDate();
+
+            if (year % 100 == 0 && year % 400 == 0 || year % 4 == 0) {
+                days[1] = 29;
+            }
+            var n = 0;
+            for (var i = 0; i < month; i++) {
+                n += days[i];
+            }
+            return n + day;
         }
 
-        return zeros + value;
-      };
-
-      function getDays() {
-        var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-          year = d.getFullYear(),
-          month = d.getMonth(),
-          day = d.getDate();
-
-        if (year % 100 == 0 && year % 400 == 0 || year % 4 == 0) {
-          days[1] = 29;
+        function cb(c) {
+            var ret = '';
+            switch (c) {
+            case '%a':
+                ret = weekdays[d.getDay()].slice(0, 3);
+                break;
+            case '%A':
+                ret = weekdays[d.getDay()];
+                break;
+            case '%b':
+                ret = months[d.getMonth()].slice(0, 3);
+                break;
+            case '%B':
+                ret = months[d.getMonth()];
+                break;
+            case '%c':
+                ret = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+                break;
+            case '%d':
+                var day = d.getDate();
+                ret = zeroize(day);
+                break;
+            case '%-d':
+                ret = d.getDate();
+                break;
+            case '%D':
+                ret = '%m/%d/%Y';
+                break;
+            case '%e':
+                ret = d.getDate();
+                break;
+            case '%F':
+                ret = '%Y-%m-%d';
+                break;
+            case '%H':
+                var hours = d.getHours();
+                ret = zeroize(hours);
+                break;
+            case '%I':
+                ret = d.getHours() % 12;
+                break;
+            case '%j':
+                ret = zeroize(getDays(), 3);
+                break;
+            case 'k':
+                ret = d.getHours();
+                break;
+            case '%m':
+                var month = d.getMonth() + 1;
+                ret = zeroize(month, 2);
+                break;
+            case '%M':
+                ret = zeroize(d.getMinutes(), 2);
+                break;
+            case '%s':
+                ret = zeroize(d.getSeconds(), 2);
+                break;
+            case '%p':
+                ret = d.getHours() < 12 ? 'AM' : 'PM';
+                break;
+            case '%r':
+                ret = '%I:%M:%s %p';
+                break;
+            case '%R':
+                ret = '%H:%M';
+                break;
+            case '%T':
+                ret = '%H:%M:%s';
+                break;
+            case '%U':
+                ret = Math.ceil(getDays() / 7);
+                break;
+            case '%w':
+                ret = d.getDay();
+                break;
+            case '%x':
+                ret = '%m/%d/%y';
+                break;
+            case '%X':
+                ret = '%h:%M:%s';
+                break;
+            case '%y':
+                ret = d.getFullYear() % 100;
+                break;
+            case '%Y':
+                ret = d.getFullYear();
+                break;
+            default:
+                ret = c;
+            }
+            return ret;
         }
-        var n = 0;
-        for (var i = 0; i < month; i++) {
-          n += days[i];
+        var re = /%-?[\w]/g;
+        if (!formatString) {
+            formatString = '%c';
         }
-        return n + day;
-      }
-
-      function cb(c) {
-        var ret = "";
-        switch (c) {
-        case '%a':
-          ret = weekdays[d.getDay()].slice(0, 3);
-          break;
-        case '%A':
-          ret = weekdays[d.getDay()];
-          break;
-        case '%b':
-          ret = months[d.getMonth()].slice(0, 3);
-          break;
-        case '%B':
-          ret = months[d.getMonth()];
-          break;
-        case '%c':
-          ret = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-          break;
-        case '%d':
-          var day = d.getDate();
-          ret = zeroize(day);
-          break;
-        case '%-d':
-          ret = d.getDate();;
-          break;
-        case '%D':
-          ret = '%m/%d/%Y';
-          break;
-        case '%e':
-          ret = d.getDate();
-          break;
-        case '%F':
-          ret = '%Y-%m-%d';
-          break;
-        case '%H':
-          var hours = d.getHours();
-          ret = zeroize(hours);
-          break;
-        case '%I':
-          ret = d.getHours() % 12;
-          break;
-        case '%j':
-          ret = zeroize(getDays(), 3);
-          break;
-        case 'k':
-          ret = d.getHours();
-          break;
-        case '%m':
-          var month = d.getMonth() + 1;
-          ret = zeroize(month, 2);
-          break;
-        case '%M':
-          ret = zeroize(d.getMinutes(), 2);
-          break;
-        case '%s':
-          ret = zeroize(d.getSeconds(), 2);
-          break;
-        case '%p':
-          ret = d.getHours() < 12 ? 'AM' : 'PM';
-          break;
-        case '%r':
-          ret = '%I:%M:%s %p';
-          break;
-        case '%R':
-          ret = '%H:%M';
-          break;
-        case '%T':
-          ret = '%H:%M:%s';
-          break;
-        case '%U':
-          ret = Math.ceil(getDays() / 7);
-          break;
-        case '%w':
-          ret = d.getDay();
-          break;
-        case '%x':
-          ret = '%m/%d/%y';
-          break;
-        case '%X':
-          ret = '%h:%M:%s'
-          break;
-        case '%y':
-          ret = d.getFullYear() % 100;
-          break;
-        case '%Y':
-          ret = d.getFullYear();
-          break;
-        default:
-          ret = c;
-        }
-        return ret;
-      }
-      var re = /%-?[\w]/g;
-      if (!formatString) {
-        formatString = '%c';
-      }
-      formatString = formatString.replace(re, cb);
-      formatString = formatString.replace(re, cb);
-      return formatString;
-    };
+        formatString = formatString.replace(re, cb);
+        formatString = formatString.replace(re, cb);
+        return formatString;
+    }
 
     /**
      * Sets a default value for any variable with no assigned value
-     * 
-     * The default value is returned if the variable resolves to null ,undefined or an empty string "". 
+     *
+     * The default value is returned if the variable resolves to null ,undefined or an empty string "".
      * A string containing whitespace characters and a number has value 0 will not resolve to the default value.
      *
      */
     function defaults(value, dft) {
-      // undefined and null and empty string
-      if (value == null || value === '') {
-        return dft;
-      } else {
-        return value;
-      }
-    };
+        // undefined and null and empty string
+        if (value == null || value === '') {
+            return dft;
+        } else {
+            return value;
+        }
+    }
 
 
 
     var otherFilters = Object.freeze({
-    	date: date,
-    	defaults: defaults
+        date: date,
+        defaults: defaults
     });
 
     function install(Vue) {
-      util.each(collectionFilters, function(value, key) {
-        Vue.filter(key, value);
-      });
+        util.each(collectionFilters, function(value, key) {
+            Vue.filter(key, value);
+        });
 
-      util.each(mathFilters, function(value, key) {
-        Vue.filter(key, value);
-      });
+        util.each(mathFilters, function(value, key) {
+            Vue.filter(key, value);
+        });
 
-      util.each(stringFilters, function(value, key) {
-        Vue.filter(key, value);
-      });
+        util.each(stringFilters, function(value, key) {
+            Vue.filter(key, value);
+        });
 
-      util.each(otherFilters, function(value, key) {
-        Vue.filter(key, value);
-      });
+        util.each(otherFilters, function(value, key) {
+            Vue.filter(key, value);
+        });
     }
 
-    if (typeof exports == "object") {
-      module.exports = install
-    } else if (typeof define == "function" && define.amd) {
-      define([], function() {
-        return install
-      });
+    if (typeof exports == 'object') {
+        module.exports = install;
+    } else if (typeof define == 'function' && define.amd) {
+        define([], function() {
+            return install;
+        });
     } else if (window.Vue) {
-      Vue.use(install)
+        Vue.use(install);
     }
 
 }());

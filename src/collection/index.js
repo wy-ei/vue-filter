@@ -11,15 +11,15 @@ import range from './range';
 import contains from './contains';
 
 export {
-	at,
-	concat,
-	first,
-	join,
-	last,
-	map,
-	random,
-	reverse,
-	size,
-	range,
-	contains
+    at,
+    concat,
+    first,
+    join,
+    last,
+    map,
+    random,
+    reverse,
+    size,
+    range,
+    contains
 };

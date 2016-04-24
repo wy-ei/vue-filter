@@ -7,11 +7,11 @@ import util from '../util/index';
  */
 
 function first(value) {
-  if (util.isArrayLike(value)) {
-    return value[0];
-  } else {
-    return value;
-  }
-};
+    if (util.isArrayLike(value)) {
+        return value[0];
+    } else {
+        return value;
+    }
+}
 
 export default first;

@@ -7,11 +7,11 @@ import util from '../util/index';
  */
 
 function last(value) {
-  if (util.isArrayLike(value)) {
-    return value[value.length - 1];
-  } else {
-    return value;
-  }
-};
+    if (util.isArrayLike(value)) {
+        return value[value.length - 1];
+    } else {
+        return value;
+    }
+}
 
 export default last;

@@ -8,26 +8,26 @@ import util from '../util/index';
  */
 
 function contains(arr, item) {
-	var ret = false;
+    var ret = false;
     if (util.isArrayLike(arr)) {
-    	if(util.isFunction(item)){
-    		var fun = item;
-    		util.each(arr, function (val) {
-	            if (fun(val) === true) {
-	                ret = true;
-	                // stop each
-	                return false;
-	            }
-	        });
-    	}else{
-	        util.each(arr, function (val) {
-	            if (val === item) {
-	                ret = true;
-	                // stop each
-	                return false;
-	            }
-	        });
-    	}
+        if (util.isFunction(item)) {
+            var fun = item;
+            util.each(arr, function(val) {
+                if (fun(val) === true) {
+                    ret = true;
+                    // stop each
+                    return false;
+                }
+            });
+        } else {
+            util.each(arr, function(val) {
+                if (val === item) {
+                    ret = true;
+                    // stop each
+                    return false;
+                }
+            });
+        }
     }
     return ret;
 }
