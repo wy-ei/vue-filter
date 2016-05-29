@@ -7,7 +7,7 @@ var arrayLike = {
     1: 234,
     2: 345,
     length: 3
-}
+};
 
 var obj = {
     name: 'wy',

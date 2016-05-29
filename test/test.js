@@ -300,7 +300,7 @@ var arrayLike = {
     1: 234,
     2: 345,
     length: 3
-}
+};
 
 var obj = {
     name: 'wy',
@@ -533,6 +533,55 @@ function truncate(str, length, truncation) {
     return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
 }
 
+/**
+ * return a string by repeat a char n times
+ */
+
+function padding(size,ch){
+    var str = '';
+    if(!ch && ch !== 0){
+        ch = ' ';
+    }
+    while(size !== 0){
+        if(size & 1 === 1){
+            str += ch;
+        }
+        ch += ch;
+        size >>>= 1;
+    }
+    return str;
+}
+
+
+/**
+ * leftPad
+ *
+ * {{ 'abc' | leftPad 5 '*' }} => '**abc'
+ */
+function leftPad(str,size,ch){
+    size = +size || 0;
+    var padLength = size - str.length;
+    if(padLength <= 0){
+        return str;
+    }
+    return padding(padLength,ch).concat(str);
+}
+
+
+/**
+ * rightPad
+ *
+ * {{ 'abc' | leftPad 5 '*' }} => 'abc**'
+ */
+function rightPad(str,size,ch){
+    size = +size || 0;
+    var padLength = size - str.length;
+    if(padLength <= 0){
+        return str;
+    }
+    return str.concat(padding(padLength,ch));
+}
+
 var test$1 = require('tape');
 test$1('trim', function(t) {
     var trim$$ = trim;
@@ -595,6 +644,23 @@ test$1('truncate', function(t) {
     t.equal(truncate$$('abcdefghigk', 10), 'abcdefg...');
     t.equal(truncate$$('abcdefg', 10, '---'), 'abcdefg---');
     t.equal(truncate$$('abc', 10, '-'), 'abc-');
+    t.end();
+});
+
+
+test$1('leftPad',function(t){
+    var leftPad$$ = leftPad;
+    t.equal(leftPad$$('abc',5,'*'),'**abc');
+    t.equal(leftPad$$('abc',5),'  abc');
+    t.equal(leftPad$$('abc',-1,'*'),'abc');
+    t.end();
+});
+
+test$1('rightPad',function(t){
+    var rightPad$$ = rightPad;
+    t.equal(rightPad$$('abc',5,'*'),'abc**');
+    t.equal(rightPad$$('abc',5),'abc  ');
+    t.equal(rightPad$$('abc',-1,'*'),'abc');
     t.end();
 });
 

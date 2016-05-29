@@ -63,3 +63,20 @@ test('truncate', function(t) {
     t.equal(truncate('abc', 10, '-'), 'abc-');
     t.end();
 });
+
+
+test('leftPad',function(t){
+    var leftPad = methods.leftPad;
+    t.equal(leftPad('abc',5,'*'),'**abc');
+    t.equal(leftPad('abc',5),'  abc');
+    t.equal(leftPad('abc',-1,'*'),'abc');
+    t.end();
+});
+
+test('rightPad',function(t){
+    var rightPad = methods.rightPad;
+    t.equal(rightPad('abc',5,'*'),'abc**');
+    t.equal(rightPad('abc',5),'abc  ');
+    t.equal(rightPad('abc',-1,'*'),'abc');
+    t.end();
+});

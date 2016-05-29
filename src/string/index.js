@@ -6,6 +6,7 @@ import split from './split';
 import test from './test';
 import trim from './trim';
 import truncate from './truncate';
+import {leftPad,rightPad} from './pad';
 
 export {
     append,
@@ -15,5 +16,7 @@ export {
     split,
     test,
     trim,
-    truncate
+    truncate,
+    leftPad,
+    rightPad
 };
