@@ -1,5 +1,5 @@
 /**
- * vue-filter.js v0.1.0
+ * vue-filter.js v0.1.3
  * (c) 2016 wy-ei
  * MIT License.
  */
@@ -704,6 +704,55 @@
         return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
     }
 
+    /**
+     * return a string by repeat a char n times
+     */
+
+    function padding(size,ch){
+        var str = '';
+        if(!ch && ch !== 0){
+            ch = ' ';
+        }
+        while(size !== 0){
+            if(size & 1 === 1){
+                str += ch;
+            }
+            ch += ch;
+            size >>>= 1;
+        }
+        return str;
+    }
+
+
+    /**
+     * leftPad
+     *
+     * {{ 'abc' | leftPad 5 '*' }} => '**abc'
+     */
+    function leftPad(str,size,ch){
+        size = +size || 0;
+        var padLength = size - str.length;
+        if(padLength <= 0){
+            return str;
+        }
+        return padding(padLength,ch).concat(str);
+    }
+
+
+    /**
+     * rightPad
+     *
+     * {{ 'abc' | leftPad 5 '*' }} => 'abc**'
+     */
+    function rightPad(str,size,ch){
+        size = +size || 0;
+        var padLength = size - str.length;
+        if(padLength <= 0){
+            return str;
+        }
+        return str.concat(padding(padLength,ch));
+    }
+
 
 
     var stringFilters = Object.freeze({
@@ -714,7 +763,9 @@
         split: split,
         test: test,
         trim: trim,
-        truncate: truncate
+        truncate: truncate,
+        leftPad: leftPad,
+        rightPad: rightPad
     });
 
     /**
