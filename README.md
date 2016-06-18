@@ -113,6 +113,7 @@ It's very easy to use.
 + [test](#test)
 + [leftPad](#leftpad)
 + [rightPad](#rightpad)
++ [repeat](#repeat)
 
 
 ### Other Filters
@@ -411,6 +412,17 @@ pad a string on right
 
 ```
 {{ 'abc' | rightPad 5 '*' }} => 'abc**'
+```
+
+#### repeat
+
+repeat a string n times
+
+```
+{{ 'abc' | repeat 3 }} => 'abcabcabc'
+{{ 'abc' | repeat '3' }} => 'abcabcabc'
+{{ 'abc' | repeat 0 }} => ''
+{{ 'abc' | repeat }} => ''
 ```
 
 ### Other Filters

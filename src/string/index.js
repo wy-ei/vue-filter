@@ -7,6 +7,7 @@ import test from './test';
 import trim from './trim';
 import truncate from './truncate';
 import {leftPad,rightPad} from './pad';
+import repeat from './repeat';
 
 export {
     append,
@@ -18,5 +19,6 @@ export {
     trim,
     truncate,
     leftPad,
-    rightPad
+    rightPad,
+    repeat
 };

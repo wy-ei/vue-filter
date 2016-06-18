@@ -80,3 +80,14 @@ test('rightPad',function(t){
     t.equal(rightPad('abc',-1,'*'),'abc');
     t.end();
 });
+
+
+test('repeat',function(t){
+    var repeat = methods.repeat;
+    t.equal(repeat('abc',1),'abc');
+    t.equal(repeat('abc',3),'abcabcabc');
+    t.equal(repeat('abc','3'),'abcabcabc');
+    t.equal(repeat('abc','2.5'),'abcabc');
+    t.equal(repeat('abc'),'');
+    t.end();
+});

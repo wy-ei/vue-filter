@@ -582,6 +582,37 @@ function rightPad(str,size,ch){
     return str.concat(padding(padLength,ch));
 }
 
+/**
+ * Appends characters to a string.
+ *
+ * {{ 'abc' | repeat 3 }} => 'abcabcabc'
+ */
+
+function repeat(str, times) {
+    times = times ? Number(times) : 0;
+    if(times != times){ // NAN
+        times = 0;
+    }
+
+    times = Math.floor(times);
+
+    if(times <= -1){
+        times = 0;
+    }
+    
+    str = '' + str;
+
+    var ret = '';
+    while(times !== 0){
+        if(times & 1 === 1){
+            ret += str;
+        }
+        str += str;
+        times >>>= 1;
+    }
+    return ret;
+}
+
 var test$1 = require('tape');
 test$1('trim', function(t) {
     var trim$$ = trim;
@@ -661,6 +692,17 @@ test$1('rightPad',function(t){
     t.equal(rightPad$$('abc',5,'*'),'abc**');
     t.equal(rightPad$$('abc',5),'abc  ');
     t.equal(rightPad$$('abc',-1,'*'),'abc');
+    t.end();
+});
+
+
+test$1('repeat',function(t){
+    var repeat$$ = repeat;
+    t.equal(repeat$$('abc',1),'abc');
+    t.equal(repeat$$('abc',3),'abcabcabc');
+    t.equal(repeat$$('abc','3'),'abcabcabc');
+    t.equal(repeat$$('abc','2.5'),'abcabc');
+    t.equal(repeat$$('abc'),'');
     t.end();
 });
 

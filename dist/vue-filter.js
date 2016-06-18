@@ -1,5 +1,5 @@
 /**
- * vue-filter.js v0.1.3
+ * vue-filter.js v0.1.4
  * (c) 2016 wy-ei
  * MIT License.
  */
@@ -753,6 +753,37 @@
         return str.concat(padding(padLength,ch));
     }
 
+    /**
+     * Appends characters to a string.
+     *
+     * {{ 'abc' | repeat 3 }} => 'abcabcabc'
+     */
+
+    function repeat(str, times) {
+        times = times ? Number(times) : 0;
+        if(times != times){ // NAN
+            times = 0;
+        }
+
+        times = Math.floor(times);
+
+        if(times <= -1){
+            times = 0;
+        }
+        
+        str = '' + str;
+
+        var ret = '';
+        while(times !== 0){
+            if(times & 1 === 1){
+                ret += str;
+            }
+            str += str;
+            times >>>= 1;
+        }
+        return ret;
+    }
+
 
 
     var stringFilters = Object.freeze({
@@ -765,7 +796,8 @@
         trim: trim,
         truncate: truncate,
         leftPad: leftPad,
-        rightPad: rightPad
+        rightPad: rightPad,
+        repeat: repeat
     });
 
     /**
