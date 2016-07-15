@@ -527,10 +527,13 @@ function trim(str, rightOrleft) {
  * {{ 'this is a big city!' | truncate 10 '...' }} => this is...
  */
 
-function truncate(str, length, truncation) {
+function truncate(str, length, ellipses) {
     length = length || 30;
-    truncation = typeof truncation === 'string' ? truncation : '...';
-    return (str.length + truncation.length > length ? str.slice(0, length - truncation.length) : str) + truncation;
+    if(ellipses === undefined){
+        ellipses = '...';
+    }
+    ellipses = '' + ellipses;
+    return (str.length > length ? str.slice(0, length - ellipses.length) + ellipses : str);
 }
 
 /**
@@ -671,10 +674,11 @@ test$1('test', function(t) {
 
 test$1('truncate', function(t) {
     var truncate$$ = truncate;
-    t.equal(truncate$$('abcdefg', 10), 'abcdefg...');
-    t.equal(truncate$$('abcdefghigk', 10), 'abcdefg...');
-    t.equal(truncate$$('abcdefg', 10, '---'), 'abcdefg---');
-    t.equal(truncate$$('abc', 10, '-'), 'abc-');
+    t.equal(truncate$$('0123456789', 10), '0123456789');
+    t.equal(truncate$$('0123456789abc', 10), '0123456...');
+    t.equal(truncate$$('0123456789abc', 10, '---'), '0123456---');
+    t.equal(truncate$$('abc', 10, '-'), 'abc');
+    t.equal(truncate$$('abcde', 4, 1), 'abc1');
     t.end();
 });
 

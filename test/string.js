@@ -57,10 +57,11 @@ test('test', function(t) {
 
 test('truncate', function(t) {
     var truncate = methods.truncate;
-    t.equal(truncate('abcdefg', 10), 'abcdefg...');
-    t.equal(truncate('abcdefghigk', 10), 'abcdefg...');
-    t.equal(truncate('abcdefg', 10, '---'), 'abcdefg---');
-    t.equal(truncate('abc', 10, '-'), 'abc-');
+    t.equal(truncate('0123456789', 10), '0123456789');
+    t.equal(truncate('0123456789abc', 10), '0123456...');
+    t.equal(truncate('0123456789abc', 10, '---'), '0123456---');
+    t.equal(truncate('abc', 10, '-'), 'abc');
+    t.equal(truncate('abcde', 4, 1), 'abc1');
     t.end();
 });
 

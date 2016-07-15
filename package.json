@@ -1,10 +1,9 @@
 {
   "name": "vue-filter",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A plugin for Vue.js. It can enhance vue filter system.",
   "main": "dist/vue-filter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
