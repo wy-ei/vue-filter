@@ -16,8 +16,12 @@ util.isArray = function(obj) {
 
 var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
 util.isArrayLike = function(obj) {
-    var length = obj['length'];
-    return typeof length === 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+    if(typeof obj !== 'object' || !obj){
+        return false;
+    }
+    var length = obj.length;
+    return typeof length === 'number'
+        && length % 1 === 0 && length >= 0 && length <= MAX_ARRAY_INDEX;
 };
 
 util.isObject = function(obj) {

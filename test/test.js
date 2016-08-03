@@ -10,8 +10,12 @@ util.isArray = function(obj) {
 
 var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
 util.isArrayLike = function(obj) {
-    var length = obj['length'];
-    return typeof length === 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+    if(typeof obj !== 'object' || !obj){
+        return false;
+    }
+    var length = obj.length;
+    return typeof length === 'number'
+        && length % 1 === 0 && length >= 0 && length <= MAX_ARRAY_INDEX;
 };
 
 util.isObject = function(obj) {
@@ -115,6 +119,102 @@ util.get = function(obj, accessor) {
     }
     return ret;
 };
+
+var test = require('tape');
+var arrayLike = {
+    0: 123,
+    1: 234,
+    2: 345,
+    length: 3
+};
+var obj = {
+    name: 'james',
+    age: 21
+};
+
+
+
+test('isArrayLike', function (t) {
+    var isArrayLike = util.isArrayLike;
+    t.equal(isArrayLike(null), false, '`null` is not an ALO');
+    t.equal(isArrayLike(undefined), false, '`undefined` is not an ALO');
+    t.equal(isArrayLike(true), false, '`true` is not an ALO');
+    t.equal(isArrayLike(false), false, '`false` is not an ALO');
+    t.equal(isArrayLike(function () {}), false, '`function` is not an ALO');
+    t.equal(isArrayLike(''), false, '`string` is not an ALO');
+    t.equal(isArrayLike('abc'), false, '`string` is not an ALO');
+
+    t.equal(isArrayLike([]), true, '`[]` is a simple ALO');
+    t.equal(isArrayLike(arguments), true, '`arguments` is a simple ALO');
+    t.equal(isArrayLike({ length: 0 }), true, '`{ length: 0 }` is a simple ALO');
+    t.equal(isArrayLike({ length: 0.1 }), false, 'length of 0.1 is not valid');
+    t.end();
+});
+
+test('toArray', function(t) {
+    var toArray = util.toArray;
+
+    t.deepEqual(toArray([1, 2, 3, 4]), [1, 2, 3, 4]);
+    t.deepEqual(toArray([1, 2, 3, 4]), [1, 2, 3, 4]);
+    t.deepEqual(toArray(arrayLike), [123, 234, 345]);
+    t.deepEqual(toArray(obj), ['james', 21]);
+    t.deepEqual(toArray(null), []);
+    t.deepEqual(toArray(0), []);
+    t.deepEqual(toArray(123), []);
+    t.end();
+});
+
+test('isArrayLike', function(t) {
+    var isArrayLike = util.isArrayLike;
+    t.true(isArrayLike([]));
+    t.true(isArrayLike([1, 2, 3]));
+    t.true(isArrayLike(arrayLike));
+    t.false(isArrayLike(obj));
+    t.end();
+});
+
+test('get', function(t) {
+    var get = util.get;
+    var obj = {
+        name: {
+            first: 'w',
+            second: 'y'
+        },
+        skill: {
+            it: {
+                web: ['js', 'css', 'html']
+            }
+        }
+    };
+
+    t.equal(get(obj, 'name.first'), 'w');
+    t.deepEqual(get(obj, 'skill.it.web'), ['js', 'css', 'html']);
+    t.equal(get(obj, 'skill.it.tools'), undefined);
+    t.equal(get(1, 'skill.it.web'), 1);
+
+    t.equal(get(obj, function(obj) {
+        return obj.skill.it.web[2];
+    }), 'html');
+
+    var arr = [{
+        name: 'ww',
+        age: 31
+    }, {
+        name: 'yyy',
+        age: 21
+    }, {
+        name: 'zz',
+        age: 26
+    }, {
+        name: 'xxxx',
+        age: 18
+    }];
+
+    t.equal(get(arr, function(arr) {
+        return arr[0].name.length;
+    }), 2);
+    t.end();
+});
 
 /**
  * Returns the item at the specified index location in an array or a string.
@@ -294,41 +394,41 @@ function contains(arr, item) {
     return ret;
 }
 
-var test = require('tape');
-var arrayLike = {
+var test$1 = require('tape');
+var arrayLike$1 = {
     0: 123,
     1: 234,
     2: 345,
     length: 3
 };
 
-var obj = {
+var obj$1 = {
     name: 'wy',
     age: 21
 };
 
-test('at', function(t) {
+test$1('at', function(t) {
     var at$$ = at;
     t.equal(at$$([1, 2, 3], 1), 2);
     t.equal(at$$([1, 2, 3], -1), undefined);
     // if first argument is not a array ,samply return it;
     t.equal(at$$(123, 1), 123);
-    t.equal(at$$(arrayLike, 2), 345);
+    t.equal(at$$(arrayLike$1, 2), 345);
     t.end();
 });
 
-test('concat', function(t) {
+test$1('concat', function(t) {
     var concat$$ = concat;
     t.deepEqual(concat$$([1, 2, 3], [4, 5, 6]), [1, 2, 3, 4, 5, 6]);
     t.deepEqual(concat$$([1, 2, 3], 123), [1, 2, 3]);
     t.deepEqual(concat$$(123, [4, 5, 6]), [4, 5, 6]);
     t.deepEqual(concat$$(123, 123), []);
-    t.deepEqual(concat$$(arrayLike, [1, 2, 3]), [123, 234, 345, 1, 2, 3]);
-    t.deepEqual(concat$$(obj, [1, 2, 3]), ['wy', 21, 1, 2, 3]);
+    t.deepEqual(concat$$(arrayLike$1, [1, 2, 3]), [123, 234, 345, 1, 2, 3]);
+    t.deepEqual(concat$$(obj$1, [1, 2, 3]), ['wy', 21, 1, 2, 3]);
     t.end();
 });
 
-test('contains', function(t) {
+test$1('contains', function(t) {
     var contains$$ = contains;
     t.true(contains$$([1, 2, 3], 2));
     t.false(contains$$([1, 2, 3], 4));
@@ -341,36 +441,39 @@ test('contains', function(t) {
     t.end();
 });
 
-test('first', function(t) {
+test$1('first', function(t) {
     var first$$ = first;
     t.equal(first$$(['a', 'b', 'c']), 'a');
-    t.equal(first$$(arrayLike), 123);
+    t.equal(first$$(arrayLike$1), 123);
     t.equal(first$$([]), undefined);
     t.equal(first$$(123), 123);
-    t.equal(first$$(obj), obj);
+    t.equal(first$$(obj$1), obj$1);
     t.end();
 });
 
-test('last', function(t) {
+test$1('last', function(t) {
     var last$$ = last;
     t.equal(last$$(['a', 'b', 'c']), 'c');
-    t.equal(last$$(arrayLike), 345);
+    t.equal(last$$(arrayLike$1), 345);
     t.equal(last$$([]), undefined);
     t.equal(last$$(123), 123);
-    t.equal(last$$(obj), obj);
+    t.equal(last$$(obj$1), obj$1);
     t.end();
 });
 
-test('join', function(t) {
+test$1('join', function(t) {
     var join$$ = join;
     t.equal(join$$(['a', 'b', 'c'], '-'), 'a-b-c');
     t.equal(join$$(['a', 'b', 'c']), 'a,b,c');
-    t.equal(join$$(arrayLike, '-'), '123-234-345');
-    t.equal(join$$(obj), obj);
+    t.equal(join$$(arrayLike$1, '-'), '123-234-345');
+    t.equal(join$$(obj$1), obj$1);
+    t.equal(join$$(obj$1), obj$1);
+    t.equal(join$$(null), null);
+    t.equal(join$$(undefined), undefined);
     t.end();
 });
 
-test('map', function(t) {
+test$1('map', function(t) {
     var map$$ = map;
     var arr1 = map$$([1, 2, 3], function(val) {
         return val + 1;
@@ -388,21 +491,21 @@ test('map', function(t) {
     t.end();
 });
 
-test('range', function(t) {
+test$1('range', function(t) {
     var range$$ = range;
     var arr = [];
     t.deepEqual(range$$(arr, 3), [0, 1, 2]);
     t.end();
 });
 
-test('reverse', function(t) {
+test$1('reverse', function(t) {
     var reverse$$ = reverse;
     t.deepEqual(reverse$$([1, 2, 3]), [3, 2, 1]);
     t.deepEqual(reverse$$('abc'), 'cba');
     t.end();
 });
 
-test('size', function(t) {
+test$1('size', function(t) {
     var size$$ = size;
     t.equal(size$$([1, 2, 3]), 3);
     t.equal(size$$('abc'), 3);
@@ -488,7 +591,7 @@ function split(str, separator) {
  * {{ "http://vuejs.org" | test /^http/ }} => true
  */
 
-function test$2(str, re, flag) {
+function test$3(str, re, flag) {
     re = new RegExp(re, flag);
     return re.test(str);
 }
@@ -616,8 +719,8 @@ function repeat(str, times) {
     return ret;
 }
 
-var test$1 = require('tape');
-test$1('trim', function(t) {
+var test$2 = require('tape');
+test$2('trim', function(t) {
     var trim$$ = trim;
     t.equal(trim$$('    abc ', 'l'), 'abc ');
     t.equal(trim$$(' abc  ', 'r'), ' abc');
@@ -625,7 +728,7 @@ test$1('trim', function(t) {
     t.end();
 });
 
-test$1('append', function(t) {
+test$2('append', function(t) {
     var append$$ = append;
     t.equal(append$$('abc', '-123'), 'abc-123');
     t.equal(append$$(1, '-123'), '1-123');
@@ -634,7 +737,7 @@ test$1('append', function(t) {
     t.end();
 });
 
-test$1('prepend', function(t) {
+test$2('prepend', function(t) {
     var prepend$$ = prepend;
     t.equal(prepend$$('abc', '123-'), '123-abc');
     t.equal(prepend$$(1, '123-'), '123-1');
@@ -643,14 +746,14 @@ test$1('prepend', function(t) {
     t.end();
 });
 
-test$1('camelcase', function(t) {
+test$2('camelcase', function(t) {
     var camelcase$$ = camelcase;
     t.equal(camelcase$$('some_one'), 'SomeOne');
     t.equal(camelcase$$('some-one'), 'SomeOne');
     t.end();
 });
 
-test$1('remove', function(t) {
+test$2('remove', function(t) {
     var remove$$ = remove;
     t.equal(remove$$('a-b-c-d-e', '-'), 'abcde');
     t.equal(remove$$('a-b-c-d-e', '='), 'a-b-c-d-e');
@@ -658,21 +761,21 @@ test$1('remove', function(t) {
     t.end();
 });
 
-test$1('split', function(t) {
+test$2('split', function(t) {
     var split$$ = split;
     t.deepEqual(split$$('1-2-3', '-'), ['1', '2', '3']);
     t.equal(split$$(123, '-'), 123);
     t.end();
 });
 
-test$1('test', function(t) {
-    var test = test$2;
+test$2('test', function(t) {
+    var test = test$3;
     t.equal(test('http://vue.org', '^http'), true);
     t.equal(test('http://vue.org', '^https'), false);
     t.end();
 });
 
-test$1('truncate', function(t) {
+test$2('truncate', function(t) {
     var truncate$$ = truncate;
     t.equal(truncate$$('0123456789', 10), '0123456789');
     t.equal(truncate$$('0123456789abc', 10), '0123456...');
@@ -683,7 +786,7 @@ test$1('truncate', function(t) {
 });
 
 
-test$1('leftPad',function(t){
+test$2('leftPad',function(t){
     var leftPad$$ = leftPad;
     t.equal(leftPad$$('abc',5,'*'),'**abc');
     t.equal(leftPad$$('abc',5),'  abc');
@@ -691,7 +794,7 @@ test$1('leftPad',function(t){
     t.end();
 });
 
-test$1('rightPad',function(t){
+test$2('rightPad',function(t){
     var rightPad$$ = rightPad;
     t.equal(rightPad$$('abc',5,'*'),'abc**');
     t.equal(rightPad$$('abc',5),'abc  ');
@@ -700,7 +803,7 @@ test$1('rightPad',function(t){
 });
 
 
-test$1('repeat',function(t){
+test$2('repeat',function(t){
     var repeat$$ = repeat;
     t.equal(repeat$$('abc',1),'abc');
     t.equal(repeat$$('abc',3),'abcabcabc');
@@ -834,8 +937,8 @@ function mean(arr) {
     }
 }
 
-var test$3 = require('tape');
-test$3('max', function(t) {
+var test$4 = require('tape');
+test$4('max', function(t) {
     var max$$ = max;
 
     var arr = [{
@@ -860,7 +963,7 @@ test$3('max', function(t) {
     t.end();
 });
 
-test$3('min', function(t) {
+test$4('min', function(t) {
     var min$$ = min;
     var arr = [{
         name: 'ww',
@@ -884,7 +987,7 @@ test$3('min', function(t) {
     t.end();
 });
 
-test$3('sum', function(t) {
+test$4('sum', function(t) {
     var sum$$ = sum;
     t.equal(sum$$([1, 2, 3]), 6);
     t.equal(sum$$([1, 2, 3], 10), 16);
@@ -894,7 +997,7 @@ test$3('sum', function(t) {
 });
 
 
-test$3('mean', function(t) {
+test$4('mean', function(t) {
     var mean$$ = mean;
     t.equal(mean$$([1, 2, 3]), 2);
     t.equal(mean$$('abc'), 'abc');
@@ -1061,8 +1164,8 @@ function defaults(value, dft) {
     }
 }
 
-var test$4 = require('tape');
-test$4('defaults', function(t) {
+var test$5 = require('tape');
+test$5('defaults', function(t) {
     var defaults$$ = defaults;
     t.equal(defaults$$(1, 100), 1);
     t.equal(defaults$$(0, 100), 0);
@@ -1073,7 +1176,7 @@ test$4('defaults', function(t) {
     t.end();
 });
 
-test$4('date', function(t) {
+test$5('date', function(t) {
     var date$$ = date;
     var d = new Date;
     d.setFullYear(2016);

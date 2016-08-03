@@ -12,6 +12,25 @@ var obj = {
     age: 21
 };
 
+
+
+test('isArrayLike', function (t) {
+    var isArrayLike = util.isArrayLike;
+    t.equal(isArrayLike(null), false, '`null` is not an ALO');
+    t.equal(isArrayLike(undefined), false, '`undefined` is not an ALO');
+    t.equal(isArrayLike(true), false, '`true` is not an ALO');
+    t.equal(isArrayLike(false), false, '`false` is not an ALO');
+    t.equal(isArrayLike(function () {}), false, '`function` is not an ALO');
+    t.equal(isArrayLike(''), false, '`string` is not an ALO');
+    t.equal(isArrayLike('abc'), false, '`string` is not an ALO');
+
+    t.equal(isArrayLike([]), true, '`[]` is a simple ALO');
+    t.equal(isArrayLike(arguments), true, '`arguments` is a simple ALO');
+    t.equal(isArrayLike({ length: 0 }), true, '`{ length: 0 }` is a simple ALO');
+    t.equal(isArrayLike({ length: 0.1 }), false, 'length of 0.1 is not valid');
+    t.end();
+});
+
 test('toArray', function(t) {
     var toArray = util.toArray;
 

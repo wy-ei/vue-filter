@@ -1,4 +1,4 @@
-import util from './util/index'
+import util from './util/index';
 import * as collectionFilters from './collection/index';
 import * as mathFilters from './math/index';
 import * as stringFilters from './string/index';

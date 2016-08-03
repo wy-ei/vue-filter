@@ -74,6 +74,9 @@ test('join', function(t) {
     t.equal(join(['a', 'b', 'c']), 'a,b,c');
     t.equal(join(arrayLike, '-'), '123-234-345');
     t.equal(join(obj), obj);
+    t.equal(join(obj), obj);
+    t.equal(join(null), null);
+    t.equal(join(undefined), undefined);
     t.end();
 });
 
