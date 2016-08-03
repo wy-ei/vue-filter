@@ -1,5 +1,7 @@
 # vue-filter
 
+[![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
+
 A plugin for Vue.js. Which include many useful **custom filters** can enhance vue filter system.
 
 ## Installation
