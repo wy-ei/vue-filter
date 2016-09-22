@@ -1,5 +1,5 @@
 /**
- * vue-filter.js v0.1.6
+ * vue-filter.js v0.1.8
  * (c) 2016 wy-ei
  * MIT License.
  */
@@ -889,7 +889,10 @@
                 ret = zeroize(hours);
                 break;
             case '%I':
-                ret = d.getHours() % 12;
+                var hours = d.getHours();
+                if (hours != 12)
+                  hours = hours % 12;
+                ret = zeroize(hours);
                 break;
             case '%j':
                 ret = zeroize(getDays(), 3);

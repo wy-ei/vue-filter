@@ -7,6 +7,7 @@ rollup.rollup({
     var code = bundle.generate().code;
     fs.writeFileSync('test/test.js', code);
     require('../test/test.js');
+    fs.unlinkSync('test/test.js');
 }, function(err) {
     console.log(err);
 });
