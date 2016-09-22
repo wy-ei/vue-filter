@@ -80,7 +80,10 @@ function date(date, formatString) {
             ret = zeroize(hours);
             break;
         case '%I':
-            ret = d.getHours() % 12;
+            var hours = d.getHours();
+            if (hours != 12)
+              hours = hours % 12;
+            ret = zeroize(hours);
             break;
         case '%j':
             ret = zeroize(getDays(), 3);
