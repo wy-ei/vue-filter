@@ -1,4 +1,5 @@
 /test
+/srcipts
 .eslintrc.json
 .eslintignore
 .travis.yml
