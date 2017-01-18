@@ -1,6 +1,46 @@
 /**
- * Converts a timestamp into another date format.
- *
+Converts a timestamp into another date format.
+
+```html
+{{ Date.now() | date '%T' }}  => '13:34:36'
+{{ 'Wed Jan 20 2016 13:34:36 GMT+0800' | date '%T' }} => '13:34:36'
+{{ 1453268193752 | date '%Y-%m-%d' }} => '2016-01-20'
+{{ new Date | date '%I:%M:%s %p' }} => '1:39:22 PM'
+```
+
+**more date parameters are listed below:**
+
+
+| param | explanation | example |
+|:--:|:--|:--|
+|%a | Abbreviated weekday. |`{{ timestamp | date "%a" }} => "Sat" `|
+|%A |Full weekday name. |`{{ timestamp | date "%A" }} => "Tuesday" `|
+|%b |Abbreviated month name. |`{{ timestamp | date "%b" }} => "Jan" `|
+|%B |Full month name |`{{ timestamp | date "%B" }} => "January" `|
+|%c |Preferred local date and time representation |`{{ timestamp | date "%c" }} => "Tue Apr 22 11:16:09 2014" `|
+|%d |Day of the month, zero-padded (01, 02, 03, etc.). |`{{ timestamp | date "%d" }} => "04" `|
+%-d |Day of the month, not zero-padded (1,2,3, etc.). |`{{ timestamp | date "%-d" }} => "4" `|
+|%D |Formats the date (dd/mm/yy). |`{{ timestamp | date "%D" }} => "04/22/14" `|
+|%e |Day of the month, blank-padded ( 1, 2, 3, etc.). |`{{ timestamp | date "%e" }} => "3" `|
+|%F |Returns the date in ISO 8601 format (yyyy-mm-dd). |`{{ timestamp | date "%F" }} => "2014-04-22" `|
+|%H |Hour of the day, 24-hour clock (00 - 23). |`{{ timestamp | date "%H" }} => "15" `|
+|%I |Hour of the day, 12-hour clock (1 - 12). |`{{ timestamp | date "%I" }} => "7" `|
+|%j |Day of the year (001 - 366). |`{{ timestamp | date "%j" }} => "245" `|
+|%k |Hour of the day, 24-hour clock (1 - 24). |`{{ timestamp | date "%k" }} => "14" `|
+|%m |Month of the year (01 - 12). |`{{ timestamp | date "%m" }} => "04" `|
+|%M |Minute of the hour (00 - 59). |`{{ timestamp | date "%M" }} => "53" `|
+|%p |Meridian indicator (AM/PM). |`{{ timestamp | date "%p" }} => "PM" `|
+|%r |12-hour time (%I:%M:%S %p) |`{{ timestamp | date "%r" }} => "03:20:07 PM" `|
+|%R |24-hour time (%H:%M) |`{{ timestamp | date "%R" }} => "15:21" `|
+|%T |24-hour time (%H:%M:%S) |`{{ timestamp | date "%T" }} => "15:22:13" `|
+|%U |The number of the week in the current year, starting with the first Sunday as the first day of the first week. |`{{ timestamp | date "%U" }} => "16" `|
+|%W |The number of the week in the current year, starting with the first Monday as the first day of the first week. |`{{ timestamp | date "%W" }} => "16" `|
+|%w |Day of the week (0 - 6, with Sunday being 0). |`{{ timestamp | date "%w" }} => "2" `|
+|%x |Preferred representation for the date alone, no time. (mm/dd/yy). |`{{ timestamp | date "%x" }} => "04/22/14" `|
+|%X |Preferred representation for the time. (hh:mm:ss). |`{{ timestamp | date "%X" }} => "13:17:24" `|
+|%y |Year without a century (00.99). |`{{ timestamp | date "%y" }} => "14" `|
+|%Y |Year with a century. |`{{ timestamp | date "%Y" }} => "2014" `|
+
  */
 var weekdays = ['Sunday', 'Monday', 'Tuesday',
     'Wednesday', 'Thursday', 'Friday', 'Saturday'

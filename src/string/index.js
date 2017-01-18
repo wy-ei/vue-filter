@@ -8,6 +8,8 @@ import trim from './trim';
 import truncate from './truncate';
 import {leftPad,rightPad} from './pad';
 import repeat from './repeat';
+import lowercase from './lowercase';
+import uppercase from './uppercase';
 
 export {
     append,
@@ -20,5 +22,7 @@ export {
     truncate,
     leftPad,
     rightPad,
-    repeat
+    repeat,
+    lowercase,
+    uppercase
 };

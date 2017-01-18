@@ -10,27 +10,27 @@ var
 
 var util = {};
 
-util.isArray = function(obj) {
+util.isArray = function (obj) {
     return Array.isArray(obj);
 };
 
 var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-util.isArrayLike = function(obj) {
-    if(typeof obj !== 'object' || !obj){
+util.isArrayLike = function (obj) {
+    if (typeof obj !== 'object' || !obj) {
         return false;
     }
     var length = obj.length;
-    return typeof length === 'number'
-        && length % 1 === 0 && length >= 0 && length <= MAX_ARRAY_INDEX;
+    return typeof length === 'number' &&
+        length % 1 === 0 && length >= 0 && length <= MAX_ARRAY_INDEX;
 };
 
-util.isObject = function(obj) {
+util.isObject = function (obj) {
     var type = typeof obj;
     return type === 'function' || type === 'object' && !!obj;
 };
 
 
-util.each = function(obj, callback) {
+util.each = function (obj, callback) {
     var i,
         len;
     if (util.isArray(obj)) {
@@ -49,13 +49,13 @@ util.each = function(obj, callback) {
     return obj;
 };
 
-util.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
-    util['is' + name] = function(obj) {
+util.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function (name) {
+    util['is' + name] = function (obj) {
         return toString.call(obj) === '[object ' + name + ']';
     };
 });
 
-util.keys = function(obj) {
+util.keys = function (obj) {
     if (!util.isObject(obj)) {
         return [];
     }
@@ -71,7 +71,7 @@ util.keys = function(obj) {
     return keys;
 };
 
-util.values = function(obj) {
+util.values = function (obj) {
     var keys = util.keys(obj);
     var length = keys.length;
     var values = Array(length);
@@ -81,7 +81,7 @@ util.values = function(obj) {
     return values;
 };
 
-util.toArray = function(obj) {
+util.toArray = function (obj) {
     if (!obj) {
         return [];
     }
@@ -91,7 +91,7 @@ util.toArray = function(obj) {
     return util.values(obj);
 };
 
-util.map = function(obj, cb) {
+util.map = function (obj, cb) {
     var keys = !util.isArrayLike(obj) && util.keys(obj),
         length = (keys || obj).length,
         results = Array(length);
@@ -102,7 +102,7 @@ util.map = function(obj, cb) {
     return results;
 };
 
-util.get = function(obj, accessor) {
+util.get = function (obj, accessor) {
     var ret = undefined;
     if (!util.isObject(obj)) {
         return obj;
@@ -124,6 +124,32 @@ util.get = function(obj, accessor) {
         ret = accessor(obj);
     }
     return ret;
+};
+
+
+util.debounce = function (func, wait) {
+    var timeout, args, context, timestamp, result;
+    var later = function () {
+        var last = Date.now() - timestamp;
+        if (last < wait && last >= 0) {
+            timeout = setTimeout(later, wait - last);
+        } else {
+            timeout = null;
+            result = func.apply(context, args);
+            if (!timeout) {
+                context = args = null;
+            }
+        }
+    };
+    return function () {
+        context = this;
+        args = arguments;
+        timestamp = Date.now();
+        if (!timeout) {
+            timeout = setTimeout(later, wait);
+        }
+        return result;
+    };
 };
 
 export default util;

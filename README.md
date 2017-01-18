@@ -1,18 +1,18 @@
-# vue-filter
+# vue-filter [![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
 
-[![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
-
-A plugin for Vue.js. Which include many useful **custom filters** can enhance vue filter system.
+A collection of Vue.js filters.
 
 ## Installation
 
-### NPM
+**CommonJS:**
+
+install package from NPM:
 
 ```
 npm install vue-filter
 ```
 
-### CommonJS
+require vue-filter in you code:
 
 ```javascript
 var Vue = require('Vue');
@@ -20,47 +20,18 @@ var VueFilter = require('vue-filter');
 Vue.use(VueFilter);
 ```
 
-### AMD
-```javascript
-require(['vue','vue-filter'],function(Vue,VueFilter){
-	Vue.use(VueFilter);
-});
-```
+**Direct include**
 
-### Direct include
-
-you can include it directly with a `<script>` tag. It will install itself automatically.
+Include it directly with a `<script>` tag. It will install itself automatically.
 
 ```html
 <script src="vue.js"></script>
 <script src="vue-filter.js"></script>
 ```
 
-## Usage
+## Filters
 
-It's very easy to use.
-
-**Example**:
-
-+ append postfix for a string:
-
-```html
-<img src={{ 'sky' | append '.jpg' }} />
-<!-- get -->
-<img src='sky.jpg' />
-```
-
-+ get first element in an array or first charactor in a string:
-
-```html
-<p>{{ ['a','b','c'] | first }}</p>
-<!-- get -->
-<p>a</p>
-```
-
-**See filter list below for more filters**
-
-## Filters List
+Click the filter to see how to use it.
 
 ### Collection Filters
 
@@ -76,33 +47,6 @@ It's very easy to use.
 + [range](#range)
 + [contains](#contains)
 
-### Math Filters
-
-+ [abs](#math-method-filters)
-+ [acos](#math-method-filters)
-+ [asin](#math-method-filters)
-+ [atan](#math-method-filters)
-+ [atan2](#math-method-filters)
-+ [ceil](#math-method-filters)
-+ [cos](#math-method-filters)
-+ [exp](#math-method-filters)
-+ [floor](#math-method-filters)
-+ [log](#math-method-filters)
-+ [pow](#math-method-filters)
-+ [round](#math-method-filters)
-+ [sin](#math-method-filters)
-+ [sqrt](#math-method-filters)
-+ [tan](#math-method-filters)
-+ [sum](#sum)
-+ [mean](#mean)
-+ [min](#min)
-+ [max](#max)
-+ [plus](#plus)
-+ [minis](#minus)
-+ [multiply](#multiply)
-+ [divide](#divide)
-+ [mod](#mod)
-
 ### String Filters
 
 + [append](#append)
@@ -116,20 +60,33 @@ It's very easy to use.
 + [leftPad](#leftpad)
 + [rightPad](#rightpad)
 + [repeat](#repeat)
++ [lowercase](#lowercase)
++ [uppercase](#uppercase)
 
+### Math Filters
+
++ [all the function in Math](#math-method-filters)
++ [sum](#sum)
++ [mean](#mean)
++ [min](#min)
++ [max](#max)
++ [plus](#plus)
++ [minis](#minus)
++ [multiply](#multiply)
++ [divide](#divide)
++ [mod](#mod)
 
 ### Other Filters
 
 + [date](#date)
 + [defaults](#defaults)
++ [get](#get)
++ [debounce](#debounce)
 
-**see [Document](#document) below to learn how to use those filters**
 
-## Document
+## Usage
 
 ### Collection Filters
-
----
 
 #### first
 
@@ -178,7 +135,7 @@ Returns the item at the specified index location in an array or a string.
 
 #### reverse
 
-reverse an array or a string
+Reverse an array or a string.
 
 ```
 {{ 'abc' | reverse }} => 'cba'
@@ -189,14 +146,13 @@ reverse an array or a string
 
 Concatenates an array into another one.
 
-
 ```  
 {{ [1,2,3] | concat [4,5,6] }} => [1,2,3,4,5,6]
 ```
 
 #### map
 
-returns a new collection of the results of each expression execution.
+Returns a new collection of the results of each expression execution.
 
 ```javascript
 new Vue({
@@ -213,7 +169,7 @@ new Vue({
 
 #### random
 
-get a random value from a collection
+Get a random value from a collection.
 
 ```
 {{ [1,2,3,4] | random }} => 1 or 2 or 3 or 4
@@ -221,7 +177,7 @@ get a random value from a collection
 
 #### range
 
-Return a new collection from a given length
+Return a new collection from a given length.
 
 ```
 {{ [] | range 4 }} => [0,1,2,3]
@@ -235,15 +191,142 @@ Checks if given expression or value is present in the collection
 {{ [2,3,4] | contains 3 }} => true;
 ```
 
-### Math Filters
-
+### String Filters
 ---
 
+#### append
+
+Appends characters to a string.
+
+```
+{{ 'sky' | append '.jpg' }} => 'sky.jpg'
+```
+
+#### prepend
+
+Prepends characters to a string.
+
+```
+{{ 'world' | prepend 'hello ' }} => 'hello world'
+```
+
+#### remove
+
+Removes all occurrences of a substring from a string.
+
+```
+{{ 'Hello JavaScript' | remove 'Hello' }} => ' JavaScript'
+```
+
+#### camelcase
+
+Converts a string into CamelCase.
+
+```
+{{ some_else | camelcase }} => SomeElse
+{{ some-else | camelcase }} => SomeElse
+```
+
+#### truncate
+
+Truncate text to a specified length.
+
+```
+{{ 'this is a big city!' | truncate 10 '...' }} => this is...
+```
+
+#### split
+
+The split filter takes on a substring as a parameter.The substring is used as a delimiter to divide a string into an array.
+
+```
+{{ 'a-b-c-d' | split '-' }} => [a,b,c,d]
+```
+
+#### trim
+
+Strips tabs, spaces, and newlines (all whitespace) from the left or right or both side of a string.which depends on second argument. if it is 'r' will only trim right side,if it is 'l' will only trim left side otherwise trim both left and right side.
+
+```
+{{ '   some spaces   ' | trim }} => 'some spaces'
+{{ '   some spaces   ' | trim 'r' }} => '   some spaces'
+{{ '   some spaces   ' | trim 'l' }} => 'some spaces   '
+```
+
+#### test
+
+Test if a string match a pattern.
+
+```
+{{ "http://vuejs.org" | test /^http/ }} => true
+```
+
+#### leftPad
+
+Pad a string on left.
+
+```
+{{ 'abc' | leftPad 5 '*' }} => '**abc'
+```
+
+#### rightPad
+
+Pad a string on right.
+
+```
+{{ 'abc' | rightPad 5 '*' }} => 'abc**'
+```
+
+#### repeat
+
+Repeat a string n times.
+
+```
+{{ 'abc' | repeat 3 }} => 'abcabcabc'
+{{ 'abc' | repeat '3' }} => 'abcabcabc'
+{{ 'abc' | repeat 0 }} => ''
+{{ 'abc' | repeat }} => ''
+```
+
+#### lowercase
+
+Lowercase a string.
+
+```
+{{ 'Vue' | lowercase }} => 'vue'
+```
+
+#### uppercase
+
+Uppercase a string.
+
+```
+{{ 'Vue' | uppercase }} => 'VUE'
+```
+
+### Math filters
+---
 #### Math method filters
 
-abs,acos,asin,atan,atan2,ceil,cos,exp,floor,log,pow,round,sin,sqrt,tan
+You can use those math function as filter:
 
-**Notice:** random filter use to get a random value from a collection
+- `abs`
+- `acos`
+- `asin`
+- `atan`
+- `atan2`
+- `ceil`
+- `cos`
+- `exp`
+- `floor`
+- `log`
+- `pow`
+- `round`
+- `sin`
+- `sqrt`
+- `tan`
+
+**Notice:** `random` use to pick a random item from collection.
 
 ```
 {{ -1.2 | abs }}  => 1.2
@@ -264,7 +347,7 @@ you can give an option argument as initial value
 
 #### mean
 
-return mean value of a array
+Return mean value of a array.
 
 ```
 {{ [1,2,3,4] | mean }} => 2.5
@@ -272,8 +355,7 @@ return mean value of a array
 
 #### min
 
-return minimum value in an array.It will compare two item by a certain key
-if key provide.
+Return minimum value in an array. It will compare two item by a certain key if key provide.
 
 ```
 {{ [13,22,3,24 ] | min }} => 3
@@ -329,109 +411,11 @@ Divides an output by a number and returns the remainder.
 {{ 10 | mod 3 }} => 1
 ```
 
-### String Filters
-
----
-
-#### append
-
-Appends characters to a string.
-
-```
-{{ 'sky' | append '.jpg' }} => 'sky.jpg'
-```
-
-#### prepend
-
-Prepends characters to a string.
-
-```
-{{ 'world' | prepend 'hello ' }} => 'hello world'
-```
-
-#### remove
-
-Removes all occurrences of a substring from a string.
-
-```
-{{ 'Hello JavaScript' | remove 'Hello' }} => ' JavaScript'
-```
-
-#### camelcase
-
-Converts a string into CamelCase.
-
-```
-{{ some_else | camelcase }} => SomeElse
-{{ some-else | camelcase }} => SomeElse
-```
-
-#### truncate
-
-truncate text to a specified length.
-
-```
-{{ 'this is a big city!' | truncate 10 '...' }} => this is...
-```
-
-#### split
-
-The split filter takes on a substring as a parameter.The substring is used as a delimiter to divide a string into an array.
-
-```
-{{ 'a-b-c-d' | split '-' }} => [a,b,c,d]
-```
-
-#### trim
-
-Strips tabs, spaces, and newlines (all whitespace) from the left or right or both side of a string.which depends on second argument. if it is 'r' will only trim right side,if it is 'l' will only trim left side otherwise trim both left and right side.
-
-```
-{{ '   some spaces   ' | trim }} => 'some spaces'
-{{ '   some spaces   ' | trim 'r' }} => '   some spaces'
-{{ '   some spaces   ' | trim 'l' }} => 'some spaces   '
-```
-
-#### test
-
-test if a string match a pattern
-
-```
-{{ "http://vuejs.org" | test /^http/ }} => true
-```
-
-#### leftPad
-
-pad a string on left
-
-```
-{{ 'abc' | leftPad 5 '*' }} => '**abc'
-```
-
-#### rightPad
-
-pad a string on right
-
-```
-{{ 'abc' | rightPad 5 '*' }} => 'abc**'
-```
-
-#### repeat
-
-repeat a string n times
-
-```
-{{ 'abc' | repeat 3 }} => 'abcabcabc'
-{{ 'abc' | repeat '3' }} => 'abcabcabc'
-{{ 'abc' | repeat 0 }} => ''
-{{ 'abc' | repeat }} => ''
-```
 
 ### Other Filters
-
 ---
 
-### date
+#### date
 
 Converts a timestamp into another date format.
 
@@ -443,7 +427,6 @@ Converts a timestamp into another date format.
 ```
 
 **more date parameters are listed below:**
-
 
 | param | explanation | example |
 |:--:|:--|:--|
@@ -475,7 +458,7 @@ Converts a timestamp into another date format.
 |%y |Year without a century (00.99). |`{{ timestamp | date "%y" }} => "14" `|
 |%Y |Year with a century. |`{{ timestamp | date "%Y" }} => "2014" `|
 
-### defaults
+#### defaults
 
 Sets a default value for any variable with no assigned value.
 
@@ -485,6 +468,28 @@ The default value is returned if the variable resolves to null ,undefined or an 
 {{ customer.name | defaults "customer" }}
 
 <!--if customer.name is null or empty,will use "customer" instead-->
+```
+
+#### debounce
+
+
+Debounce a function, the default dalay is 300ms
+
+```
+{{ func | debounce 300 }}
+```
+
+#### get
+
+Get a property inside an Object
+
+```
+james = {
+   contact:{
+       tel: 187xxxx0001
+   }
+}
+{{ james | get 'contact.tel' }} => 187xxxx0001
 ```
 
 ## License

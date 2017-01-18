@@ -11,8 +11,7 @@ var base = {};
 
 ['abs', 'acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'exp', 'floor',
     'log', 'pow', 'round', 'sin', 'sqrt', 'tan'
-]
-.forEach(function(method) {
+].forEach(function(method) {
     base[method] = function(value, n) {
         if (typeof value === 'number') {
             return Math[method](value, n);

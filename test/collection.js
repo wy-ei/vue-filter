@@ -1,5 +1,5 @@
 var test = require('tape');
-import * as methods from '../src/collection/index';
+import * as filters from '../src/collection/index';
 
 
 var arrayLike = {
@@ -15,7 +15,7 @@ var obj = {
 };
 
 test('at', function(t) {
-    var at = methods.at;
+    var at = filters.at;
     t.equal(at([1, 2, 3], 1), 2);
     t.equal(at([1, 2, 3], -1), undefined);
     // if first argument is not a array ,samply return it;
@@ -25,7 +25,7 @@ test('at', function(t) {
 });
 
 test('concat', function(t) {
-    var concat = methods.concat;
+    var concat = filters.concat;
     t.deepEqual(concat([1, 2, 3], [4, 5, 6]), [1, 2, 3, 4, 5, 6]);
     t.deepEqual(concat([1, 2, 3], 123), [1, 2, 3]);
     t.deepEqual(concat(123, [4, 5, 6]), [4, 5, 6]);
@@ -36,7 +36,7 @@ test('concat', function(t) {
 });
 
 test('contains', function(t) {
-    var contains = methods.contains;
+    var contains = filters.contains;
     t.true(contains([1, 2, 3], 2));
     t.false(contains([1, 2, 3], 4));
     t.true(contains(['1', 2, 3], function(val) {
@@ -49,7 +49,7 @@ test('contains', function(t) {
 });
 
 test('first', function(t) {
-    var first = methods.first;
+    var first = filters.first;
     t.equal(first(['a', 'b', 'c']), 'a');
     t.equal(first(arrayLike), 123);
     t.equal(first([]), undefined);
@@ -59,7 +59,7 @@ test('first', function(t) {
 });
 
 test('last', function(t) {
-    var last = methods.last;
+    var last = filters.last;
     t.equal(last(['a', 'b', 'c']), 'c');
     t.equal(last(arrayLike), 345);
     t.equal(last([]), undefined);
@@ -69,7 +69,7 @@ test('last', function(t) {
 });
 
 test('join', function(t) {
-    var join = methods.join;
+    var join = filters.join;
     t.equal(join(['a', 'b', 'c'], '-'), 'a-b-c');
     t.equal(join(['a', 'b', 'c']), 'a,b,c');
     t.equal(join(arrayLike, '-'), '123-234-345');
@@ -81,7 +81,7 @@ test('join', function(t) {
 });
 
 test('map', function(t) {
-    var map = methods.map;
+    var map = filters.map;
     var arr1 = map([1, 2, 3], function(val) {
         return val + 1;
     });
@@ -99,21 +99,21 @@ test('map', function(t) {
 });
 
 test('range', function(t) {
-    var range = methods.range;
+    var range = filters.range;
     var arr = [];
     t.deepEqual(range(arr, 3), [0, 1, 2]);
     t.end();
 });
 
 test('reverse', function(t) {
-    var reverse = methods.reverse;
+    var reverse = filters.reverse;
     t.deepEqual(reverse([1, 2, 3]), [3, 2, 1]);
     t.deepEqual(reverse('abc'), 'cba');
     t.end();
 });
 
 test('size', function(t) {
-    var size = methods.size;
+    var size = filters.size;
     t.equal(size([1, 2, 3]), 3);
     t.equal(size('abc'), 3);
     t.end();

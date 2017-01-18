@@ -1,8 +1,8 @@
 var test = require('tape');
-import * as methods from '../src/math/index';
+import * as filters from '../src/math/index';
 
 test('max', function(t) {
-    var max = methods.max;
+    var max = filters.max;
 
     var arr = [{
         name: 'ww',
@@ -27,7 +27,7 @@ test('max', function(t) {
 });
 
 test('min', function(t) {
-    var min = methods.min;
+    var min = filters.min;
     var arr = [{
         name: 'ww',
         age: 31
@@ -51,7 +51,7 @@ test('min', function(t) {
 });
 
 test('sum', function(t) {
-    var sum = methods.sum;
+    var sum = filters.sum;
     t.equal(sum([1, 2, 3]), 6);
     t.equal(sum([1, 2, 3], 10), 16);
     t.equal(sum(123), 123);
@@ -61,7 +61,7 @@ test('sum', function(t) {
 
 
 test('mean', function(t) {
-    var mean = methods.mean;
+    var mean = filters.mean;
     t.equal(mean([1, 2, 3]), 2);
     t.equal(mean('abc'), 'abc');
     t.end();
