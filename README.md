@@ -6,18 +6,18 @@ A collection of Vue.js filters.
 
 **CommonJS:**
 
-install package from NPM:
+1. Install from NPM:
 
 ```
-npm install vue-filter
+npm install vue-filter --save
 ```
 
-require vue-filter in you code:
+2. Use vue-filter:
 
 ```javascript
-var Vue = require('Vue');
-var VueFilter = require('vue-filter');
-Vue.use(VueFilter);
+var Vue = require('vue');
+var vueFilter = require('vue-filter');
+Vue.use(vueFilter);
 ```
 
 **Direct include**

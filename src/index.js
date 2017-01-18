@@ -5,14 +5,16 @@ import * as stringFilters from './string/index';
 import * as otherFilters from './other/index';
 
 function install(Vue) {
-    var filters = [].concat(
+    var filters = util.extend({},
         collectionFilters,
         mathFilters,
         stringFilters,
         otherFilters
     );
     util.each(filters, function(value, key) {
-        Vue.filter(key, value);
+        if(!Vue.filter(key)){
+            Vue.filter(key, value);
+        }
     });
 }
 

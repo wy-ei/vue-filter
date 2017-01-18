@@ -71,6 +71,16 @@ util.keys = function (obj) {
     return keys;
 };
 
+util.extend = function(target, source){
+    source = [].slice.call(arguments, 1);
+    for(var i = 0; i < source.length; i++){
+        util.each(util.keys(source[i]), function(key){
+            target[key] = source[i][key];
+        });
+    }
+    return target;
+};
+
 util.values = function (obj) {
     var keys = util.keys(obj);
     var length = keys.length;

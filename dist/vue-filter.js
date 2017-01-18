@@ -1,5 +1,5 @@
 /**
- * vue-filter.js v0.1.9
+ * vue-filter.js v0.1.10
  * (c) 2017 wy-ei
  * MIT License.
  */
@@ -71,6 +71,16 @@
             }
         }
         return keys;
+    };
+
+    util.extend = function(target, source){
+        source = [].slice.call(arguments, 1);
+        for(var i = 0; i < source.length; i++){
+            util.each(util.keys(source[i]), function(key){
+                target[key] = source[i][key];
+            });
+        }
+        return target;
     };
 
     util.values = function (obj) {
@@ -1084,8 +1094,8 @@
      * {{ james | get 'contact.tel' }} => 187xxxx0001
      */
 
-    function get(object, accessor){
-        return util.get(object, accessor);
+    function get(obj, accessor){
+        return util.get(obj, accessor);
     }
 
 
@@ -1098,14 +1108,16 @@
     });
 
     function install(Vue) {
-        var filters = [].concat(
+        var filters = util.extend({},
             collectionFilters,
             mathFilters,
             stringFilters,
             otherFilters
         );
         util.each(filters, function(value, key) {
-            Vue.filter(key, value);
+            if(!Vue.filter(key)){
+                Vue.filter(key, value);
+            }
         });
     }
 
