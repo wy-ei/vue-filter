@@ -62,6 +62,8 @@ test('truncate', function(t) {
     t.equal(truncate('0123456789abc', 10, '---'), '0123456---');
     t.equal(truncate('abc', 10, '-'), 'abc');
     t.equal(truncate('abcde', 4, 1), 'abc1');
+    t.equal(truncate('abc defg h', 9, '...', true), 'abc...');
+    t.equal(truncate('abc defg h', 8, '...', false), 'abc d...');
     t.end();
 });
 
