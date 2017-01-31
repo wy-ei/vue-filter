@@ -58,12 +58,13 @@ test('test', function(t) {
 test('truncate', function(t) {
     var truncate = filters.truncate;
     t.equal(truncate('0123456789', 10), '0123456789');
-    t.equal(truncate('0123456789abc', 10), '0123456...');
-    t.equal(truncate('0123456789abc', 10, '---'), '0123456---');
+    t.equal(truncate('0123456789abc', 10), '0123456789...');
+    t.equal(truncate('0123456789abc', 10, '---'), '0123456789---');
     t.equal(truncate('abc', 10, '-'), 'abc');
-    t.equal(truncate('abcde', 4, 1), 'abc1');
-    t.equal(truncate('abc defg h', 9, '...', true), 'abc...');
-    t.equal(truncate('abc defg h', 8, '...', false), 'abc d...');
+    t.equal(truncate('abcde', 4, 1), 'abcd1');
+    t.equal(truncate('abc defg h', 6, '...', true), 'abc...');
+    t.equal(truncate('abc defg h', 9, '...', true), 'abc defg...');
+    t.equal(truncate('abc defg h', 8, '...', false), 'abc defg...');
     t.end();
 });
 
