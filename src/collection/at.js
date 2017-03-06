@@ -1,17 +1,22 @@
-import util from '../util/index';
+var _ = require('underscore');
+
 /**
- * Return the item at the specified index in an array or a string.
- *
- * {{ ['a','b','c'] | at 1 }} => 'b'
- * {{ 'hello' | at 1 }} => 'e'
+ * @filter at
+ * @description Return the item at the specified index in an array or a string.
+ * @example
+ * ```
+ * {{ ['a','b','c'] | at(1) }} => 'b'
+ * {{ 'hello' | at(0) }} => 'h'
+ * {{ 'js' | at(10) }} => undefined
+ * ```
  */
 
-function at(arr, index) {
-    if (util.isArrayLike(arr)) {
-        return arr[index];
-    } else {
-        return arr;
+function at(collection, index) {
+    if(!_.isArray(collection)){
+        collection = _.toArray();
     }
+    index = Number(index);
+    return collection[index];
 }
 
-export default at;
+module.exports = at;

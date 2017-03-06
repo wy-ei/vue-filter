@@ -1,3 +1,5 @@
+var util = require('../util/index');
+var _ = require('underscore');
 /**
  *  Return a new collection from a given length
  *
@@ -5,10 +7,7 @@
  */
 
 function range(arr, n) {
-    arr = [];
-    for (var i = 0; i < n; i++) {
-        arr.push(i);
-    }
-    return arr;
+    util.deprecated('range', 'Because range is use to generate an array, it doesn\'t need a input, you can use _.range(n) generate an array directly.');
+    return _.range(n);
 }
-export default range;
+module.exports = range;

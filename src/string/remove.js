@@ -1,15 +1,19 @@
-import util from '../util/index';
+var _ = require('underscore');
+var util = require('../util/index');
 /**
- * Removes all occurrences of a substring from a string.
- *
+ * @description Removes all occurrences of a substring from a string.
+ * @example
+ * ```
  * {{ 'Hello JavaScript' | remove 'Hello' }} => ' JavaScript'
+ * ```
  */
 
 function remove(str, substr) {
-    if (util.isString(str)) {
+    util.deprecated('remove', 'You can use `replace(substr, \'\')` instead of remove');
+    if (_.isString(str)) {
         str = str.split(substr).join('');
     }
     return str;
 }
 
-export default remove;
+module.exports = remove;

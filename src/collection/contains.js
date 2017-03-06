@@ -1,10 +1,18 @@
-import util from '../util/index';
+var util = require('../util/index');
 
 /**
- * Checks if given expression or value is present in the collection
- *
- * {{ [2,3,4] | contains 3}} => true;
- *
+ * 
+ * @param {collection} arr - the collection need be checked
+ * @param {any|function} item - the element to be find. If it is a function, 
+ * the function will invoked per item if the function return true, I say the array contains specific item.
+ * @description Checks if given expression or value is present in the collection.
+ * @example
+ * ```
+ * {{ [2,3,4] | contains(3)}} => true;
+ * 
+ * if you want you a function checked is there contains a specific item ,you should use `some` filter
+ * {{ [{name: 'mj'}, {name: 'kb'}] | some((obj)=>obj.name === 'jm')}} => false
+ * ```
  */
 
 function contains(arr, item) {
@@ -32,4 +40,4 @@ function contains(arr, item) {
     return ret;
 }
 
-export default contains;
+module.exports= contains;

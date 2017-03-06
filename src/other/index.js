@@ -1,11 +1,9 @@
-import date from './date';
-import defaults from './defaults';
-import debounce from './debounce';
-import get from './get';
+var date = require('./date');
+var get = require('./get');
+var debounce = require('./debounce');
 
-export {
+module.exports = {
     date,
-    defaults,
     debounce,
     get
 };

@@ -1,18 +1,8 @@
-var
-    ArrayProto = Array.prototype,
-    ObjProto = Object.prototype;
-
-var
-    slice = ArrayProto.slice,
-    toString = ObjProto.toString;
-
+var _ = require('underscore');
 
 
 var util = {};
 
-util.isArray = function (obj) {
-    return Array.isArray(obj);
-};
 
 var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
 util.isArrayLike = function (obj) {
@@ -24,103 +14,15 @@ util.isArrayLike = function (obj) {
         length % 1 === 0 && length >= 0 && length <= MAX_ARRAY_INDEX;
 };
 
-util.isObject = function (obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
-};
-
-
-util.each = function (obj, callback) {
-    var i,
-        len;
-    if (util.isArray(obj)) {
-        for (i = 0, len = obj.length; i < len; i++) {
-            if (callback(obj[i], i, obj) === false) {
-                break;
-            }
-        }
-    } else {
-        for (i in obj) {
-            if (callback(obj[i], i, obj) === false) {
-                break;
-            }
-        }
-    }
-    return obj;
-};
-
-util.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function (name) {
-    util['is' + name] = function (obj) {
-        return toString.call(obj) === '[object ' + name + ']';
-    };
-});
-
-util.keys = function (obj) {
-    if (!util.isObject(obj)) {
-        return [];
-    }
-    if (Object.keys) {
-        return Object.keys(obj);
-    }
-    var keys = [];
-    for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            keys.push(key);
-        }
-    }
-    return keys;
-};
-
-util.extend = function(target, source){
-    source = [].slice.call(arguments, 1);
-    for(var i = 0; i < source.length; i++){
-        util.each(util.keys(source[i]), function(key){
-            target[key] = source[i][key];
-        });
-    }
-    return target;
-};
-
-util.values = function (obj) {
-    var keys = util.keys(obj);
-    var length = keys.length;
-    var values = Array(length);
-    for (var i = 0; i < length; i++) {
-        values[i] = obj[keys[i]];
-    }
-    return values;
-};
-
-util.toArray = function (obj) {
-    if (!obj) {
-        return [];
-    }
-    if (util.isArrayLike(obj)) {
-        return slice.call(obj);
-    }
-    return util.values(obj);
-};
-
-util.map = function (obj, cb) {
-    var keys = !util.isArrayLike(obj) && util.keys(obj),
-        length = (keys || obj).length,
-        results = Array(length);
-    for (var index = 0; index < length; index++) {
-        var currentKey = keys ? keys[index] : index;
-        results[index] = cb(obj[currentKey], currentKey, obj);
-    }
-    return results;
-};
-
 util.get = function (obj, accessor) {
     var ret = undefined;
-    if (!util.isObject(obj)) {
+    if (!_.isObject(obj)) {
         return obj;
     }
     if (accessor == undefined) {
         return obj;
     }
-    if (util.isString(accessor)) {
+    if (_.isString(accessor)) {
         accessor = accessor.split('.');
         ret = obj;
         try {
@@ -130,36 +32,18 @@ util.get = function (obj, accessor) {
         } catch (e) {
             ret = undefined;
         }
-    } else if (util.isFunction(accessor)) {
+    } else if (_.isFunction(accessor)) {
         ret = accessor(obj);
     }
     return ret;
 };
 
+util.deprecated = function(filter, msg){
+    console.warn('[filter - ' + filter + ']:this filter has deprecated, it will be remove at next minor version. ' + msg);
+}
 
-util.debounce = function (func, wait) {
-    var timeout, args, context, timestamp, result;
-    var later = function () {
-        var last = Date.now() - timestamp;
-        if (last < wait && last >= 0) {
-            timeout = setTimeout(later, wait - last);
-        } else {
-            timeout = null;
-            result = func.apply(context, args);
-            if (!timeout) {
-                context = args = null;
-            }
-        }
-    };
-    return function () {
-        context = this;
-        args = arguments;
-        timestamp = Date.now();
-        if (!timeout) {
-            timeout = setTimeout(later, wait);
-        }
-        return result;
-    };
-};
+util.type = function(filter, input, type){
+    console.warn('[filter - ' + filter + ']: expect input type is :' + type + 'but got ' + typeof input);
+}
 
-export default util;
+module.exports = util;

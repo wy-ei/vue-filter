@@ -1,5 +1,5 @@
 var test = require('tape');
-import * as filters from '../src/other/index';
+var filters = require('../src/filters');
 
 test('defaults', function(t) {
     var defaults = filters.defaults;
@@ -29,8 +29,6 @@ test('debounce', function (t) {
     var callback = function(){
         i += 1;
     };
-
-    t.equal(debounce(null), undefined);
 
     var handler = debounce(callback, 450);
 

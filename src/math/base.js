@@ -1,10 +1,13 @@
 /**
- * all method in Math without random
- *
+ * 
+ * @description all the method in Math without random
+ * @example
+ * ```
  * {{ -1.2 | abs }}  => 1.2
  * {{ 1 | acos }}  => 0
  * {{ 1.3 | ceil }} => 2
- * {{ 3 | pow 2 }} => 9  i.e: Math.pow(3,2)
+ * {{ 3 | pow(2) }} => 9  i.e: Math.pow(3,2)
+ * ```
  */
 
 var base = {};
@@ -22,5 +25,4 @@ var base = {};
 });
 
 
-
-export default base;
+module.exports = base;

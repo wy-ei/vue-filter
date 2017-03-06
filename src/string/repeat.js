@@ -1,32 +1,32 @@
 /**
- * Appends characters to a string.
+ * @description return a string which build by repeat the given str n times.
  *
  * {{ 'abc' | repeat 3 }} => 'abcabcabc'
  */
 
-function repeat(str, times) {
-    times = times ? Number(times) : 0;
-    if(times != times){ // NAN
-        times = 0;
+function repeat(str, n) {
+    n = n ? Number(n) : 0;
+    if(n != n){ // NAN
+        n = 0;
     }
 
-    times = Math.floor(times);
+    n = Math.floor(n);
 
-    if(times <= -1){
-        times = 0;
+    if(n <= -1){
+        n = 0;
     }
     
     str = '' + str;
 
     var ret = '';
-    while(times !== 0){
-        if(times & 1 === 1){
+    while(n !== 0){
+        if(n & 1 === 1){
             ret += str;
         }
         str += str;
-        times >>>= 1;
+        n >>>= 1;
     }
     return ret;
 }
 
-export default repeat;
+module.exports = repeat;

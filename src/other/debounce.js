@@ -1,9 +1,9 @@
-import util from '../util/index';
+var _ = require('underscore');
 
 /**
  * debounce a function, the default dalay is 300ms
  * 
- * {{ func | debounce 300 }}
+ * {{ func | debounce(300) }}
  */
 
 function debounce(handler, delay) {
@@ -13,7 +13,6 @@ function debounce(handler, delay) {
     if (!delay) {
         delay = 300;
     }
-    return util.debounce(handler, delay);
+    return _.debounce(handler, delay);
 }
-
-export default debounce;
+module.exports = debounce;

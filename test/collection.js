@@ -1,5 +1,5 @@
 var test = require('tape');
-import * as filters from '../src/collection/index';
+var filters = require('../src/filters');
 
 
 var arrayLike = {
@@ -25,13 +25,23 @@ test('at', function(t) {
 });
 
 test('concat', function(t) {
+    var arrayLike = {
+        0: 123,
+        1: 234,
+        2: 345,
+        length: 3
+    };
+    var obj = {
+        name: 'wy',
+        age: 21
+    };
     var concat = filters.concat;
     t.deepEqual(concat([1, 2, 3], [4, 5, 6]), [1, 2, 3, 4, 5, 6]);
-    t.deepEqual(concat([1, 2, 3], 123), [1, 2, 3]);
-    t.deepEqual(concat(123, [4, 5, 6]), [4, 5, 6]);
-    t.deepEqual(concat(123, 123), []);
+    t.deepEqual(concat([1, 2, 3], 123), [1, 2, 3, 123]);
+    t.deepEqual(concat(null, [4, 5, 6]), [4,5,6]);
+    t.deepEqual(concat(123, 123), [123]);
     t.deepEqual(concat(arrayLike, [1, 2, 3]), [123, 234, 345, 1, 2, 3]);
-    t.deepEqual(concat(obj, [1, 2, 3]), ['wy', 21, 1, 2, 3]);
+    t.deepEqual(concat([1, 2, 3], obj), [1, 2, 3, obj]);
     t.end();
 });
 
@@ -39,12 +49,6 @@ test('contains', function(t) {
     var contains = filters.contains;
     t.true(contains([1, 2, 3], 2));
     t.false(contains([1, 2, 3], 4));
-    t.true(contains(['1', 2, 3], function(val) {
-        return typeof val == 'string';
-    }));
-    t.false(contains([2, 4, 6], function(val) {
-        return val % 2 == 1;
-    }));
     t.end();
 });
 
@@ -53,8 +57,8 @@ test('first', function(t) {
     t.equal(first(['a', 'b', 'c']), 'a');
     t.equal(first(arrayLike), 123);
     t.equal(first([]), undefined);
-    t.equal(first(123), 123);
-    t.equal(first(obj), obj);
+    t.equal(first(123), undefined);
+    t.equal(first(obj), undefined);
     t.end();
 });
 
@@ -63,8 +67,8 @@ test('last', function(t) {
     t.equal(last(['a', 'b', 'c']), 'c');
     t.equal(last(arrayLike), 345);
     t.equal(last([]), undefined);
-    t.equal(last(123), 123);
-    t.equal(last(obj), obj);
+    t.equal(last(123), undefined);
+    t.equal(last(obj), undefined);
     t.end();
 });
 
@@ -73,10 +77,9 @@ test('join', function(t) {
     t.equal(join(['a', 'b', 'c'], '-'), 'a-b-c');
     t.equal(join(['a', 'b', 'c']), 'a,b,c');
     t.equal(join(arrayLike, '-'), '123-234-345');
-    t.equal(join(obj), obj);
-    t.equal(join(obj), obj);
-    t.equal(join(null), null);
-    t.equal(join(undefined), undefined);
+    t.equal(join(obj), 'wy,21');
+    t.equal(join(null), '');
+    t.equal(join(undefined), '');
     t.end();
 });
 
@@ -101,7 +104,7 @@ test('map', function(t) {
 test('range', function(t) {
     var range = filters.range;
     var arr = [];
-    t.deepEqual(range(arr, 3), [0, 1, 2]);
+    t.deepEqual(range([], 3), [0, 1, 2]);
     t.end();
 });
 

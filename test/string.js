@@ -1,9 +1,12 @@
 var test = require('tape');
-import * as filters from '../src/string/index';
+var filters = require('../src/filters');
+
 test('trim', function(t) {
     var trim = filters.trim;
-    t.equal(trim('    abc ', 'l'), 'abc ');
-    t.equal(trim(' abc  ', 'r'), ' abc');
+    var trimLeft = filters.trimLeft;
+    var trimRight = filters.trimRight;
+    t.equal(trimLeft('    abc '), 'abc ');
+    t.equal(trimRight(' abc  '), ' abc');
     t.equal(trim('  abc  '), 'abc');
     t.end();
 });
@@ -62,9 +65,9 @@ test('truncate', function(t) {
     t.equal(truncate('0123456789abc', 10, '---'), '0123456789---');
     t.equal(truncate('abc', 10, '-'), 'abc');
     t.equal(truncate('abcde', 4, 1), 'abcd1');
-    t.equal(truncate('abc defg h', 6, '...', true), 'abc...');
-    t.equal(truncate('abc defg h', 9, '...', true), 'abc defg...');
-    t.equal(truncate('abc defg h', 8, '...', false), 'abc defg...');
+    t.equal(truncate('abc defg h', 6, '...'), 'abc de...');
+    t.equal(truncate('abc defg h', 9, '...'), 'abc defg ...');
+    t.equal(truncate('abc defg h', 8, '...'), 'abc defg...');
     t.end();
 });
 

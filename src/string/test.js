@@ -9,4 +9,4 @@ function test(str, re, flag) {
     return re.test(str);
 }
 
-export default test;
+module.exports = test;

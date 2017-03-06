@@ -1,4 +1,4 @@
-import util from '../util/index';
+var _ = require('underscore');
 /**
  * The split filter takes on a substring as a parameter.
  * The substring is used as a delimiter to divide a string into an array.
@@ -8,11 +8,11 @@ import util from '../util/index';
 
 function split(str, separator) {
     separator = separator || '';
-    if (util.isString(str)) {
+    if (_.isString(str)) {
         return str.split(separator);
     } else {
         return str;
     }
 }
 
-export default split;
+module.exports = split;

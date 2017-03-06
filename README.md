@@ -2,34 +2,151 @@
 
 A collection of Vue.js filters.
 
-## Installation
+## How to use ?
 
-**CommonJS:**
+### 1. Get vue-filter
 
-1. Install from NPM:
+You can install it from npm:
 
-```
+```sh
 npm install vue-filter --save
 ```
 
-2. Use vue-filter:
+or copy the file at [here](https://raw.githubusercontent.com/wy-ei/vue-filter/master/dist/vue-filter.js).
 
-```javascript
-var Vue = require('vue');
-var vueFilter = require('vue-filter');
-Vue.use(vueFilter);
-```
+### 2.Install filters
 
-**Direct include**
-
-Include it directly with a `<script>` tag. It will install itself automatically.
+If you include the file with `<script>` tag, the filters will be installed automatically. But please make sure put the `vue-filter` script behind Vue.
 
 ```html
 <script src="vue.js"></script>
 <script src="vue-filter.js"></script>
 ```
 
-## Filters
+If you use a bundle tools like webpack, you need install the filters manually.
+
+```js
+var vueFilter = require('vue-filter');
+var Vue = require('vue');
+
+Vue.install(vueFilter);
+```
+
+After that, you can use the filters in your project.
+
+## How to use those filters in you project?
+
+All the filter take some date as input, process it, and return the data which has been processed. It's very easy to use:
+
+```js
+let list = [{
+    name: 'James, LeBron',
+    score: 38
+},{
+    name: 'Irving, Kyrie',
+    score: 43
+},{
+    name: 'Jefferson, Richard',
+    score: 11
+}]
+
+// get sum of score.
+{{ list | map(player => player.score) | sum  }} => 92
+
+// top score.
+{{ list | max(player => player.score) | get('score') }} => 43
+```
+
+## Filter List
+
+### Collection
+
+- [reduce](http://underscorejs.org/#reduce)
+- [reduceRight](http://underscorejs.org/#reduceRight)
+- [find](http://underscorejs.org/#find)
+- [filter](http://underscorejs.org/#filter)
+- [where](http://underscorejs.org/#where)
+- [findWhere](http://underscorejs.org/#findWhere)
+- [reject](http://underscorejs.org/#reject)
+- [every](http://underscorejs.org/#every)
+- [some](http://underscorejs.org/#some)
+- [contains](http://underscorejs.org/#contains)
+- [invoke](http://underscorejs.org/#invoke)
+- [pluck](http://underscorejs.org/#pluck)
+- [max](http://underscorejs.org/#max)
+- [min](http://underscorejs.org/#min)
+- [sortBy](http://underscorejs.org/#sortBy)
+- [groupBy](http://underscorejs.org/#groupBy)
+- [indexBy](http://underscorejs.org/#indexBy)
+- [countBy](http://underscorejs.org/#countBy)
+- [shuffle](http://underscorejs.org/#shuffle)
+- [sample](http://underscorejs.org/#sample)
+- [toArray](http://underscorejs.org/#toArray)
+- [size](http://underscorejs.org/#size)
+- [partition](http://underscorejs.org/#partition)
+
+### Array
+
+- [first](http://underscorejs.org/#first)
+- [initial](http://underscorejs.org/#initial)
+- [last](http://underscorejs.org/#last)
+- [rest](http://underscorejs.org/#rest)
+- [compact](http://underscorejs.org/#compact)
+- [flatten](http://underscorejs.org/#flatten)
+- [without](http://underscorejs.org/#without)
+- [union](http://underscorejs.org/#union)
+- [intersection](http://underscorejs.org/#intersection)
+- [difference](http://underscorejs.org/#difference)
+- [uniq](http://underscorejs.org/#uniq)
+- [zip](http://underscorejs.org/#zip)
+- [unzip](http://underscorejs.org/#unzip)
+- [object](http://underscorejs.org/#object)
+- [indexOf](http://underscorejs.org/#indexOf)
+- [lastIndexOf](http://underscorejs.org/#lastIndexOf)
+- [sortedIndex](http://underscorejs.org/#sortedIndex)
+- [findIndex](http://underscorejs.org/#findIndex)
+- [findLastIndex](http://underscorejs.org/#findLastIndex)
+- [range](http://underscorejs.org/#range)
+
+### String
+
+
+
+### Math
+
+### Object
+
+- [tap](http://underscorejs.org/#tap)
+- [has](http://underscorejs.org/#has)
+- [matcher](http://underscorejs.org/#matcher)
+- [property](http://underscorejs.org/#property)
+- [propertyOf](http://underscorejs.org/#propertyOf)
+- [isEqual](http://underscorejs.org/#isEqual)
+- [isMatch](http://underscorejs.org/#isMatch)
+- [isEmpty](http://underscorejs.org/#isEmpty)
+- [isElement](http://underscorejs.org/#isElement)
+- [isArray](http://underscorejs.org/#isArray)
+- [isObject](http://underscorejs.org/#isObject)
+- [isArguments](http://underscorejs.org/#isArguments)
+- [isFunction](http://underscorejs.org/#isFunction)
+- [isString](http://underscorejs.org/#isString)
+- [isNumber](http://underscorejs.org/#isNumber)
+- [isFinite](http://underscorejs.org/#isFinite)
+- [isBoolean](http://underscorejs.org/#isBoolean)
+- [isDate](http://underscorejs.org/#isDate)
+- [isRegExp](http://underscorejs.org/#isRegExp)
+- [isError](http://underscorejs.org/#isError)
+- [isNaN](http://underscorejs.org/#isNaN)
+- [isNull](http://underscorejs.org/#isNull)
+- [isUndefined](http://underscorejs.org/#isUndefined)
+
+### 
+
+At first, I write some filter like max, min, append, truncate etc. But it's not enough, so, I think why don't we use `[underscore](http://underscorejs.org/)`, underscore has many useful util function, And we can use them as filter pretty easy.
+
+So, now you can use the function in `undersore` as a filter.
+
+
 
 Click the filter to see how to use it.
 

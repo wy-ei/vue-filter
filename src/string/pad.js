@@ -20,9 +20,11 @@ function padding(size,ch){
 
 
 /**
- * leftPad
- *
- * {{ 'abc' | leftPad 5 '*' }} => '**abc'
+ * @description leftPad
+ * @example
+ * ```
+ * {{ 'abc' | leftPad(5, '*') }} => '**abc'
+ * ```
  */
 function leftPad(str,size,ch){
     size = +size || 0;
@@ -35,9 +37,10 @@ function leftPad(str,size,ch){
 
 
 /**
- * rightPad
- *
- * {{ 'abc' | leftPad 5 '*' }} => 'abc**'
+ * @description rightPad
+ * ```
+ * {{ 'abc' | leftPad(5, '*') }} => 'abc**'
+ * ```
  */
 function rightPad(str,size,ch){
     size = +size || 0;
@@ -48,7 +51,7 @@ function rightPad(str,size,ch){
     return str.concat(padding(padLength,ch));
 }
 
-export {
+module.exports = {
     leftPad,
     rightPad
 };

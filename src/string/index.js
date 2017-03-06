@@ -1,28 +1,25 @@
-import append from './append';
-import camelcase from './camelcase';
-import prepend from './prepend';
-import remove from './remove';
-import split from './split';
-import test from './test';
-import trim from './trim';
-import truncate from './truncate';
-import {leftPad,rightPad} from './pad';
-import repeat from './repeat';
-import lowercase from './lowercase';
-import uppercase from './uppercase';
+var append = require('./append');
+var prepend = require('./prepend');
+var remove = require('./remove');
+var base = require('./base');
+var test = require('./test');
+var trimx = require('./trimx');
+var truncate = require('./truncate');
+var pad = require('./pad');
+var repeat = require('./repeat');
+var xcase = require('./xcase');
 
-export {
+
+module.exports = {
+    ...base,
+    ...xcase,
+    ...pad,
+    ...trimx,
     append,
-    camelcase,
+
     prepend,
-    remove,
-    split,
+    remove, // enhance
     test,
-    trim,
     truncate,
-    leftPad,
-    rightPad,
-    repeat,
-    lowercase,
-    uppercase
+    repeat
 };

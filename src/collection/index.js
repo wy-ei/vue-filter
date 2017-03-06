@@ -1,25 +1,13 @@
-import at from './at';
-import concat from './concat';
-import first from './first';
-import join from './join';
-import last from './last';
-import map from './map';
-import random from './random';
-import reverse from './reverse';
-import size from './size';
-import range from './range';
-import contains from './contains';
+var base = require('./base');
+var at = require('./at');
+var reverse = require('./reverse');
+var range = require('./range');
 
-export {
+
+
+module.exports = {
+    ...base,
     at,
-    concat,
-    first,
-    join,
-    last,
-    map,
-    random,
     reverse,
-    size,
-    range,
-    contains
+    range
 };

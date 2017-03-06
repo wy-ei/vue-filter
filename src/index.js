@@ -1,29 +1,18 @@
-import util from './util/index';
-import * as collectionFilters from './collection/index';
-import * as mathFilters from './math/index';
-import * as stringFilters from './string/index';
-import * as otherFilters from './other/index';
+var filters = require('./filters');
+var _ = require('underscore');
 
 function install(Vue) {
-    var filters = util.extend({},
-        collectionFilters,
-        mathFilters,
-        stringFilters,
-        otherFilters
-    );
-    util.each(filters, function(value, key) {
-        if(!Vue.filter(key)){
+    _.each(filters, function(value, key) {
+        if(Vue.filter(key)){
+            console.warn('[filter duplication]: A filter named '+ key + 'has already been installed.');
+        }else{
             Vue.filter(key, value);
         }
     });
 }
 
-if (typeof exports == 'object') {
-    module.exports = install;
-} else if (typeof define == 'function' && define.amd) {
-    define([], function() {
-        return install;
-    });
-} else if (window.Vue) {
+if (typeof window !== 'undefined' && window.Vue) {
     Vue.use(install);
 }
+
+module.exports = install;

@@ -13,4 +13,4 @@ function prepend(str, prefix) {
     return prefix + str;
 }
 
-export default prepend;
+module.exports =  prepend;

@@ -1,80 +1,50 @@
-import util from '../util/index';
+var util = require('../util');
+var _ = require('underscore');
 
 /**
- * Divides an output by a number
- *
- * {{ 10 | divide 4 }} => 2.5
+ * 
+ * @filter divide, minus, plus, multiply, mod, or, xor, and, not
+ * @description some math operator.
+ * @example
+ * ```
+ * {{ 10 | plus(1) }} => 11
+ * {{ 2 | or(1) }} => 3
+ * {{ 255 | not() }} => -256 
+ * ```
  */
-
-function divide(value, n) {
-    if (util.isNumber(value)) {
-        return value / n;
-    } else {
-        return value;
-    }
-}
+var operator = {};
 
 
-/**
- * Subtracts a number from an output.
- *
- * {{ 12 | minus 2 }} => 10
- */
+['divide', 'minus', 'plus', 'multiply', 'mod', 'or', 'xor', 'and'].forEach(function(method) {
+    operator[method] = function(a, b) {
+        if (_.isNumber(a) && _.isNumber(b)) {
+            switch(method){
+                case 'divide':
+                    return a / b;
+                case 'minus':
+                    return a - b;
+                case 'plus':
+                    return a + b;
+                case 'multiply':
+                    return a * b;
+                case 'mod':
+                    return a % b;
+                case 'or':
+                    return a | b;
+                case 'xor':
+                    return a ^ b;
+                case 'and':
+                    return a & b;
+            }
+        } else {
+            console.warn('[filter:' + method + ']: but param should be number, but got ' + typeof a + ' ' + typeof b);
+            return value;
+        }
+    };
+});
 
-function minus(value, n) {
-    if (util.isNumber(value)) {
-        return value - n;
-    } else {
-        return value;
-    }
-}
+ operator.not = function(a){
+     return ~a;
+ };
 
-/**
- * Adds a number to an output.
- *
- * {{ 10 | plus 2 }} => 12
- */
-
-function plus(value, n) {
-    if (util.isNumber(value)) {
-        return value + n;
-    } else {
-        return value;
-    }
-}
-
-/**
- * Multiplies an output by a number.
- *
- * {{ 10 | multiply 2 }} => 20
- */
-
-function multiply(value, n) {
-    if (util.isNumber(value)) {
-        return value * n;
-    } else {
-        return value;
-    }
-}
-
-/**
- * Divides an output by a number and returns the remainder.
- *
- * {{ 10 | mod 2 }} => 20
- */
-
-function mod(value, n) {
-    if (util.isNumber(value)) {
-        return value % n;
-    } else {
-        return value;
-    }
-}
-
-export {
-    plus,
-    minus,
-    multiply,
-    divide,
-    mod
-};
+module.exports = operator;

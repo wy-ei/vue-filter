@@ -1,18 +1,23 @@
-import util from '../util/index';
+var _ = require('underscore');
+
+
 /**
- * return mean value of a array
- *
+ * @param {array} arr - The array to iterate over.
+ * @description Returns the mean.
+ * @example
+ * ```
  * {{ [1,2,3,4] | mean }} => 2.5
+ * ```
  */
 
 function mean(arr) {
-    if (util.isArray(arr)) {
+    if (_.isArray(arr)) {
         var sum = arr.reduce(function(prev, curr) {
             return prev + curr;
         }, 0);
 
         var len = arr.length;
-        if (util.isNumber(sum) && len != 0) {
+        if (_.isNumber(sum) && len != 0) {
             return sum / len;
         } else {
             return 0;
@@ -22,4 +27,4 @@ function mean(arr) {
     }
 }
 
-export default mean;
+module.exports = mean;

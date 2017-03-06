@@ -1,5 +1,5 @@
 var test = require('tape');
-import * as filters from '../src/math/index';
+var filters = require('../src/filters');
 
 test('max', function(t) {
     var max = filters.max;
@@ -55,7 +55,7 @@ test('sum', function(t) {
     t.equal(sum([1, 2, 3]), 6);
     t.equal(sum([1, 2, 3], 10), 16);
     t.equal(sum(123), 123);
-    t.equal(sum('abc'), 'abc');
+    t.equal(isNaN(sum('abc')), true);
     t.end();
 });
 

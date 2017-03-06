@@ -186,4 +186,4 @@ function date(date, formatString) {
 }
 
 
-export default date;
+module.exports =  date;

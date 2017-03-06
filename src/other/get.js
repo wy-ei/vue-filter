@@ -1,4 +1,4 @@
-import util from '../util/index';
+var util = require('../util/index');
 
 
 /**
@@ -16,4 +16,4 @@ function get(obj, accessor){
     return util.get(obj, accessor);
 }
 
-export default get;
+module.exports = get;

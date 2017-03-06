@@ -1,5 +1,6 @@
-import './util';
-import './collection';
-import './string';
-import './math';
-import './other';
+require("babel-register");
+require('./util');
+require('./collection');
+require('./string');
+require('./math');
+require('./other');

@@ -1,5 +1,6 @@
 var test = require('tape');
-import util from '../src/util/index';
+var filters = require('../src/filters');
+var util = require('../src/util/index');
 
 var arrayLike = {
     0: 123,
@@ -31,27 +32,6 @@ test('isArrayLike', function (t) {
     t.end();
 });
 
-test('toArray', function(t) {
-    var toArray = util.toArray;
-
-    t.deepEqual(toArray([1, 2, 3, 4]), [1, 2, 3, 4]);
-    t.deepEqual(toArray([1, 2, 3, 4]), [1, 2, 3, 4]);
-    t.deepEqual(toArray(arrayLike), [123, 234, 345]);
-    t.deepEqual(toArray(obj), ['james', 21]);
-    t.deepEqual(toArray(null), []);
-    t.deepEqual(toArray(0), []);
-    t.deepEqual(toArray(123), []);
-    t.end();
-});
-
-test('isArrayLike', function(t) {
-    var isArrayLike = util.isArrayLike;
-    t.true(isArrayLike([]));
-    t.true(isArrayLike([1, 2, 3]));
-    t.true(isArrayLike(arrayLike));
-    t.false(isArrayLike(obj));
-    t.end();
-});
 
 test('get', function(t) {
     var get = util.get;

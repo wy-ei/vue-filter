@@ -1,4 +1,4 @@
-import util from '../util/index';
+var _ = require('underscore');
 /**
  * reverse an array or a string
  *
@@ -6,16 +6,16 @@ import util from '../util/index';
  * {{ [1,2,3] | reverse }} => [3,2,1]
  */
 
-function reverse(arr) {
-    if (util.isArray(arr)) {
-        // make a copy
-        arr = arr.concat();
-        return arr.reverse();
-    } else if (util.isString(arr)) {
-        return arr.split('').reverse().join('');
-    } else {
-        return arr;
+
+
+function reverse(collection) {
+    if (typeof collection === 'string') {
+        return collection.split('').reverse().join('');
     }
+    if(_.isArray(collection)){
+        return collection.concat().reverse();
+    }
+    return arr;
 }
 
-export default reverse;
+module.exports =  reverse;

@@ -13,4 +13,4 @@ function append(str, postfix) {
     return str + postfix;
 }
 
-export default append;
+module.exports = append;

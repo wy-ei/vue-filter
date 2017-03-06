@@ -1,0 +1,17 @@
+var util = require('../util');
+
+let base = {};
+
+['toFixed', 'toPrecision'].forEach(function(method) {
+    base[method] = function(num) {
+        var type = typeof num;
+        if (type === 'number') {
+            return Number.prototype[method].apply(num, _.rest(arguments));
+        } else {
+            util.type(num, 'number');
+            return value;
+        }
+    };
+});
+
+module.exports = base;

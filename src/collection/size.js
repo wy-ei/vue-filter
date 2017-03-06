@@ -10,4 +10,4 @@ function size(arr) {
     return length ? length : 0;
 }
 
-export default size;
+module.exports =  size;
