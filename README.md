@@ -2,7 +2,7 @@
 
 **A collection of [Vue.js](https://github.com/vuejs/vue) filter.**
 
-vue-filter contain many useful Vue.js filter. At version 0.2.x, Powered by [underscore](http://underscorejs.org/), we have more filters. see [filter list](#filter-list) for more information.
+At version 0.2.x, Powered by [underscore](http://underscorejs.org/), we have more filter. see [filter list](#filter-list) for more information.
 
 ## How to use ?
 
@@ -14,14 +14,14 @@ You can install it from npm:
 npm install vue-filter --save
 ```
 
-or copy the file at [here](https://raw.githubusercontent.com/wy-ei/vue-filter/master/dist/vue-filter.js).
+or copy the file at [here](https://raw.githubusercontent.com/wy-ei/vue-filter/master/dist/vue-filter.min.js).
 
 
 If you include the file with `<script>` tag, the filters will be installed automatically. But please make sure put the `vue-filter` script behind Vue.
 
 ```html
-<script src="vue.js"></script>
-<script src="vue-filter.js"></script>
+<script src="vue.min.js"></script>
+<script src="vue-filter.min.js"></script>
 ```
 
 If you use a bundle tools like webpack, you need install the filters manually.
