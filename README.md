@@ -1,10 +1,12 @@
 # vue-filter [![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
 
-A collection of Vue.js filter. Power By [underscore](http://underscorejs.org).
+**A collection of [Vue.js](https://github.com/vuejs/vue) filter.**
+
+vue-filter contain many useful Vue.js filter. At version 0.2.x, Powered by [underscore](http://underscorejs.org/), we have more filters. see [filter list](#filter-list) for more information.
 
 ## How to use ?
 
-### 1. Install vue-filter
+### step 1. Install vue-filter
 
 You can install it from npm:
 
@@ -31,7 +33,7 @@ var Vue = require('vue');
 Vue.install(vueFilter);
 ```
 
-### 2. use filter
+### step 2. use filter
 
 
 ```js
@@ -149,6 +151,8 @@ Click the filter to see how to use it.
 + [multiply](#multiply)
 + [divide](#divide)
 + [mod](#mod)
++ [toFixed](#tofixed)
++ [toPrecision](#toprecision)
 
 
 ### Other Filters
@@ -160,8 +164,7 @@ Click the filter to see how to use it.
 + [get](#get)
 
 
-## Usage
-
+## Filter Usage
 
 ### Collection Filters
 
@@ -387,8 +390,7 @@ Given a **list**, and an [**iteratee**](#iteratee) function that returns a key f
 }, {
   "name": "curly",
   "age": 60
-}] | indexBy("age") }}
-=>
+}] | indexBy("age") }} =>
 {
   "40": {
     "name": "moe",
@@ -916,7 +918,16 @@ Convert an object into a list of `[key, value]` pairs. The opposite of [object](
 Returns a copy of the **object** where the keys have become the values and the values the keys. For this to work, all of your object's values should be unique and string serializable.
 
 ```js
-{{ {"Moe":"Moses","Larry":"Louis","Curly":"Jerome"} | invert }} => {"Moses":"Moe","Louis":"Larry","Jerome":"Curly"}
+{{ {
+    "Moe": "Moses",
+    "Larry": "Louis",
+    "Curly": "Jerome"
+} | invert }} =>
+{
+    "Moses": "Moe",
+    "Louis": "Larry",
+    "Jerome": "Curly"
+}
 ```
 
 
@@ -1045,7 +1056,15 @@ Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function 
 Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _-Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
 
 ```js
-{{ [{"name":"moe","age":40},{"name":"larry","age":50},{"name":"curly","age":60}] | max(function (stooge){ return stooge.age; }) }} => {"name":"curly","age":60}
+{{ [{
+    "name":"moe","age":40
+},{
+    "name":"larry","age":50
+},{
+    "name":"curly","age":60
+}] | max(function (stooge){
+    return stooge.age;
+}) }} => {"name":"curly","age":60}
 ```
 
 
@@ -1099,6 +1118,24 @@ Divides an output by a number and returns the remainder.
 ```javascript
 {{ 10 | mod(3) }} => 1
 ```
+
+#### toFixed
+
+```javascript
+{{ 3.1415926 | toFixed(3) }} => "3.1415"
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### toPrecision
+
+```javascript
+{{ 3.1415926 | toPrecision(3) }} => "3.14"
+
+{{ 1 | toPrecision(3) }} => "1.00"
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 ### Other Filters
 
