@@ -3,3 +3,4 @@
 .eslintrc.json
 .eslintignore
 .travis.yml
+webpack.config.js

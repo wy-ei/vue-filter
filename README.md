@@ -120,14 +120,6 @@ Click the filter to see how to use it.
 + [lowercase](#lowercase)
 + [uppercase](#uppercase)
 
-### Function Filters
-
-- [delay](#delay)
-- [throttle](#throttle)
-- [debounce](#debounce)
-- [once](#once)
-
-
 ### Object Filters
 
 - [keys](#keys)
@@ -808,61 +800,6 @@ Uppercase a string.
 ```javascript
 {{ 'Vue' | uppercase }} => 'VUE'
 ```
-
-### Function Filters
-
-#### delay
-
-Much like **setTimeout**, invokes **function** after **wait** milliseconds. If you pass the optional **arguments**, they will be forwarded on to the **function** when it is invoked.
-
-```js
-{{ login | delay(console.log, 1000, 'logged later'); }}
-=> 'logged later' // Appears after one second.
-```
-
-
-<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
-
-#### throttle
-
-Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly, will only actually call the original function at most once per every **wait** milliseconds. Useful for rate-limiting events that occur faster than you can keep up with.
-
-By default, **throttle** will execute the function as soon as you call it for the first time, and, if you call it again any number of times during the **wait** period, as soon as that period is over. If you'd like to disable the leading-edge call, pass `{leading: false}`, and if you'd like to disable the execution on the trailing-edge, pass
-`{trailing: false}`.
-
-```js
-{{ updatePosition | throttle(100) }}
-```
-
-
-<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
-
-#### debounce
-
-
-Creates and returns a new debounced version of the passed function which will postpone its execution until after **wait** milliseconds have elapsed since the last time it was invoked. Useful for implementing behavior that should only happen _after_ the input has stopped arriving. For example: rendering a preview of a Markdown comment, recalculating a layout after the window has stopped being resized, and so on.
-
-At the end of the **wait** interval, the function will be called with the arguments that were passed _most recently_ to the debounced function.
-
-Pass `true` for the **immediate** argument to cause **debounce** to trigger the function on the leading instead of the trailing edge of the **wait** interval. Useful in circumstances like preventing accidental double-clicks on a "submit" button from firing a second time.
-
-```js
-{{ calculateLayout | debounce(300) }}
-//
-```
-
-
-<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
-
-#### once
-
-Creates a version of the function that can only be called one time. Repeated calls to the modified function will have no effect, returning the value from the original call. Useful for initialization functions, instead of having to set a boolean flag and then check it later.
-
-```js
-{{ sendMessage | once }}
-// Message only send once.
-```
-
 
 ### Object Filters
 
