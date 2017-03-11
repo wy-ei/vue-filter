@@ -16,7 +16,7 @@ test('substr', function(t) {
 
 test('substring', function(t) {
     var substring = filters.substring;
-    t.equal(substring('javascript', 0, 2), 'jav');
+    t.equal(substring('javascript', 0, 2), 'ja');
     t.end();
 });
 

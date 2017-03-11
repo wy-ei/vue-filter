@@ -3,7 +3,6 @@ var util = require('../util');
 
 /**
  *
- * @deprecated
  * @description some native method in string
  * @example
  * ```

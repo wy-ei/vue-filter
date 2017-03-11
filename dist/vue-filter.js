@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1640,8 +1640,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscor
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _ = __webpack_require__(0);
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
+var _ = __webpack_require__(0);
 var util = {};
 
 var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
@@ -1696,13 +1697,18 @@ module.exports = util;
 
 var collection = __webpack_require__(5);
 var math = __webpack_require__(9);
-var string = __webpack_require__(19);
-var other = __webpack_require__(16);
+var string = __webpack_require__(21);
+var other = __webpack_require__(18);
+var number = __webpack_require__(14);
 var _ = __webpack_require__(0);
 
-console.log(Object.keys(math));
+var filters = {};
 
-var filters = _.extend({}, _, collection, string, math, other);
+['map', 'reduce', 'find', 'filter', 'reject', 'every', 'some', 'contains', 'pluck', 'max', 'min', 'sortBy', 'groupBy', 'indexBy', 'countBy', 'shuffle', 'sample', 'toArray', 'size', 'first', 'initial', 'last', 'rest', 'flatten', 'without', 'union', 'intersection', 'difference', 'uniq', 'delay', 'throttle', 'debounce', 'once', 'keys', 'allKeys', 'values', 'pairs', 'invert', 'extend', 'pick', 'omit', 'defaults', 'has', 'escape', 'unescape', 'result'].forEach(function (key) {
+    filters[key] = _[key];
+});
+
+filters = _.extend(filters, collection, string, math, number, other);
 
 module.exports = filters;
 
@@ -1714,7 +1720,6 @@ module.exports = filters;
 
 
 var _ = __webpack_require__(0);
-
 /**
  * @filter at
  * @description Return the item at the specified index in an array or a string.
@@ -1727,11 +1732,11 @@ var _ = __webpack_require__(0);
  */
 
 function at(collection, index) {
-    if (!_.isArray(collection)) {
-        collection = _.toArray();
+    if (_.isArray(collection) || _.isString(collection)) {
+        index = Number(index);
+        return collection[index];
     }
-    index = Number(index);
-    return collection[index];
+    return undefined;
 }
 
 module.exports = at;
@@ -1857,7 +1862,7 @@ function reverse(collection) {
     if (_.isArray(collection)) {
         return collection.concat().reverse();
     }
-    return arr;
+    return collection;
 }
 
 module.exports = reverse;
@@ -1959,55 +1964,49 @@ module.exports = mean;
 "use strict";
 
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var util = __webpack_require__(1);
-var _ = __webpack_require__(0);
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 /**
- * 
+ *
  * @filter divide, minus, plus, multiply, mod, or, xor, and, not
  * @description some math operator.
  * @example
  * ```
  * {{ 10 | plus(1) }} => 11
  * {{ 2 | or(1) }} => 3
- * {{ 255 | not() }} => -256 
+ * {{ 255 | not() }} => -256
  * ```
  */
 var operator = {};
 
-['divide', 'minus', 'plus', 'multiply', 'mod', 'or', 'xor', 'and'].forEach(function (method) {
+['divide', 'minus', 'plus', 'multiply', 'mod'].forEach(function (method) {
     operator[method] = function (a, b) {
-        if (_.isNumber(a) && _.isNumber(b)) {
-            switch (method) {
-                case 'divide':
-                    return a / b;
-                case 'minus':
-                    return a - b;
-                case 'plus':
-                    return a + b;
-                case 'multiply':
-                    return a * b;
-                case 'mod':
-                    return a % b;
-                case 'or':
-                    return a | b;
-                case 'xor':
-                    return a ^ b;
-                case 'and':
-                    return a & b;
-            }
-        } else {
-            console.warn('[filter:' + method + ']: but param should be number, but got ' + (typeof a === 'undefined' ? 'undefined' : _typeof(a)) + ' ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));
-            return value;
+        a = Number(a);
+        b = Number(b);
+
+        switch (method) {
+            case 'divide':
+                if (b === 0) {
+                    console.error('0 can\'t as a divisor');
+                }
+                return a / b;
+            case 'minus':
+                return a - b;
+            case 'plus':
+                return a + b;
+            case 'multiply':
+                return a * b;
+            case 'mod':
+                return a % b;
+            // case 'or':
+            //     return a | b;
+            // case 'xor':
+            //     return a ^ b;
+            // case 'and':
+            //     return a & b;
         }
     };
 });
-
-operator.not = function (a) {
-    return ~a;
-};
 
 module.exports = operator;
 
@@ -2052,6 +2051,47 @@ module.exports = sum;
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _ = __webpack_require__(0);
+var util = __webpack_require__(1);
+
+var base = {};
+
+['toFixed', 'toPrecision'].forEach(function (method) {
+    base[method] = function (num) {
+        var type = typeof num === 'undefined' ? 'undefined' : _typeof(num);
+        if (type === 'number') {
+            return Number.prototype[method].apply(num, _.rest(arguments));
+        } else {
+            util.type(num, 'number');
+            return num;
+        }
+    };
+});
+
+module.exports = base;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var base = __webpack_require__(13);
+
+module.exports = _extends({}, base);
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2106,6 +2146,8 @@ var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'A
 
 function date(date, formatString) {
     var d = new Date(date);
+    var hours = 0;
+    var month = 0;
 
     var zeroize = function zeroize(value, length) {
 
@@ -2171,12 +2213,14 @@ function date(date, formatString) {
                 ret = '%Y-%m-%d';
                 break;
             case '%H':
-                var hours = d.getHours();
+                hours = d.getHours();
                 ret = zeroize(hours);
                 break;
             case '%I':
-                var hours = d.getHours();
-                if (hours != 12) hours = hours % 12;
+                hours = d.getHours();
+                if (hours != 12) {
+                    hours = hours % 12;
+                }
                 ret = zeroize(hours);
                 break;
             case '%j':
@@ -2186,7 +2230,7 @@ function date(date, formatString) {
                 ret = d.getHours();
                 break;
             case '%m':
-                var month = d.getMonth() + 1;
+                month = d.getMonth() + 1;
                 ret = zeroize(month, 2);
                 break;
             case '%M':
@@ -2242,7 +2286,7 @@ function date(date, formatString) {
 module.exports = date;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2268,7 +2312,7 @@ function debounce(handler, delay) {
 module.exports = debounce;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2294,15 +2338,15 @@ function get(obj, accessor) {
 module.exports = get;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var date = __webpack_require__(13);
-var get = __webpack_require__(15);
-var debounce = __webpack_require__(14);
+var date = __webpack_require__(15);
+var get = __webpack_require__(17);
+var debounce = __webpack_require__(16);
 
 module.exports = {
     date: date,
@@ -2311,7 +2355,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2335,7 +2379,7 @@ function append(str, postfix) {
 module.exports = append;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2347,27 +2391,26 @@ var _ = __webpack_require__(0);
 var util = __webpack_require__(1);
 
 /**
- * 
- * @deprecated
+ *
  * @description some native method in string
  * @example
  * ```
- * {{ -1.2 | abs }}  => 1.2
- * {{ 1 | acos }}  => 0
- * {{ 1.3 | ceil }} => 2
- * {{ 3 | pow 2 }} => 9  i.e: Math.pow(3,2)
+ * {{ 'ab-cd' | replace('-', '') }}  => 'abcd'
+ * {{ 'a-b-c' | split('-') }}  => ['a','b','c']
+ * {{ 'javascript' | substr(0, 4) }} => 'java'
+ * {{ 'javascript' | substring(0,2) }} => 'jav'
  * ```
  */
 
 var base = {};
 
-['replace', 'split', 'trim', 'substr', 'substring', 'match'].forEach(function (method) {
+['replace', 'split', 'substr', 'substring'].forEach(function (method) {
     base[method] = function (str) {
         var type = typeof str === 'undefined' ? 'undefined' : _typeof(str);
         if (type === 'string') {
             return String.prototype[method].apply(str, _.rest(arguments));
         } else {
-            util.type(method, str, 'string');
+            util.type(method, str, 'string'.substring);
             return str;
         }
     };
@@ -2376,7 +2419,7 @@ var base = {};
 module.exports = base;
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2384,20 +2427,19 @@ module.exports = base;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var append = __webpack_require__(17);
-var prepend = __webpack_require__(21);
-var remove = __webpack_require__(22);
-var base = __webpack_require__(18);
-var test = __webpack_require__(24);
-var trimx = __webpack_require__(25);
-var truncate = __webpack_require__(26);
-var pad = __webpack_require__(20);
-var repeat = __webpack_require__(23);
-var xcase = __webpack_require__(27);
+var append = __webpack_require__(19);
+var prepend = __webpack_require__(22);
+var remove = __webpack_require__(23);
+var base = __webpack_require__(20);
+var test = __webpack_require__(25);
+var trimx = __webpack_require__(26);
+var truncate = __webpack_require__(27);
+var xpad = __webpack_require__(29);
+var repeat = __webpack_require__(24);
+var xcase = __webpack_require__(28);
 
-module.exports = _extends({}, base, xcase, pad, trimx, {
+module.exports = _extends({}, base, xcase, xpad, trimx, {
     append: append,
-
     prepend: prepend,
     remove: remove, // enhance
     test: test,
@@ -2406,7 +2448,255 @@ module.exports = _extends({}, base, xcase, pad, trimx, {
 });
 
 /***/ }),
-/* 20 */
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Prepends characters to a string.
+ *
+ * {{ 'world' | prepend 'hello ' }} => 'hello world'
+ */
+
+function prepend(str, prefix) {
+    if (!str && str !== 0) {
+        str = '';
+    } else {
+        str = str.toString();
+    }
+    return prefix + str;
+}
+
+module.exports = prepend;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _ = __webpack_require__(0);
+var util = __webpack_require__(1);
+/**
+ * @description Removes all occurrences of a substring from a string.
+ * @example
+ * ```
+ * {{ 'Hello JavaScript' | remove 'Hello' }} => ' JavaScript'
+ * ```
+ */
+
+function remove(str, substr) {
+    util.deprecated('remove', 'You can use `replace(substr, \'\')` instead of remove');
+    if (_.isString(str)) {
+        str = str.split(substr).join('');
+    }
+    return str;
+}
+
+module.exports = remove;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @description return a string which build by repeat the given str n times.
+ *
+ * {{ 'abc' | repeat 3 }} => 'abcabcabc'
+ */
+
+function repeat(str, n) {
+    n = n ? Number(n) : 0;
+    if (n != n) {
+        // NAN
+        n = 0;
+    }
+
+    n = Math.floor(n);
+
+    if (n <= -1) {
+        n = 0;
+    }
+
+    str = '' + str;
+
+    var ret = '';
+    while (n !== 0) {
+        if (n & 1 === 1) {
+            ret += str;
+        }
+        str += str;
+        n >>>= 1;
+    }
+    return ret;
+}
+
+module.exports = repeat;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Test if a string match a pattern
+ *
+ * {{ "http://vuejs.org" | test /^http/ }} => true
+ */
+
+function test(str, re, flag) {
+  re = new RegExp(re, flag);
+  return re.test(str);
+}
+
+module.exports = test;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var util = __webpack_require__(1);
+var _ = __webpack_require__(0);
+/**
+ * Strips tabs, spaces, and newlines (all whitespace)
+ * from the left or right or both side of a string.
+ * which depends on second argument. if it is 'r' will only
+ * trim right side,if it is 'l' will only trim left side
+ * otherwise trim both left and right side.
+ *
+ * {{ '   some spaces   ' | trim }} => 'some spaces'
+ * {{ '   some spaces   ' | trimRight }} => '   some spaces'
+ * {{ '   some spaces   ' | trimLeft }} => 'some spaces   '
+ */
+
+function _trim(str, re) {
+    if (_.isString(str)) {
+        return str.replace(re, '');
+    } else {
+        util.type('trim', str, 'string');
+        return str;
+    }
+}
+
+function trim(str) {
+    return _trim(str, /^\s+|\s+$/g);
+}
+
+function trimLeft(str) {
+    return _trim(str, /^\s+/);
+}
+
+function trimRight(str) {
+    return _trim(str, /\s+$/);
+}
+
+module.exports = {
+    trim: trim,
+    trimLeft: trimLeft,
+    trimRight: trimRight
+};
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @description truncate text to a specified length.
+ * **notice: the length donot include the length of ellipses string, 
+ * this mean the origin string will but cat to specific length and then append the ellipses string**
+ * the default length is 30, default ellipses string is `'...'`
+ * @example
+ * ```
+ * {{ 'this is a big city!' | truncate(12) }} => 'this is a bi...`
+ * {{ 'this is a big city!' | truncate(12, '~~~') }} => 'this is a bi~~~`
+ * ```
+ */
+
+function truncate(str, length, ellipses) {
+    length = length || 30;
+
+    if (str.length <= length) {
+        return str;
+    }
+
+    if (ellipses === undefined) {
+        ellipses = '...';
+    }
+    ellipses = '' + ellipses;
+
+    str = str.slice(0, length);
+
+    return str + ellipses;
+}
+
+module.exports = truncate;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @description Uppercase a string
+ * @example
+ * ```
+ * {{ 'abC' | uppercase }} => 'ABC'
+ * ```
+ */
+function uppercase(value) {
+    return value || value === 0 ? value.toString().toUpperCase() : '';
+}
+
+/**
+ * @description Lowercase a string
+ * @example
+ * ```
+ * {{ 'abC' | uppercase }} => 'ABC'
+ * ```
+ */
+function lowercase(value) {
+    return value || value === 0 ? value.toString().toLowerCase() : '';
+}
+
+/**
+ * @description Converts a string into CamelCase.
+ * @example
+ * ```
+ * {{ 'some_else' | camelcase }} => 'SomeElse'
+ * {{ 'some-else' | camelcase }} => 'SomeElse'
+ * ```
+ */
+function camelcase(str) {
+    var re = /(?:^|[-_\/])(\w)/g;
+    return str.toString().replace(re, function (_, c) {
+        return c.toUpperCase();
+    });
+}
+
+module.exports = {
+    uppercase: uppercase,
+    lowercase: lowercase,
+    camelcase: camelcase
+};
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2468,259 +2758,13 @@ module.exports = {
 };
 
 /***/ }),
-/* 21 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-/**
- * Prepends characters to a string.
- *
- * {{ 'world' | prepend 'hello ' }} => 'hello world'
- */
-
-function prepend(str, prefix) {
-    if (!str && str !== 0) {
-        str = '';
-    } else {
-        str = str.toString();
-    }
-    return prefix + str;
-}
-
-module.exports = prepend;
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _ = __webpack_require__(0);
-var util = __webpack_require__(1);
-/**
- * @description Removes all occurrences of a substring from a string.
- * @example
- * ```
- * {{ 'Hello JavaScript' | remove 'Hello' }} => ' JavaScript'
- * ```
- */
-
-function remove(str, substr) {
-    util.deprecated('remove', 'You can use `replace(substr, \'\')` instead of remove');
-    if (_.isString(str)) {
-        str = str.split(substr).join('');
-    }
-    return str;
-}
-
-module.exports = remove;
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * @description return a string which build by repeat the given str n times.
- *
- * {{ 'abc' | repeat 3 }} => 'abcabcabc'
- */
-
-function repeat(str, n) {
-    n = n ? Number(n) : 0;
-    if (n != n) {
-        // NAN
-        n = 0;
-    }
-
-    n = Math.floor(n);
-
-    if (n <= -1) {
-        n = 0;
-    }
-
-    str = '' + str;
-
-    var ret = '';
-    while (n !== 0) {
-        if (n & 1 === 1) {
-            ret += str;
-        }
-        str += str;
-        n >>>= 1;
-    }
-    return ret;
-}
-
-module.exports = repeat;
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Test if a string match a pattern
- *
- * {{ "http://vuejs.org" | test /^http/ }} => true
- */
-
-function test(str, re, flag) {
-  re = new RegExp(re, flag);
-  return re.test(str);
-}
-
-module.exports = test;
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var util = __webpack_require__(1);
-var _ = __webpack_require__(0);
-/**
- * Strips tabs, spaces, and newlines (all whitespace)
- * from the left or right or both side of a string.
- * which depends on second argument. if it is 'r' will only
- * trim right side,if it is 'l' will only trim left side
- * otherwise trim both left and right side.
- *
- * {{ '   some spaces   ' | trim }} => 'some spaces'
- * {{ '   some spaces   ' | trimRight }} => '   some spaces'
- * {{ '   some spaces   ' | trimLeft }} => 'some spaces   '
- */
-
-function _trim(str, re) {
-    if (_.isString(str)) {
-        return str.replace(re, '');
-    } else {
-        util.type('trim', str, 'string');
-        return str;
-    }
-}
-
-function trim(str) {
-    return _trim(str, /^\s+|\s+$/g);
-}
-
-function trimLeft(str) {
-    return _trim(str, /^\s+/);
-}
-
-function trimRight(str) {
-    return _trim(str, /\s+$/);
-}
-
-module.exports = {
-    trim: trim,
-    trimLeft: trimLeft,
-    trimRight: trimRight
-};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * @description truncate text to a specified length.
- * **notice: the length donot include the length of ellipses string, 
- * this mean the origin string will but cat to specific length and then append the ellipses string**
- * the default length is 30, default ellipses string is `'...'`
- * @example
- * ```
- * {{ 'this is a big city!' | truncate(12) }} => 'this is a bi...`
- * {{ 'this is a big city!' | truncate(12, '~~~') }} => 'this is a bi~~~`
- * ```
- */
-
-function truncate(str, length, ellipses) {
-    length = length || 30;
-
-    if (str.length <= length) {
-        return str;
-    }
-
-    if (ellipses === undefined) {
-        ellipses = '...';
-    }
-    ellipses = '' + ellipses;
-
-    str = str.slice(0, length);
-
-    return str + ellipses;
-}
-
-module.exports = truncate;
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * @description Uppercase a string
- * @example
- * ```
- * {{ 'abC' | uppercase }} => 'ABC'
- * ```
- */
-function uppercase(value) {
-    return value || value === 0 ? value.toString().toUpperCase() : '';
-}
-
-/**
- * @description Lowercase a string
- * @example
- * ```
- * {{ 'abC' | uppercase }} => 'ABC'
- * ```
- */
-function lowercase(value) {
-    return value || value === 0 ? value.toString().toLowerCase() : '';
-}
-
-/**
- * @description Converts a string into CamelCase.
- * @example
- * ```
- * {{ 'some_else' | camelcase }} => 'SomeElse'
- * {{ 'some-else' | camelcase }} => 'SomeElse'
- * ```
- */
-function camelcase(str) {
-    var re = /(?:^|[-_\/])(\w)/g;
-    return str.toString().replace(re, function (_, c) {
-        return c.toUpperCase();
-    });
-}
-
-module.exports = {
-    uppercase: uppercase,
-    lowercase: lowercase,
-    camelcase: camelcase
-};
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 var filters = __webpack_require__(2);
 var _ = __webpack_require__(0);

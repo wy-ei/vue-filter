@@ -16,7 +16,6 @@ module.exports = {
     ...xpad,
     ...trimx,
     append,
-
     prepend,
     remove, // enhance
     test,

@@ -1,6 +1,6 @@
 # vue-filter [![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
 
-A collection of Vue.js filters.
+A collection of Vue.js filter. Power By [underscore](http://underscorejs.org).
 
 ## How to use ?
 
@@ -174,7 +174,7 @@ Produces a new array of values by mapping each value in **list** through a trans
 
 {{ [1,2,3] | map(function (num){ return num * 3; }) }} => [3,6,9]
 
-{{ {"one":1,"two":2,"three":3} | map(function (num, key){ return num * 3; }) }} => [3,6,9
+{{ {"one":1,"two":2,"three":3} | map(function (num, key){ return num * 3; }) }} => [3,6,9]
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -184,8 +184,8 @@ Produces a new array of values by mapping each value in **list** through a trans
 Returns the item at the specified index location in an array or a string.
 
 ```javascript
-{{ ['a','b','c'] | at 1 }} => 'b'
-{{ 'hello' | at 1 }} => 'e'
+{{ ['a','b','c'] | at(1) }} => 'b'
+{{ 'hello' | at(1) }} => 'e'
 ```
 
 
@@ -253,7 +253,7 @@ Returns _true_ if all of the values in the **list** pass the **predicate** truth
 Returns _true_ if any of the values in the **list** pass the **predicate** truth test. Short-circuits and stops traversing the list if a true element is found.
 
 ```js
-{{ [null,0,"yes",false] | some(val => !val }) }} => true
+{{ [null,0,"yes",false] | some(val => !val ) }} => true
 ```
 
 
@@ -440,9 +440,9 @@ Returns a shuffled copy of the **list**, using a version of the [Fisher-Yates sh
 Produce a random sample from the **list**. Pass a number to return **n** random elements from the list. Otherwise a single random item will be returned.
 
 ```js
-{{ [1,2,3,4,5,6] | sample }} => 2
+{{ [1,2,3,4,5,6] | sample }} => one element
 
-{{ [1,2,3,4,5,6] | sample(3) }} => [5,1,3]
+{{ [1,2,3,4,5,6] | sample(3) }} => there elements
 ```
 
 
@@ -570,7 +570,7 @@ Computes the union of the passed-in **arrays**: the list of unique items, in ord
 Computes the list of values that are the intersection of all the **arrays**. Each value in the result is present in each of the **arrays**.
 
 ```js
-{{ [1,2,3] | intersection([101,2,1,10], [2,1]) }} => [1,2
+{{ [1,2,3] | intersection([101,2,1,10], [2,1]) }} => [1,2]
 ```
 
 
@@ -604,7 +604,7 @@ Joins the elements of an array with the character passed as the parameter.
 The result is a single string.
 
 ```javascript
-{{ ['a','b','c'] | join '-' }} => 'a-b-c'
+{{ ['a','b','c'] | join('-') }} => 'a-b-c'
 ```
 
 
@@ -626,8 +626,8 @@ Reverse an array or a string.
 
 Concatenates an array into another one.
 
-```  
-{{ [1,2,3] | concat [4,5,6] }} => [1,2,3,4,5,6]
+```  js
+{{ [1,2,3] | concat([4,5,6]) }} => [1,2,3,4,5,6]
 ```
 
 
@@ -656,7 +656,7 @@ Concatenates an array into another one.
 #### substring
 
 ```js
-{{ 'javascript' | substring(0,2) }} => 'jav'
+{{ 'javascript' | substring(0,2) }} => 'ja'
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -666,7 +666,7 @@ Concatenates an array into another one.
 Appends characters to a string.
 
 ```javascript
-{{ 'sky' | append '.jpg' }} => 'sky.jpg'
+{{ 'sky' | append('.jpg') }} => 'sky.jpg'
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -676,7 +676,7 @@ Appends characters to a string.
 Prepends characters to a string.
 
 ```javascript
-{{ 'world' | prepend 'hello ' }} => 'hello world'
+{{ 'world' | prepend('hello ') }} => 'hello world'
 ```
 
 
@@ -688,8 +688,8 @@ Prepends characters to a string.
 Converts a string into CamelCase.
 
 ```javascript
-{{ some_else | camelcase }} => SomeElse
-{{ some-else | camelcase }} => SomeElse
+{{ "some_else" | camelcase }} => "SomeElse"
+{{ "some-else" | camelcase }} => "SomeElse"
 ```
 
 
@@ -700,7 +700,7 @@ Converts a string into CamelCase.
 Truncate text to a specified length.
 
 ```javascript
-{{ 'this is a big city!' | truncate 10 '...' }} => this is...
+{{ 'this is a big city!' | truncate(10, '...') }} => 'this is a ...'
 ```
 
 
@@ -711,7 +711,7 @@ Truncate text to a specified length.
 The split filter takes on a substring as a parameter.The substring is used as a delimiter to divide a string into an array.
 
 ```javascript
-{{ 'a-b-c-d' | split '-' }} => [a,b,c,d]
+{{ 'a-b-c-d' | split('-') }} => [a,b,c,d]
 ```
 
 
@@ -748,9 +748,9 @@ Strips tabs, spaces, and newlines (all whitespace) from the left or right or bot
 Test if a string match a pattern.
 
 ```javascript
-{{ "http://vuejs.org" | test("/^http/") }} => true
+{{ "http://vuejs.org" | test("^http") }} => true
 // second param is regExp flag
-{{ "VUE" | test("/vue/", "i") }} => true
+{{ "VUE" | test("vue", "i") }} => true
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -760,7 +760,7 @@ Test if a string match a pattern.
 Pad a string on left.
 
 ```javascript
-{{ 'abc' | leftPad 5 '*' }} => '**abc'
+{{ 'abc' | leftPad(5, '*') }} => '**abc'
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -770,7 +770,7 @@ Pad a string on left.
 Pad a string on right.
 
 ```javascript
-{{ 'abc' | rightPad 5 '*' }} => 'abc**'
+{{ 'abc' | rightPad(5, '*') }} => 'abc**'
 ```
 
 
@@ -781,9 +781,9 @@ Pad a string on right.
 Repeat a string n times.
 
 ```javascript
-{{ 'abc' | repeat 3 }} => 'abcabcabc'
-{{ 'abc' | repeat '3' }} => 'abcabcabc'
-{{ 'abc' | repeat 0 }} => ''
+{{ 'abc' | repeat(3) }} => 'abcabcabc'
+{{ 'abc' | repeat('3') }} => 'abcabcabc'
+{{ 'abc' | repeat(0) }} => ''
 {{ 'abc' | repeat }} => ''
 ```
 
@@ -814,7 +814,7 @@ Uppercase a string.
 Much like **setTimeout**, invokes **function** after **wait** milliseconds. If you pass the optional **arguments**, they will be forwarded on to the **function** when it is invoked.
 
 ```js
-{{ delay(console.log, 1000, 'logged later'); }}
+{{ login | delay(console.log, 1000, 'logged later'); }}
 => 'logged later' // Appears after one second.
 ```
 
@@ -1010,7 +1010,7 @@ Get sum of all values in an array.
 ```javascript
 {{ [1,2,3] | sum }} => 6
 you can give an option argument as initial value
-{{ [1,2,3] | sum 10 }} = 16
+{{ [1,2,3] | sum(10) }} = 16
 ```
 
 
@@ -1056,7 +1056,7 @@ Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function 
 Adds a number to an output.
 
 ```javascript
-{{ 10 | plus 2 }} => 12
+{{ 10 | plus(2) }} => 12
 ```
 
 
@@ -1067,7 +1067,7 @@ Adds a number to an output.
 Subtracts a number from an output.
 
 ```javascript
-{{ 12 | minus 2 }} => 10
+{{ 12 | minus(2) }} => 10
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -1077,7 +1077,7 @@ Subtracts a number from an output.
 Multiplies an output by a number.
 
 ```javascript
-{{ 10 | multiply 2 }} => 20
+{{ 10 | multiply(2) }} => 20
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -1087,7 +1087,7 @@ Multiplies an output by a number.
 Divides an output by a number
 
 ```javascript
-{{ 10 | divide 4 }} => 2.5
+{{ 10 | divide(4) }} => 2.5
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
@@ -1097,7 +1097,7 @@ Divides an output by a number
 Divides an output by a number and returns the remainder.
 
 ```javascript
-{{ 10 | mod 3 }} => 1
+{{ 10 | mod(3) }} => 1
 ```
 
 ### Other Filters
@@ -1132,8 +1132,6 @@ If the value of the named **property** is a function then invoke it with the **o
 ```js
 {{ {"cheese":"crumpets"} | result("cheese") }} => "crumpets"
 
-{{ {"cheese":"crumpets"} | result("stuff") }} => "nonsense"
-
 {{ {"cheese":"crumpets"} | result("meat", "ham") }} => "ham"
 ```
 
@@ -1143,11 +1141,11 @@ If the value of the named **property** is a function then invoke it with the **o
 
 Converts a timestamp into another date format.
 
-```html
-{{ Date.now() | date '%T' }}  => '13:34:36'
-{{ 'Wed Jan 20 2016 13:34:36 GMT+0800' | date '%T' }} => '13:34:36'
-{{ 1453268193752 | date '%Y-%m-%d' }} => '2016-01-20'
-{{ new Date | date '%I:%M:%s %p' }} => '1:39:22 PM'
+```js
+{{ Date.now() | date('%T') }}  => current time, format like: '13:34:36'
+{{ 'Wed Jan 20 2016 13:34:36 GMT+0800' | date('%T') }} => '13:34:36'
+{{ 1453268193752 | date('%Y-%m-%d') }} => '2016-01-20'
+{{ new Date | date('%I:%M:%s %p') }} => '1:39:22 PM'
 ```
 
 **more date parameters are listed below:**
@@ -1194,7 +1192,7 @@ Get a property inside an Object
    contact:{
        tel: "187xxxx0001"
    }
-} | get 'contact.tel' }} => "187xxxx0001"
+} | get('contact.tel') }} => "187xxxx0001"
 ```
 
 ## License

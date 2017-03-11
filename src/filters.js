@@ -5,7 +5,60 @@ var other = require('./other/index');
 var number = require('./number/index');
 var _ = require('underscore');
 
+var filters = {};
 
-var filters = _.extend({}, _, collection, string, math, number, other);
+[
+    'map',
+    'reduce',
+    'find',
+    'filter',
+    'reject',
+    'every',
+    'some',
+    'contains',
+    'pluck',
+    'max',
+    'min',
+    'sortBy',
+    'groupBy',
+    'indexBy',
+    'countBy',
+    'shuffle',
+    'sample',
+    'toArray',
+    'size',
+    'first',
+    'initial',
+    'last',
+    'rest',
+    'flatten',
+    'without',
+    'union',
+    'intersection',
+    'difference',
+    'uniq',
+    'delay',
+    'throttle',
+    'debounce',
+    'once',
+    'keys',
+    'allKeys',
+    'values',
+    'pairs',
+    'invert',
+    'extend',
+    'pick',
+    'omit',
+    'defaults',
+    'has',
+    'escape',
+    'unescape',
+    'result'
+].forEach(function(key){
+    filters[key] = _[key];
+});
+
+
+filters = _.extend(filters, collection, string, math, number, other);
 
 module.exports = filters;
