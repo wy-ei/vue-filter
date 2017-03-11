@@ -4,7 +4,7 @@ A collection of Vue.js filters.
 
 ## How to use ?
 
-### 1. Get vue-filter
+### 1. Install vue-filter
 
 You can install it from npm:
 
@@ -14,7 +14,6 @@ npm install vue-filter --save
 
 or copy the file at [here](https://raw.githubusercontent.com/wy-ei/vue-filter/master/dist/vue-filter.js).
 
-### 2.Install filters
 
 If you include the file with `<script>` tag, the filters will be installed automatically. But please make sure put the `vue-filter` script behind Vue.
 
@@ -32,11 +31,8 @@ var Vue = require('vue');
 Vue.install(vueFilter);
 ```
 
-After that, you can use the filters in your project.
+### 2. use filter
 
-## How to use those filters in you project?
-
-All the filter take some date as input, process it, and return the data which has been processed. It's very easy to use:
 
 ```js
 let list = [{
@@ -59,120 +55,62 @@ let list = [{
 
 ## Filter List
 
-### Collection
-
-- [reduce](http://underscorejs.org/#reduce)
-- [reduceRight](http://underscorejs.org/#reduceRight)
-- [find](http://underscorejs.org/#find)
-- [filter](http://underscorejs.org/#filter)
-- [where](http://underscorejs.org/#where)
-- [findWhere](http://underscorejs.org/#findWhere)
-- [reject](http://underscorejs.org/#reject)
-- [every](http://underscorejs.org/#every)
-- [some](http://underscorejs.org/#some)
-- [contains](http://underscorejs.org/#contains)
-- [invoke](http://underscorejs.org/#invoke)
-- [pluck](http://underscorejs.org/#pluck)
-- [max](http://underscorejs.org/#max)
-- [min](http://underscorejs.org/#min)
-- [sortBy](http://underscorejs.org/#sortBy)
-- [groupBy](http://underscorejs.org/#groupBy)
-- [indexBy](http://underscorejs.org/#indexBy)
-- [countBy](http://underscorejs.org/#countBy)
-- [shuffle](http://underscorejs.org/#shuffle)
-- [sample](http://underscorejs.org/#sample)
-- [toArray](http://underscorejs.org/#toArray)
-- [size](http://underscorejs.org/#size)
-- [partition](http://underscorejs.org/#partition)
-
-### Array
-
-- [first](http://underscorejs.org/#first)
-- [initial](http://underscorejs.org/#initial)
-- [last](http://underscorejs.org/#last)
-- [rest](http://underscorejs.org/#rest)
-- [compact](http://underscorejs.org/#compact)
-- [flatten](http://underscorejs.org/#flatten)
-- [without](http://underscorejs.org/#without)
-- [union](http://underscorejs.org/#union)
-- [intersection](http://underscorejs.org/#intersection)
-- [difference](http://underscorejs.org/#difference)
-- [uniq](http://underscorejs.org/#uniq)
-- [zip](http://underscorejs.org/#zip)
-- [unzip](http://underscorejs.org/#unzip)
-- [object](http://underscorejs.org/#object)
-- [indexOf](http://underscorejs.org/#indexOf)
-- [lastIndexOf](http://underscorejs.org/#lastIndexOf)
-- [sortedIndex](http://underscorejs.org/#sortedIndex)
-- [findIndex](http://underscorejs.org/#findIndex)
-- [findLastIndex](http://underscorejs.org/#findLastIndex)
-- [range](http://underscorejs.org/#range)
-
-### String
-
-
-
-### Math
-
-### Object
-
-- [tap](http://underscorejs.org/#tap)
-- [has](http://underscorejs.org/#has)
-- [matcher](http://underscorejs.org/#matcher)
-- [property](http://underscorejs.org/#property)
-- [propertyOf](http://underscorejs.org/#propertyOf)
-- [isEqual](http://underscorejs.org/#isEqual)
-- [isMatch](http://underscorejs.org/#isMatch)
-- [isEmpty](http://underscorejs.org/#isEmpty)
-- [isElement](http://underscorejs.org/#isElement)
-- [isArray](http://underscorejs.org/#isArray)
-- [isObject](http://underscorejs.org/#isObject)
-- [isArguments](http://underscorejs.org/#isArguments)
-- [isFunction](http://underscorejs.org/#isFunction)
-- [isString](http://underscorejs.org/#isString)
-- [isNumber](http://underscorejs.org/#isNumber)
-- [isFinite](http://underscorejs.org/#isFinite)
-- [isBoolean](http://underscorejs.org/#isBoolean)
-- [isDate](http://underscorejs.org/#isDate)
-- [isRegExp](http://underscorejs.org/#isRegExp)
-- [isError](http://underscorejs.org/#isError)
-- [isNaN](http://underscorejs.org/#isNaN)
-- [isNull](http://underscorejs.org/#isNull)
-- [isUndefined](http://underscorejs.org/#isUndefined)
-
-### 
-
-At first, I write some filter like max, min, append, truncate etc. But it's not enough, so, I think why don't we use `[underscore](http://underscorejs.org/)`, underscore has many useful util function, And we can use them as filter pretty easy.
-
-So, now you can use the function in `undersore` as a filter.
-
-
-
 Click the filter to see how to use it.
 
 ### Collection Filters
 
-+ [first](#first)
-+ [last](#last)
+- [map](#map)
+- [at](#at)
+- [reduce](#reduce)
+- [find](#find)
+- [filter](#filter)
+- [reject](#reject)
+- [every](#every)
+- [some](#some)
+- [contains](#contains)
+- [pluck](#pluck)
+- [max](#max)
+- [min](#min)
+- [sortBy](#sortby)
+- [groupBy](#groupby)
+- [indexBy](#indexby)
+- [countBy](#countby)
+- [shuffle](#shuffle)
+- [sample](#sample)
+- [toArray](#toarray)
+- [size](#size)
+
+### Array Filters
+
+
+- [first](#first)
+- [initial](#initial)
+- [last](#last)
+- [rest](#rest)
+- [flatten](#flatten)
+- [without](#without)
+- [union](#union)
+- [intersection](#intersection)
+- [difference](#difference)
+- [uniq](#uniq)
 + [join](#join)
-+ [size](#size)
-+ [at](#at)
 + [reverse](#reverse)
 + [concat](#concat)
-+ [map](#map)
-+ [random](#random)
-+ [range](#range)
-+ [contains](#contains)
+
 
 ### String Filters
 
 + [append](#append)
 + [prepend](#prepend)
-+ [remove](#remove)
 + [camelcase](#camelcase)
++ [replace](#replace)
++ [substring](#strstring)
++ [substr](#substr)
 + [truncate](#truncate)
 + [split](#split)
 + [trim](#trim)
++ [trimLeft](#trimleft)
++ [trimRight](#trimright)
 + [test](#test)
 + [leftPad](#leftpad)
 + [rightPad](#rightpad)
@@ -180,84 +118,509 @@ Click the filter to see how to use it.
 + [lowercase](#lowercase)
 + [uppercase](#uppercase)
 
+### Function Filters
+
+- [delay](#delay)
+- [throttle](#throttle)
+- [debounce](#debounce)
+- [once](#once)
+
+
+### Object Filters
+
+- [keys](#keys)
+- [allKeys](#allkeys)
+- [values](#values)
+- [pairs](#pairs)
+- [invert](#invert)
+- [extend](#extend)
+- [pick](#pick)
+- [omit](#omit)
+- [defaults](#defaults)
+- [has](#has)
+
 ### Math Filters
 
-+ [all the function in Math](#math-method-filters)
++ [abs,acos,asin,atan,atan2,ceil,cos,exp,floor,log,pow,round,sin,sqrt,tan](#math-method-function)
 + [sum](#sum)
 + [mean](#mean)
-+ [min](#min)
-+ [max](#max)
 + [plus](#plus)
-+ [minis](#minus)
++ [minus](#minus)
 + [multiply](#multiply)
 + [divide](#divide)
 + [mod](#mod)
 
+
 ### Other Filters
 
+- [escape](#escape)
+- [unescape](#unescape)
+- [result](#result)
 + [date](#date)
-+ [defaults](#defaults)
 + [get](#get)
-+ [debounce](#debounce)
 
 
 ## Usage
 
+
 ### Collection Filters
+
+#### map
+
+Produces a new array of values by mapping each value in **list** through a transformation function ([**iteratee**](#iteratee)). The iteratee is passed three arguments: the `value`, then the `index` (or `key`) of the iteration, and finally a reference to the entire `list`.
+
+```js
+{{ [1,2,3] | map(function (n){ return n * 2; }) }} => [2,4,6]
+
+{{ [1,2,3] | map(function (num){ return num * 3; }) }} => [3,6,9]
+
+{{ {"one":1,"two":2,"three":3} | map(function (num, key){ return num * 3; }) }} => [3,6,9
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### at
+
+Returns the item at the specified index location in an array or a string.
+
+```javascript
+{{ ['a','b','c'] | at 1 }} => 'b'
+{{ 'hello' | at 1 }} => 'e'
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### reduce
+
+Also known as **inject** and **foldl**, reduce boils down a **list** of values into a single value. **Memo** is the initial state of the reduction, and each successive step of it should be returned by **iteratee**. The iteratee is passed four arguments: the `memo`, then the `value` and `index` (or key) of the iteration, and finally a reference to the entire `list`.
+
+If no memo is passed to the initial invocation of reduce, the iteratee is not invoked on the first element of the list. The first element is instead passed as the memo in the invocation of the iteratee on the next element in the list.
+
+```js
+{{ [1,2,3] | reduce(function (memo, num){ return memo + num; }, 0) }} => 6
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### find
+
+Looks through each value in the **list**, returning the first one that passes a truth test (**predicate**), or `undefined` if no value passes the test. The function returns as soon as it finds an acceptable element, and doesn't traverse the entire list.
+
+```js
+{{ [1,2,3,4,5,6] | find(function (num){ return num % 2 == 0; }) }} =>
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### filter
+
+Looks through each value in the **list**, returning an array of all the values that pass a truth test (**predicate**).
+
+```js
+{{ [1,2,3,4,5,6] | filter(function (num){ return num % 2 == 0; }) }} => [2,4,6]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### reject
+
+
+Returns the values in **list** without the elements that the truth test (**predicate**) passes. The opposite of **filter**.
+
+```js
+{{ [1,2,3,4,5,6] | reject(function (num){ return num % 2 == 0; }) }} => [1,3,5]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### every
+
+Returns _true_ if all of the values in the **list** pass the **predicate** truth test. Short-circuits and stops traversing the list if a false element is found.
+
+```js
+{{ [2,4,5] | every(function (num) { return num % 2 == 0; }) }} => false
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### some
+
+Returns _true_ if any of the values in the **list** pass the **predicate** truth test. Short-circuits and stops traversing the list if a true element is found.
+
+```js
+{{ [null,0,"yes",false] | some(val => !val }) }} => true
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### contains
+
+Returns _true_ if the **value** is present in the **list**. Uses **indexOf** internally, if **list** is an Array. Use **fromIndex** to start your search at a given index.
+
+```js
+{{ [1,2,3] | contains(3) }} => true
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### pluck
+
+
+A convenient version of what is perhaps the most common use-case for **map**: extracting a list of property values.
+
+```js
+{{ [{
+  "name": "moe",
+  "age": 40
+}, {
+  "name": "larry",
+  "age": 50
+}, {
+  "name": "curly",
+  "age": 60
+}] | pluck("name") }} => ["moe","larry","curly"]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### max
+
+
+Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _-Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
+
+```js
+{{ [{
+  "name": "moe",
+  "age": 40
+}, {
+  "name": "larry",
+  "age": 50
+}, {
+  "name": "curly",
+  "age": 60
+}] | max(function (stooge){ return stooge.age; }) }} => {"name":"curly","age":60}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### min
+
+
+Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
+
+```js
+{{ [10,5,100,2,1000] | min }} => 2
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### sortBy
+
+
+Returns a (stably) sorted copy of **list**, ranked in ascending order by the results of running each value through [**iteratee**](#iteratee). iteratee may also be the string name of the property to sort by (eg. `length`).
+
+```js
+{{ [1,2,3,4,5,6] | sortBy(function (num){ return Math.sin(num); }) }} => [5,4,6,3,1,2]
+
+{{ [{
+  "name": "moe",
+  "age": 40
+}, {
+  "name": "larry",
+  "age": 50
+}, {
+  "name": "curly",
+  "age": 60
+}] | sortBy("name") }}
+=>
+[{
+  "name": "curly",
+  "age": 60
+}, {
+  "name": "larry",
+  "age": 50
+}, {
+  "name": "moe",
+  "age": 40
+}]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### groupBy
+
+
+Splits a collection into sets, grouped by the result of running each value through **iteratee**. If **iteratee** is a string instead of a function, groups by the property named by **iteratee** on each of the values.
+
+```js
+{{ [1.3, 2.1, 2.4] | groupBy(function (num){ return Math.floor(num); }) }} => {"1":[1.3],"2":[2.1,2.4]}
+
+{{ ["one","two","three"] | groupBy("length") }} => {"3":["one","two"],"5":["three"]}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### indexBy
+
+
+Given a **list**, and an [**iteratee**](#iteratee) function that returns a key for each element in the list (or a property name), returns an object with an index of each item. Just like [groupBy](#groupBy), but for when you know your keys are unique.
+
+```js
+{{ [{
+  "name": "moe",
+  "age": 40
+}, {
+  "name": "larry",
+  "age": 50
+}, {
+  "name": "curly",
+  "age": 60
+}] | indexBy("age") }}
+=>
+{
+  "40": {
+    "name": "moe",
+    "age": 40
+  },
+  "50": {
+    "name": "larry",
+    "age": 50
+  },
+  "60": {
+    "name": "curly",
+    "age": 60
+  }
+}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### countBy
+
+
+Sorts a list into groups and returns a count for the number of objects in each group. Similar to `groupBy`, but instead of returning a list of values, returns a count for the number of values in that group.
+
+```js
+{{ [1,2,3,4,5] | countBy(function (num) {
+  return num % 2 == 0 ? 'even': 'odd';
+}) }} => {"odd":3,"even":2}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### shuffle
+
+
+Returns a shuffled copy of the **list**, using a version of the [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle).
+
+```js
+{{ [1,2,3,4,5,6] | shuffle }} => [5,2,3,6,1,4]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### sample
+
+
+Produce a random sample from the **list**. Pass a number to return **n** random elements from the list. Otherwise a single random item will be returned.
+
+```js
+{{ [1,2,3,4,5,6] | sample }} => 2
+
+{{ [1,2,3,4,5,6] | sample(3) }} => [5,1,3]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### toArray
+
+
+Creates a real Array from the **list** (anything that can be iterated over). Useful for transmuting the **arguments** object.
+
+```js
+{{ {"0":1,"1":2,"2":3,"3":4} | toArray }} => [1,2,3,4]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### size
+
+
+Return the number of values in the **list**.
+
+```js
+{{ {"one":1,"two":2,"three":3} | size }} => 3
+```
+
+## Array Functions
+
+_Note: All array functions will also work on the **arguments** object. However, Underscore functions are not designed to work on "sparse" arrays._
+
+### Array Filters
+
 
 #### first
 
-Returns the first element of an array,or first charactor of a string.
+Returns the first element of an **array**. Passing **n** will return the first **n** elements of the array.
 
+```js
+{{ [5,4,3,2,1] | first }} => 5
+
+{{ [1,2] | first(0, [[1,2],[3,4]]) }} => 1
+
+{{ [3,4] | first(1, [[1,2],[3,4]]) }} => 3
 ```
-{{ ['a','b','c'] | first }} => 'a'
-{{ 'hello' | first }} => 'h'
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### initial
+
+
+Returns everything but the last entry of the array. Especially useful on the arguments object. Pass **n** to exclude the last **n** elements from the result.
+
+```js
+{{ [5,4,3,2,1] | initial }} => [5,4,3,2]
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### last
 
-Returns the last element of an array,or last charactor of a string.
 
+Returns the last element of an **array**. Passing **n** will return the last **n** elements of the array.
+
+```js
+{{ [5,4,3,2,1] | last }} => 1
 ```
-{{ ['a','b','c'] | last }} => 'c'
-{{ 'hello' | last }} => 'o'
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### rest
+
+Returns the **rest** of the elements in an array. Pass an **index** to return the values of the array from that index onward.
+
+```js
+{{ [5,4,3,2,1] | rest }} => [4,3,2,1]
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### flatten
+
+
+Flattens a nested **array** (the nesting can be to any depth). If you pass **shallow**, the array will only be flattened a single level.
+
+```js
+{{ [1,[2],[3,[[4]]]] | flatten }} => [1,2,3,4]
+
+{{ [1,[2],[3,[[4]]]] | flatten(true) }} => [1,2,3,[[4]]]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### without
+
+
+Returns a copy of the **array** with all instances of the **values** removed.
+
+```js
+{{ [1,2,1,0,3,1,4] | without(0, 1) }} => [2,3,4]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### union
+
+
+Computes the union of the passed-in **arrays**: the list of unique items, in order, that are present in one or more of the **arrays**.
+
+```js
+{{ [1,2,3] | union([101,2,1,10], [2,1]) }} => [1,2,3,101,10]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### intersection
+
+
+Computes the list of values that are the intersection of all the **arrays**. Each value in the result is present in each of the **arrays**.
+
+```js
+{{ [1,2,3] | intersection([101,2,1,10], [2,1]) }} => [1,2
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### difference
+
+
+Similar to **without**, but returns the values from **array** that are not present in the **other** arrays.
+
+```js
+{{ [1,2,3,4,5] | difference([5,2,10]) }} => [1,3,4]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### uniq
+
+Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurence of each value is kept. If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. If you want to compute unique items based on a transformation, pass an [**iteratee**](#iteratee) function.
+
+```js
+{{ [1,2,1,4,1,3] | uniq }} => [1,2,4,3]
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### join
 
 Joins the elements of an array with the character passed as the parameter.
 The result is a single string.
 
-```
+```javascript
 {{ ['a','b','c'] | join '-' }} => 'a-b-c'
 ```
 
-#### size
 
-Returns the size of a string or an array.
-
-```
-{{ ['a','b','c'] | size }} => 3
-{{ 'hello' | size }} => 5
-```
-
-#### at
-
-Returns the item at the specified index location in an array or a string.
-
-```
-{{ ['a','b','c'] | at 1 }} => 'b'
-{{ 'hello' | at 1 }} => 'e'
-```
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### reverse
 
 Reverse an array or a string.
 
-```
+```javascript
 {{ 'abc' | reverse }} => 'cba'
 {{ [1,2,3] | reverse }} => [3,2,1]
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### concat
 
@@ -267,270 +630,514 @@ Concatenates an array into another one.
 {{ [1,2,3] | concat [4,5,6] }} => [1,2,3,4,5,6]
 ```
 
-#### map
 
-Returns a new collection of the results of each expression execution.
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
-```javascript
-new Vue({
-  ...
-  methods:{
-    increase:function(val){return val+1;}
-  }
-});
-```
-
-```
-{{ [1,2,3] | map increase }} => [2,3,4]
-```
-
-#### random
-
-Get a random value from a collection.
-
-```
-{{ [1,2,3,4] | random }} => 1 or 2 or 3 or 4
-```
-
-#### range
-
-Return a new collection from a given length.
-
-```
-{{ [] | range 4 }} => [0,1,2,3]
-```
-
-#### contains
-
-Checks if given expression or value is present in the collection
-
-```
-{{ [2,3,4] | contains 3 }} => true;
-```
 
 ### String Filters
----
+
+#### replace
+
+```js
+{{ 'ab-cd' | replace('-', '') }}  => 'abcd'
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### substr
+
+```js
+{{ 'javascript' | substr(0, 4) }} => 'java'
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### substring
+
+```js
+{{ 'javascript' | substring(0,2) }} => 'jav'
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### append
 
 Appends characters to a string.
 
-```
+```javascript
 {{ 'sky' | append '.jpg' }} => 'sky.jpg'
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### prepend
 
 Prepends characters to a string.
 
-```
+```javascript
 {{ 'world' | prepend 'hello ' }} => 'hello world'
 ```
 
-#### remove
 
-Removes all occurrences of a substring from a string.
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
-```
-{{ 'Hello JavaScript' | remove 'Hello' }} => ' JavaScript'
-```
 
 #### camelcase
 
 Converts a string into CamelCase.
 
-```
+```javascript
 {{ some_else | camelcase }} => SomeElse
 {{ some-else | camelcase }} => SomeElse
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### truncate
 
 Truncate text to a specified length.
 
-```
+```javascript
 {{ 'this is a big city!' | truncate 10 '...' }} => this is...
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### split
 
 The split filter takes on a substring as a parameter.The substring is used as a delimiter to divide a string into an array.
 
-```
+```javascript
 {{ 'a-b-c-d' | split '-' }} => [a,b,c,d]
 ```
 
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
 #### trim
 
-Strips tabs, spaces, and newlines (all whitespace) from the left or right or both side of a string.which depends on second argument. if it is 'r' will only trim right side,if it is 'l' will only trim left side otherwise trim both left and right side.
+Strips tabs, spaces, and newlines (all whitespace) from the left or right or both side of a string.which depends on second argument.
 
-```
+```javascript
 {{ '   some spaces   ' | trim }} => 'some spaces'
-{{ '   some spaces   ' | trim 'r' }} => '   some spaces'
-{{ '   some spaces   ' | trim 'l' }} => 'some spaces   '
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### trimLeft
+
+```js
+{{ '   some spaces   ' | trimLeft }} => 'some spaces   '
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### trimRight
+
+```js
+{{ '   some spaces   ' | trimRight }} => '   some spaces'
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### test
 
 Test if a string match a pattern.
 
+```javascript
+{{ "http://vuejs.org" | test("/^http/") }} => true
+// second param is regExp flag
+{{ "VUE" | test("/vue/", "i") }} => true
 ```
-{{ "http://vuejs.org" | test /^http/ }} => true
-```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### leftPad
 
 Pad a string on left.
 
-```
+```javascript
 {{ 'abc' | leftPad 5 '*' }} => '**abc'
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### rightPad
 
 Pad a string on right.
 
-```
+```javascript
 {{ 'abc' | rightPad 5 '*' }} => 'abc**'
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### repeat
 
 Repeat a string n times.
 
-```
+```javascript
 {{ 'abc' | repeat 3 }} => 'abcabcabc'
 {{ 'abc' | repeat '3' }} => 'abcabcabc'
 {{ 'abc' | repeat 0 }} => ''
 {{ 'abc' | repeat }} => ''
 ```
 
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
 #### lowercase
 
 Lowercase a string.
 
-```
+```javascript
 {{ 'Vue' | lowercase }} => 'vue'
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### uppercase
 
 Uppercase a string.
 
-```
+```javascript
 {{ 'Vue' | uppercase }} => 'VUE'
 ```
 
-### Math filters
----
-#### Math method filters
+### Function Filters
 
-You can use those math function as filter:
+#### delay
 
-- `abs`
-- `acos`
-- `asin`
-- `atan`
-- `atan2`
-- `ceil`
-- `cos`
-- `exp`
-- `floor`
-- `log`
-- `pow`
-- `round`
-- `sin`
-- `sqrt`
-- `tan`
+Much like **setTimeout**, invokes **function** after **wait** milliseconds. If you pass the optional **arguments**, they will be forwarded on to the **function** when it is invoked.
 
-**Notice:** `random` use to pick a random item from collection.
-
+```js
+{{ delay(console.log, 1000, 'logged later'); }}
+=> 'logged later' // Appears after one second.
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### throttle
+
+Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly, will only actually call the original function at most once per every **wait** milliseconds. Useful for rate-limiting events that occur faster than you can keep up with.
+
+By default, **throttle** will execute the function as soon as you call it for the first time, and, if you call it again any number of times during the **wait** period, as soon as that period is over. If you'd like to disable the leading-edge call, pass `{leading: false}`, and if you'd like to disable the execution on the trailing-edge, pass
+`{trailing: false}`.
+
+```js
+{{ updatePosition | throttle(100) }}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### debounce
+
+
+Creates and returns a new debounced version of the passed function which will postpone its execution until after **wait** milliseconds have elapsed since the last time it was invoked. Useful for implementing behavior that should only happen _after_ the input has stopped arriving. For example: rendering a preview of a Markdown comment, recalculating a layout after the window has stopped being resized, and so on.
+
+At the end of the **wait** interval, the function will be called with the arguments that were passed _most recently_ to the debounced function.
+
+Pass `true` for the **immediate** argument to cause **debounce** to trigger the function on the leading instead of the trailing edge of the **wait** interval. Useful in circumstances like preventing accidental double-clicks on a "submit" button from firing a second time.
+
+```js
+{{ calculateLayout | debounce(300) }}
+//
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### once
+
+Creates a version of the function that can only be called one time. Repeated calls to the modified function will have no effect, returning the value from the original call. Useful for initialization functions, instead of having to set a boolean flag and then check it later.
+
+```js
+{{ sendMessage | once }}
+// Message only send once.
+```
+
+
+### Object Filters
+
+#### keys
+
+Retrieve all the names of the **object**'s own enumerable properties.
+
+```js
+{{ {"one":1,"two":2,"three":3} | keys }} => ["one","two","three"]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### allKeys
+
+Retrieve _all_ the names of **object**'s own and inherited properties.
+
+```js
+{{ {"name":"Moe"} | allKeys }} => ["name","silly"]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### values
+
+
+Return all of the values of the **object**'s own properties.
+
+```js
+{{ {"one":1,"two":2,"three":3} | values }} => [1,2,3]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### pairs
+
+
+Convert an object into a list of `[key, value]` pairs. The opposite of [object](#object).
+
+```js
+{{ {"one":1,"two":2,"three":3} | pairs }} => [["one",1],["two",2],["three",3]]
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### invert
+
+
+Returns a copy of the **object** where the keys have become the values and the values the keys. For this to work, all of your object's values should be unique and string serializable.
+
+```js
+{{ {"Moe":"Moses","Larry":"Louis","Curly":"Jerome"} | invert }} => {"Moses":"Moe","Louis":"Larry","Jerome":"Curly"}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### extend
+
+
+Shallowly copy all of the properties **in** the **source** objects over to the **destination** object, and return the **destination** object. Any nested objects or arrays will be copied by reference, not duplicated. It's in-order, so the last source will override properties of the same name in previous arguments.
+
+```js
+{{ {"name":"moe"} | extend({"age":50}) }} => {"name":"moe","age":50}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### pick
+
+
+Return a copy of the **object**, filtered to only have values for the whitelisted **keys** (or array of valid keys). Alternatively accepts a predicate indicating which keys to pick.
+
+```js
+{{ {"name":"moe","age":50,"userid":"moe1"} | pick("name", "age") }} => {"name":"moe","age":50}
+
+{{ {"name":"moe","age":50,"userid":"moe1"} | pick(function (value, key, object) {
+  return _.isNumber(value);
+}) }} => {"age":50}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### omit
+
+
+Return a copy of the **object**, filtered to omit the blacklisted **keys** (or array of keys). Alternatively accepts a predicate indicating which keys to omit.
+
+```js
+{{ {"name":"moe","age":50,"userid":"moe1"} | omit("userid") }} => {"name":"moe","age":50}
+
+{{ {"name":"moe","age":50,"userid":"moe1"} | omit(function (value, key, object) {
+  return _.isNumber(value);
+}) }} => {"name":"moe","userid":"moe1"}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### defaults
+
+
+Returns **object** after filling in its `undefined` properties with the first value present in the following list of **defaults** objects.
+
+```js
+{{ {"flavor":"chocolate"} | defaults({"flavor":"vanilla","sprinkles":"lots"}) }} => {"flavor":"chocolate","sprinkles":"lots"}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### has
+
+
+Does the object contain the given key? Identical to `object.hasOwnProperty(key)`, but uses a safe reference to the `hasOwnProperty` function, in case it's been [overridden accidentally](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/).
+
+```js
+{{ {"a":1,"b":2,"c":3} | has("b") }} => true
+```
+
+### Math Filters
+
+### Math method function
+
+`abs`,`acos`,`asin`,`atan`,`atan2`,`ceil`,`cos`,`exp`,`floor`,`log`,`pow`,`round`,`sin`,`sqrt`,`tan`
+
+
+```js
 {{ -1.2 | abs }}  => 1.2
 {{ 1 | acos }}  => 0
 {{ 1.3 | ceil }} => 2
-{{ 3 | pow 2 }} => 9  i.e: Math.pow(3,2)
+{{ 3 | pow(2) }} => 9  i.e: Math.pow(3,2)
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### sum
 
 Get sum of all values in an array.
 
-```
+```javascript
 {{ [1,2,3] | sum }} => 6
 you can give an option argument as initial value
 {{ [1,2,3] | sum 10 }} = 16
 ```
 
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
 #### mean
 
 Return mean value of a array.
 
-```
+```javascript
 {{ [1,2,3,4] | mean }} => 2.5
 ```
 
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
 #### min
 
-Return minimum value in an array. It will compare two item by a certain key if key provide.
 
+Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
+
+```js
+{{ [10,5,100,2,1000] | min }} => 2
 ```
-{{ [13,22,3,24 ] | min }} => 3
-{{ list | min 'age' }} => {name:'ron',age:12}
-list:[
-	{name:'james',age:24},
-	{name:'ron',age:12}
-]
-```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### max
 
-return maximum value in an array.It will compare two item by a certain key
-if key provide.
+
+Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _-Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
+
+```js
+{{ [{"name":"moe","age":40},{"name":"larry","age":50},{"name":"curly","age":60}] | max(function (stooge){ return stooge.age; }) }} => {"name":"curly","age":60}
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### plus
 
 Adds a number to an output.
 
-```
+```javascript
 {{ 10 | plus 2 }} => 12
 ```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### minus
 
 Subtracts a number from an output.
 
-```
+```javascript
 {{ 12 | minus 2 }} => 10
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### multiply
 
 Multiplies an output by a number.
 
-```
+```javascript
 {{ 10 | multiply 2 }} => 20
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### divide
 
 Divides an output by a number
 
-```
+```javascript
 {{ 10 | divide 4 }} => 2.5
 ```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### mod
 
 Divides an output by a number and returns the remainder.
 
-```
+```javascript
 {{ 10 | mod 3 }} => 1
 ```
 
-
 ### Other Filters
----
+
+#### escape
+
+Escapes a string for insertion into HTML, replacing `&`, `<`, `>`, `"`, ```, and `'` characters.
+
+```js
+{{ "Curly, Larry & Moe" | escape }} => "Curly, Larry &amp; Moe"
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### unescape
+
+
+The opposite of [**escape**](#escape), replaces `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#96;` and `&#x27;` with their unescaped counterparts.
+
+```js
+{{ "Curly, Larry &amp; Moe" | unescape }} => "Curly, Larry & Moe"
+```
+
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
+
+#### result
+
+
+If the value of the named **property** is a function then invoke it with the **object** as context; otherwise, return it. If a default value is provided and the property doesn't exist or is undefined then the default will be returned. If `defaultValue` is a function its result will be returned.
+
+```js
+{{ {"cheese":"crumpets"} | result("cheese") }} => "crumpets"
+
+{{ {"cheese":"crumpets"} | result("stuff") }} => "nonsense"
+
+{{ {"cheese":"crumpets"} | result("meat", "ham") }} => "ham"
+```
+
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### date
 
@@ -575,38 +1182,19 @@ Converts a timestamp into another date format.
 |%y |Year without a century (00.99). |`{{ timestamp | date "%y" }} => "14" `|
 |%Y |Year with a century. |`{{ timestamp | date "%Y" }} => "2014" `|
 
-#### defaults
 
-Sets a default value for any variable with no assigned value.
-
-The default value is returned if the variable resolves to null ,undefined or an empty string ''.A string containing whitespace characters and a number has value 0 will not resolve to the default value.
-
-```html
-{{ customer.name | defaults "customer" }}
-
-<!--if customer.name is null or empty,will use "customer" instead-->
-```
-
-#### debounce
-
-
-Debounce a function, the default dalay is 300ms
-
-```
-{{ func | debounce 300 }}
-```
+<p align="right"><small><a href="#filter-list">Back Top</a></small></p>
 
 #### get
 
 Get a property inside an Object
 
-```
-james = {
+```javascript
+{{ {
    contact:{
-       tel: 187xxxx0001
+       tel: "187xxxx0001"
    }
-}
-{{ james | get 'contact.tel' }} => 187xxxx0001
+} | get 'contact.tel' }} => "187xxxx0001"
 ```
 
 ## License

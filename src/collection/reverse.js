@@ -15,7 +15,7 @@ function reverse(collection) {
     if(_.isArray(collection)){
         return collection.concat().reverse();
     }
-    return arr;
+    return collection;
 }
 
 module.exports =  reverse;

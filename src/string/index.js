@@ -5,7 +5,7 @@ var base = require('./base');
 var test = require('./test');
 var trimx = require('./trimx');
 var truncate = require('./truncate');
-var pad = require('./pad');
+var xpad = require('./xpad');
 var repeat = require('./repeat');
 var xcase = require('./xcase');
 
@@ -13,7 +13,7 @@ var xcase = require('./xcase');
 module.exports = {
     ...base,
     ...xcase,
-    ...pad,
+    ...xpad,
     ...trimx,
     append,
 

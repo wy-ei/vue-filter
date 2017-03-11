@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var util = require('../util');
 
 let base = {};
@@ -9,7 +10,7 @@ let base = {};
             return Number.prototype[method].apply(num, _.rest(arguments));
         } else {
             util.type(num, 'number');
-            return value;
+            return num;
         }
     };
 });

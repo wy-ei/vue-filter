@@ -18,9 +18,8 @@ test('at', function(t) {
     var at = filters.at;
     t.equal(at([1, 2, 3], 1), 2);
     t.equal(at([1, 2, 3], -1), undefined);
-    // if first argument is not a array ,samply return it;
-    t.equal(at(123, 1), 123);
-    t.equal(at(arrayLike, 2), 345);
+    t.equal(at([123], 0), 123);
+    t.equal(at('hello', 2), 'l');
     t.end();
 });
 
@@ -103,7 +102,6 @@ test('map', function(t) {
 
 test('range', function(t) {
     var range = filters.range;
-    var arr = [];
     t.deepEqual(range([], 3), [0, 1, 2]);
     t.end();
 });

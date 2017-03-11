@@ -1,17 +1,6 @@
 var test = require('tape');
 var filters = require('../src/filters');
 
-test('defaults', function(t) {
-    var defaults = filters.defaults;
-    t.equal(defaults(1, 100), 1);
-    t.equal(defaults(0, 100), 0);
-    t.equal(defaults(undefined, 100), 100);
-    t.equal(defaults(null, 100), 100);
-    t.equal(defaults('', 'js'), 'js');
-    t.equal(defaults('typescript', 'js'), 'typescript');
-    t.end();
-});
-
 test('date', function(t) {
     var date = filters.date;
     var d = new Date;

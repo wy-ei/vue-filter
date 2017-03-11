@@ -6,9 +6,7 @@
 </head>
 <body>
     <div id="app">
-
-{{ list | map(player => player.score) | sum  }} => 
-{{ list | max(player => player.score) | get('score') }}
+        ${content}
     </div>
     <script src="http://cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="../node_modules/underscore/underscore-min.js"></script>
@@ -27,7 +25,6 @@
                     name: 'Jefferson, Richard',
                     score: 11
                 }]
-
             }
         });
     </script>

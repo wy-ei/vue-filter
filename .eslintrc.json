@@ -27,7 +27,6 @@
         ]
     },
 	"globals": {
-    	"Vue": true,
-		"define": true
+    	"Vue": true
   	}
 }

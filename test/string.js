@@ -1,6 +1,25 @@
 var test = require('tape');
 var filters = require('../src/filters');
 
+test('replace', function(t) {
+    var replace = filters.replace;
+    t.equal(replace('ab-cd', '-', ''), 'abcd');
+    t.equal(replace('ab-cd', /\W/, ''), 'abcd');
+    t.end();
+});
+
+test('substr', function(t) {
+    var substr = filters.substr;
+    t.equal(substr('javascript', 0, 4), 'java');
+    t.end();
+});
+
+test('substring', function(t) {
+    var substring = filters.substring;
+    t.equal(substring('javascript', 0, 2), 'jav');
+    t.end();
+});
+
 test('trim', function(t) {
     var trim = filters.trim;
     var trimLeft = filters.trimLeft;

@@ -51,6 +51,8 @@ var months = ['January', 'February', 'March', 'April', 'May', 'June',
 
 function date(date, formatString) {
     var d = new Date(date);
+    var hours = 0;
+    var month = 0;
 
     var zeroize = function(value, length) {
 
@@ -80,6 +82,7 @@ function date(date, formatString) {
         }
         return n + day;
     }
+
 
     function cb(c) {
         var ret = '';
@@ -116,13 +119,14 @@ function date(date, formatString) {
             ret = '%Y-%m-%d';
             break;
         case '%H':
-            var hours = d.getHours();
+            hours = d.getHours();
             ret = zeroize(hours);
             break;
         case '%I':
-            var hours = d.getHours();
-            if (hours != 12)
-              hours = hours % 12;
+            hours = d.getHours();
+            if (hours != 12){
+                hours = hours % 12;
+            }
             ret = zeroize(hours);
             break;
         case '%j':
@@ -132,7 +136,7 @@ function date(date, formatString) {
             ret = d.getHours();
             break;
         case '%m':
-            var month = d.getMonth() + 1;
+            month = d.getMonth() + 1;
             ret = zeroize(month, 2);
             break;
         case '%M':

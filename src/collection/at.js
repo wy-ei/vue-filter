@@ -1,5 +1,4 @@
 var _ = require('underscore');
-
 /**
  * @filter at
  * @description Return the item at the specified index in an array or a string.
@@ -12,11 +11,11 @@ var _ = require('underscore');
  */
 
 function at(collection, index) {
-    if(!_.isArray(collection)){
-        collection = _.toArray();
+    if(_.isArray(collection) || _.isString(collection)){
+        index = Number(index);
+        return collection[index];
     }
-    index = Number(index);
-    return collection[index];
+    return undefined;
 }
 
 module.exports = at;

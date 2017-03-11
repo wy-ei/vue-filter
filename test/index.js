@@ -1,4 +1,4 @@
-require("babel-register");
+require('babel-register');
 require('./util');
 require('./collection');
 require('./string');

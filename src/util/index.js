@@ -1,6 +1,6 @@
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
+
 var _ = require('underscore');
-
-
 var util = {};
 
 
@@ -40,10 +40,10 @@ util.get = function (obj, accessor) {
 
 util.deprecated = function(filter, msg){
     console.warn('[filter - ' + filter + ']:this filter has deprecated, it will be remove at next minor version. ' + msg);
-}
+};
 
 util.type = function(filter, input, type){
     console.warn('[filter - ' + filter + ']: expect input type is :' + type + 'but got ' + typeof input);
-}
+};
 
 module.exports = util;
