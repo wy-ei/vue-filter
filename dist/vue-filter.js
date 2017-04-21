@@ -11,41 +11,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
+
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -56,7 +56,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 			});
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -65,13 +65,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-/******/
+
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
@@ -1704,7 +1704,7 @@ var _ = __webpack_require__(0);
 
 var filters = {};
 
-['map', 'reduce', 'find', 'filter', 'reject', 'every', 'some', 'contains', 'pluck', 'max', 'min', 'sortBy', 'groupBy', 'indexBy', 'countBy', 'shuffle', 'sample', 'toArray', 'size', 'first', 'initial', 'last', 'rest', 'flatten', 'without', 'union', 'intersection', 'difference', 'uniq', 'delay', 'throttle', 'debounce', 'once', 'keys', 'allKeys', 'values', 'pairs', 'invert', 'extend', 'pick', 'omit', 'defaults', 'has', 'escape', 'unescape', 'result'].forEach(function (key) {
+['map', 'reduce', 'find', 'filter', 'reject', 'every', 'some', 'contains', 'pluck', 'max', 'min', 'sortBy', 'groupBy', 'indexBy', 'countBy', 'shuffle', 'sample', 'toArray', 'size', 'first', 'initial', 'last', 'rest', 'flatten', 'without', 'union', 'intersection', 'difference', 'uniq', 'keys', 'allKeys', 'values', 'pairs', 'invert', 'extend', 'pick', 'omit', 'defaults', 'has', 'escape', 'unescape', 'result'].forEach(function (key) {
     filters[key] = _[key];
 });
 
@@ -1806,18 +1806,17 @@ module.exports = base;
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var base = __webpack_require__(4);
 var at = __webpack_require__(3);
 var reverse = __webpack_require__(7);
 var range = __webpack_require__(6);
+var _ = __webpack_require__(0);
 
-module.exports = _extends({}, base, {
+module.exports = _.extend({
     at: at,
     reverse: reverse,
     range: range
-});
+}, base);
 
 /***/ }),
 /* 6 */
@@ -1907,18 +1906,18 @@ module.exports = base;
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var base = __webpack_require__(8);
 var operator = __webpack_require__(11);
 
 var sum = __webpack_require__(12);
 var mean = __webpack_require__(10);
 
-module.exports = _extends({}, operator, base, {
+var _ = __webpack_require__(0);
+
+module.exports = _.extend({
     sum: sum,
     mean: mean
-});
+}, operator, base);
 
 /***/ }),
 /* 10 */
@@ -2084,11 +2083,9 @@ module.exports = base;
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var base = __webpack_require__(13);
 
-module.exports = _extends({}, base);
+module.exports = base;
 
 /***/ }),
 /* 15 */
@@ -2425,8 +2422,6 @@ module.exports = base;
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var append = __webpack_require__(19);
 var prepend = __webpack_require__(22);
 var remove = __webpack_require__(23);
@@ -2437,15 +2432,16 @@ var truncate = __webpack_require__(27);
 var xpad = __webpack_require__(29);
 var repeat = __webpack_require__(24);
 var xcase = __webpack_require__(28);
+var _ = __webpack_require__(0);
 
-module.exports = _extends({}, base, xcase, xpad, trimx, {
+module.exports = _.extend({
     append: append,
     prepend: prepend,
     remove: remove, // enhance
     test: test,
     truncate: truncate,
     repeat: repeat
-});
+}, base, xcase, xpad, trimx);
 
 /***/ }),
 /* 22 */
@@ -2788,4 +2784,3 @@ module.exports = install;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=vue-filter.js.map

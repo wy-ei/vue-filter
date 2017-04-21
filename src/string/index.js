@@ -8,17 +8,13 @@ var truncate = require('./truncate');
 var xpad = require('./xpad');
 var repeat = require('./repeat');
 var xcase = require('./xcase');
+var _ = require('underscore');
 
-
-module.exports = {
-    ...base,
-    ...xcase,
-    ...xpad,
-    ...trimx,
-    append,
-    prepend,
-    remove, // enhance
-    test,
-    truncate,
-    repeat
-};
+module.exports = _.extend({
+    append: append,
+    prepend: prepend,
+    remove: remove, // enhance
+    test: test,
+    truncate: truncate,
+    repeat: repeat
+}, base, xcase, xpad, trimx);

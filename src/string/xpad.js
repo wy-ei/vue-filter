@@ -52,6 +52,6 @@ function rightPad(str,size,ch){
 }
 
 module.exports = {
-    leftPad,
-    rightPad
+    leftPad: leftPad,
+    rightPad: rightPad
 };

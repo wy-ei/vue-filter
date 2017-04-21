@@ -1,18 +1,5 @@
 var test = require('tape');
-var filters = require('../src/filters');
 var util = require('../src/util/index');
-
-var arrayLike = {
-    0: 123,
-    1: 234,
-    2: 345,
-    length: 3
-};
-var obj = {
-    name: 'james',
-    age: 21
-};
-
 
 
 test('isArrayLike', function (t) {

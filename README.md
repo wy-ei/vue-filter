@@ -1,8 +1,6 @@
 # vue-filter [![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
 
-**A collection of [Vue.js](https://github.com/vuejs/vue) filter.**
-
-At version 0.2.x, Powered by [underscore](http://underscorejs.org/), we have more filter. see [filter list](#filter-list) for more information.
+**A collection of [Vue.js](https://github.com/vuejs/vue) filter**
 
 ## How to use ?
 
@@ -37,16 +35,18 @@ Vue.install(vueFilter);
 
 
 ```js
-let list = [{
-    name: 'James, LeBron',
-    score: 38
-},{
-    name: 'Irving, Kyrie',
-    score: 43
-},{
-    name: 'Jefferson, Richard',
-    score: 11
-}]
+data: {
+  list: [{
+      name: 'James, LeBron',
+      score: 38
+  },{
+      name: 'Irving, Kyrie',
+      score: 43
+  },{
+      name: 'Jefferson, Richard',
+      score: 11
+  }]
+}
 
 // get sum of score.
 {{ list | map(player => player.score) | sum  }} => 92
@@ -164,7 +164,7 @@ Click the filter to see how to use it.
 
 Produces a new array of values by mapping each value in **list** through a transformation function ([**iteratee**](#iteratee)). The iteratee is passed three arguments: the `value`, then the `index` (or `key`) of the iteration, and finally a reference to the entire `list`.
 
-```js
+```javascript
 {{ [1,2,3] | map(function (n){ return n * 2; }) }} => [2,4,6]
 
 {{ [1,2,3] | map(function (num){ return num * 3; }) }} => [3,6,9]
@@ -192,7 +192,7 @@ Also known as **inject** and **foldl**, reduce boils down a **list** of values i
 
 If no memo is passed to the initial invocation of reduce, the iteratee is not invoked on the first element of the list. The first element is instead passed as the memo in the invocation of the iteratee on the next element in the list.
 
-```js
+```javascript
 {{ [1,2,3] | reduce(function (memo, num){ return memo + num; }, 0) }} => 6
 ```
 
@@ -202,7 +202,7 @@ If no memo is passed to the initial invocation of reduce, the iteratee is not in
 
 Looks through each value in the **list**, returning the first one that passes a truth test (**predicate**), or `undefined` if no value passes the test. The function returns as soon as it finds an acceptable element, and doesn't traverse the entire list.
 
-```js
+```javascript
 {{ [1,2,3,4,5,6] | find(function (num){ return num % 2 == 0; }) }} =>
 ```
 
@@ -213,7 +213,7 @@ Looks through each value in the **list**, returning the first one that passes a 
 
 Looks through each value in the **list**, returning an array of all the values that pass a truth test (**predicate**).
 
-```js
+```javascript
 {{ [1,2,3,4,5,6] | filter(function (num){ return num % 2 == 0; }) }} => [2,4,6]
 ```
 
@@ -225,7 +225,7 @@ Looks through each value in the **list**, returning an array of all the values t
 
 Returns the values in **list** without the elements that the truth test (**predicate**) passes. The opposite of **filter**.
 
-```js
+```javascript
 {{ [1,2,3,4,5,6] | reject(function (num){ return num % 2 == 0; }) }} => [1,3,5]
 ```
 
@@ -236,7 +236,7 @@ Returns the values in **list** without the elements that the truth test (**predi
 
 Returns _true_ if all of the values in the **list** pass the **predicate** truth test. Short-circuits and stops traversing the list if a false element is found.
 
-```js
+```javascript
 {{ [2,4,5] | every(function (num) { return num % 2 == 0; }) }} => false
 ```
 
@@ -247,7 +247,7 @@ Returns _true_ if all of the values in the **list** pass the **predicate** truth
 
 Returns _true_ if any of the values in the **list** pass the **predicate** truth test. Short-circuits and stops traversing the list if a true element is found.
 
-```js
+```javascript
 {{ [null,0,"yes",false] | some(val => !val ) }} => true
 ```
 
@@ -258,7 +258,7 @@ Returns _true_ if any of the values in the **list** pass the **predicate** truth
 
 Returns _true_ if the **value** is present in the **list**. Uses **indexOf** internally, if **list** is an Array. Use **fromIndex** to start your search at a given index.
 
-```js
+```javascript
 {{ [1,2,3] | contains(3) }} => true
 ```
 
@@ -270,7 +270,7 @@ Returns _true_ if the **value** is present in the **list**. Uses **indexOf** int
 
 A convenient version of what is perhaps the most common use-case for **map**: extracting a list of property values.
 
-```js
+```javascript
 {{ [{
   "name": "moe",
   "age": 40
@@ -291,7 +291,7 @@ A convenient version of what is perhaps the most common use-case for **map**: ex
 
 Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _-Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
 
-```js
+```javascript
 {{ [{
   "name": "moe",
   "age": 40
@@ -312,7 +312,7 @@ Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function 
 
 Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
 
-```js
+```javascript
 {{ [10,5,100,2,1000] | min }} => 2
 ```
 
@@ -324,7 +324,7 @@ Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function 
 
 Returns a (stably) sorted copy of **list**, ranked in ascending order by the results of running each value through [**iteratee**](#iteratee). iteratee may also be the string name of the property to sort by (eg. `length`).
 
-```js
+```javascript
 {{ [1,2,3,4,5,6] | sortBy(function (num){ return Math.sin(num); }) }} => [5,4,6,3,1,2]
 
 {{ [{
@@ -358,7 +358,7 @@ Returns a (stably) sorted copy of **list**, ranked in ascending order by the res
 
 Splits a collection into sets, grouped by the result of running each value through **iteratee**. If **iteratee** is a string instead of a function, groups by the property named by **iteratee** on each of the values.
 
-```js
+```javascript
 {{ [1.3, 2.1, 2.4] | groupBy(function (num){ return Math.floor(num); }) }} => {"1":[1.3],"2":[2.1,2.4]}
 
 {{ ["one","two","three"] | groupBy("length") }} => {"3":["one","two"],"5":["three"]}
@@ -372,7 +372,7 @@ Splits a collection into sets, grouped by the result of running each value throu
 
 Given a **list**, and an [**iteratee**](#iteratee) function that returns a key for each element in the list (or a property name), returns an object with an index of each item. Just like [groupBy](#groupBy), but for when you know your keys are unique.
 
-```js
+```javascript
 {{ [{
   "name": "moe",
   "age": 40
@@ -407,7 +407,7 @@ Given a **list**, and an [**iteratee**](#iteratee) function that returns a key f
 
 Sorts a list into groups and returns a count for the number of objects in each group. Similar to `groupBy`, but instead of returning a list of values, returns a count for the number of values in that group.
 
-```js
+```javascript
 {{ [1,2,3,4,5] | countBy(function (num) {
   return num % 2 == 0 ? 'even': 'odd';
 }) }} => {"odd":3,"even":2}
@@ -421,7 +421,7 @@ Sorts a list into groups and returns a count for the number of objects in each g
 
 Returns a shuffled copy of the **list**, using a version of the [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle).
 
-```js
+```javascript
 {{ [1,2,3,4,5,6] | shuffle }} => [5,2,3,6,1,4]
 ```
 
@@ -433,7 +433,7 @@ Returns a shuffled copy of the **list**, using a version of the [Fisher-Yates sh
 
 Produce a random sample from the **list**. Pass a number to return **n** random elements from the list. Otherwise a single random item will be returned.
 
-```js
+```javascript
 {{ [1,2,3,4,5,6] | sample }} => one element
 
 {{ [1,2,3,4,5,6] | sample(3) }} => there elements
@@ -447,7 +447,7 @@ Produce a random sample from the **list**. Pass a number to return **n** random 
 
 Creates a real Array from the **list** (anything that can be iterated over). Useful for transmuting the **arguments** object.
 
-```js
+```javascript
 {{ {"0":1,"1":2,"2":3,"3":4} | toArray }} => [1,2,3,4]
 ```
 
@@ -459,7 +459,7 @@ Creates a real Array from the **list** (anything that can be iterated over). Use
 
 Return the number of values in the **list**.
 
-```js
+```javascript
 {{ {"one":1,"two":2,"three":3} | size }} => 3
 ```
 
@@ -474,7 +474,7 @@ _Note: All array functions will also work on the **arguments** object. However, 
 
 Returns the first element of an **array**. Passing **n** will return the first **n** elements of the array.
 
-```js
+```javascript
 {{ [5,4,3,2,1] | first }} => 5
 
 {{ [1,2] | first(0, [[1,2],[3,4]]) }} => 1
@@ -490,7 +490,7 @@ Returns the first element of an **array**. Passing **n** will return the first *
 
 Returns everything but the last entry of the array. Especially useful on the arguments object. Pass **n** to exclude the last **n** elements from the result.
 
-```js
+```javascript
 {{ [5,4,3,2,1] | initial }} => [5,4,3,2]
 ```
 
@@ -502,7 +502,7 @@ Returns everything but the last entry of the array. Especially useful on the arg
 
 Returns the last element of an **array**. Passing **n** will return the last **n** elements of the array.
 
-```js
+```javascript
 {{ [5,4,3,2,1] | last }} => 1
 ```
 
@@ -513,7 +513,7 @@ Returns the last element of an **array**. Passing **n** will return the last **n
 
 Returns the **rest** of the elements in an array. Pass an **index** to return the values of the array from that index onward.
 
-```js
+```javascript
 {{ [5,4,3,2,1] | rest }} => [4,3,2,1]
 ```
 
@@ -525,7 +525,7 @@ Returns the **rest** of the elements in an array. Pass an **index** to return th
 
 Flattens a nested **array** (the nesting can be to any depth). If you pass **shallow**, the array will only be flattened a single level.
 
-```js
+```javascript
 {{ [1,[2],[3,[[4]]]] | flatten }} => [1,2,3,4]
 
 {{ [1,[2],[3,[[4]]]] | flatten(true) }} => [1,2,3,[[4]]]
@@ -539,7 +539,7 @@ Flattens a nested **array** (the nesting can be to any depth). If you pass **sha
 
 Returns a copy of the **array** with all instances of the **values** removed.
 
-```js
+```javascript
 {{ [1,2,1,0,3,1,4] | without(0, 1) }} => [2,3,4]
 ```
 
@@ -551,7 +551,7 @@ Returns a copy of the **array** with all instances of the **values** removed.
 
 Computes the union of the passed-in **arrays**: the list of unique items, in order, that are present in one or more of the **arrays**.
 
-```js
+```javascript
 {{ [1,2,3] | union([101,2,1,10], [2,1]) }} => [1,2,3,101,10]
 ```
 
@@ -563,7 +563,7 @@ Computes the union of the passed-in **arrays**: the list of unique items, in ord
 
 Computes the list of values that are the intersection of all the **arrays**. Each value in the result is present in each of the **arrays**.
 
-```js
+```javascript
 {{ [1,2,3] | intersection([101,2,1,10], [2,1]) }} => [1,2]
 ```
 
@@ -575,7 +575,7 @@ Computes the list of values that are the intersection of all the **arrays**. Eac
 
 Similar to **without**, but returns the values from **array** that are not present in the **other** arrays.
 
-```js
+```javascript
 {{ [1,2,3,4,5] | difference([5,2,10]) }} => [1,3,4]
 ```
 
@@ -586,7 +586,7 @@ Similar to **without**, but returns the values from **array** that are not prese
 
 Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurence of each value is kept. If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. If you want to compute unique items based on a transformation, pass an [**iteratee**](#iteratee) function.
 
-```js
+```javascript
 {{ [1,2,1,4,1,3] | uniq }} => [1,2,4,3]
 ```
 
@@ -632,7 +632,7 @@ Concatenates an array into another one.
 
 #### replace
 
-```js
+```javascript
 {{ 'ab-cd' | replace('-', '') }}  => 'abcd'
 ```
 
@@ -640,7 +640,7 @@ Concatenates an array into another one.
 
 #### substr
 
-```js
+```javascript
 {{ 'javascript' | substr(0, 4) }} => 'java'
 ```
 
@@ -649,7 +649,7 @@ Concatenates an array into another one.
 
 #### substring
 
-```js
+```javascript
 {{ 'javascript' | substring(0,2) }} => 'ja'
 ```
 
@@ -723,7 +723,7 @@ Strips tabs, spaces, and newlines (all whitespace) from the left or right or bot
 
 #### trimLeft
 
-```js
+```javascript
 {{ '   some spaces   ' | trimLeft }} => 'some spaces   '
 ```
 
@@ -731,7 +731,7 @@ Strips tabs, spaces, and newlines (all whitespace) from the left or right or bot
 
 #### trimRight
 
-```js
+```javascript
 {{ '   some spaces   ' | trimRight }} => '   some spaces'
 ```
 
@@ -807,7 +807,7 @@ Uppercase a string.
 
 Retrieve all the names of the **object**'s own enumerable properties.
 
-```js
+```javascript
 {{ {"one":1,"two":2,"three":3} | keys }} => ["one","two","three"]
 ```
 
@@ -818,7 +818,7 @@ Retrieve all the names of the **object**'s own enumerable properties.
 
 Retrieve _all_ the names of **object**'s own and inherited properties.
 
-```js
+```javascript
 {{ {"name":"Moe"} | allKeys }} => ["name","silly"]
 ```
 
@@ -830,7 +830,7 @@ Retrieve _all_ the names of **object**'s own and inherited properties.
 
 Return all of the values of the **object**'s own properties.
 
-```js
+```javascript
 {{ {"one":1,"two":2,"three":3} | values }} => [1,2,3]
 ```
 
@@ -842,7 +842,7 @@ Return all of the values of the **object**'s own properties.
 
 Convert an object into a list of `[key, value]` pairs. The opposite of [object](#object).
 
-```js
+```javascript
 {{ {"one":1,"two":2,"three":3} | pairs }} => [["one",1],["two",2],["three",3]]
 ```
 
@@ -854,7 +854,7 @@ Convert an object into a list of `[key, value]` pairs. The opposite of [object](
 
 Returns a copy of the **object** where the keys have become the values and the values the keys. For this to work, all of your object's values should be unique and string serializable.
 
-```js
+```javascript
 {{ {
     "Moe": "Moses",
     "Larry": "Louis",
@@ -875,7 +875,7 @@ Returns a copy of the **object** where the keys have become the values and the v
 
 Shallowly copy all of the properties **in** the **source** objects over to the **destination** object, and return the **destination** object. Any nested objects or arrays will be copied by reference, not duplicated. It's in-order, so the last source will override properties of the same name in previous arguments.
 
-```js
+```javascript
 {{ {"name":"moe"} | extend({"age":50}) }} => {"name":"moe","age":50}
 ```
 
@@ -887,11 +887,11 @@ Shallowly copy all of the properties **in** the **source** objects over to the *
 
 Return a copy of the **object**, filtered to only have values for the whitelisted **keys** (or array of valid keys). Alternatively accepts a predicate indicating which keys to pick.
 
-```js
+```javascript
 {{ {"name":"moe","age":50,"userid":"moe1"} | pick("name", "age") }} => {"name":"moe","age":50}
 
 {{ {"name":"moe","age":50,"userid":"moe1"} | pick(function (value, key, object) {
-  return _.isNumber(value);
+  return typeof value === 'number'
 }) }} => {"age":50}
 ```
 
@@ -903,11 +903,11 @@ Return a copy of the **object**, filtered to only have values for the whiteliste
 
 Return a copy of the **object**, filtered to omit the blacklisted **keys** (or array of keys). Alternatively accepts a predicate indicating which keys to omit.
 
-```js
+```javascript
 {{ {"name":"moe","age":50,"userid":"moe1"} | omit("userid") }} => {"name":"moe","age":50}
 
 {{ {"name":"moe","age":50,"userid":"moe1"} | omit(function (value, key, object) {
-  return _.isNumber(value);
+  return typeof value === 'number'
 }) }} => {"name":"moe","userid":"moe1"}
 ```
 
@@ -919,7 +919,7 @@ Return a copy of the **object**, filtered to omit the blacklisted **keys** (or a
 
 Returns **object** after filling in its `undefined` properties with the first value present in the following list of **defaults** objects.
 
-```js
+```javascript
 {{ {"flavor":"chocolate"} | defaults({"flavor":"vanilla","sprinkles":"lots"}) }} => {"flavor":"chocolate","sprinkles":"lots"}
 ```
 
@@ -931,7 +931,7 @@ Returns **object** after filling in its `undefined` properties with the first va
 
 Does the object contain the given key? Identical to `object.hasOwnProperty(key)`, but uses a safe reference to the `hasOwnProperty` function, in case it's been [overridden accidentally](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/).
 
-```js
+```javascript
 {{ {"a":1,"b":2,"c":3} | has("b") }} => true
 ```
 
@@ -942,7 +942,7 @@ Does the object contain the given key? Identical to `object.hasOwnProperty(key)`
 `abs`,`acos`,`asin`,`atan`,`atan2`,`ceil`,`cos`,`exp`,`floor`,`log`,`pow`,`round`,`sin`,`sqrt`,`tan`
 
 
-```js
+```javascript
 {{ -1.2 | abs }}  => 1.2
 {{ 1 | acos }}  => 0
 {{ 1.3 | ceil }} => 2
@@ -980,7 +980,7 @@ Return mean value of a array.
 
 Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
 
-```js
+```javascript
 {{ [10,5,100,2,1000] | min }} => 2
 ```
 
@@ -992,7 +992,7 @@ Returns the minimum value in **list**. If an [**iteratee**](#iteratee) function 
 
 Returns the maximum value in **list**. If an [**iteratee**](#iteratee) function is provided, it will be used on each value to generate the criterion by which the value is ranked. _-Infinity_ is returned if **list** is empty, so an [isEmpty](#isEmpty) guard may be required. Non-numerical values in **list** will be ignored.
 
-```js
+```javascript
 {{ [{
     "name":"moe","age":40
 },{
@@ -1080,7 +1080,7 @@ Divides an output by a number and returns the remainder.
 
 Escapes a string for insertion into HTML, replacing `&`, `<`, `>`, `"`, ```, and `'` characters.
 
-```js
+```javascript
 {{ "Curly, Larry & Moe" | escape }} => "Curly, Larry &amp; Moe"
 ```
 
@@ -1091,7 +1091,7 @@ Escapes a string for insertion into HTML, replacing `&`, `<`, `>`, `"`, ```, and
 
 The opposite of [**escape**](#escape), replaces `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#96;` and `&#x27;` with their unescaped counterparts.
 
-```js
+```javascript
 {{ "Curly, Larry &amp; Moe" | unescape }} => "Curly, Larry & Moe"
 ```
 
@@ -1103,7 +1103,7 @@ The opposite of [**escape**](#escape), replaces `&amp;`, `&lt;`, `&gt;`, `&quot;
 
 If the value of the named **property** is a function then invoke it with the **object** as context; otherwise, return it. If a default value is provided and the property doesn't exist or is undefined then the default will be returned. If `defaultValue` is a function its result will be returned.
 
-```js
+```javascript
 {{ {"cheese":"crumpets"} | result("cheese") }} => "crumpets"
 
 {{ {"cheese":"crumpets"} | result("meat", "ham") }} => "ham"
@@ -1115,7 +1115,7 @@ If the value of the named **property** is a function then invoke it with the **o
 
 Converts a timestamp into another date format.
 
-```js
+```javascript
 {{ Date.now() | date('%T') }}  => current time, format like: '13:34:36'
 {{ 'Wed Jan 20 2016 13:34:36 GMT+0800' | date('%T') }} => '13:34:36'
 {{ 1453268193752 | date('%Y-%m-%d') }} => '2016-01-20'

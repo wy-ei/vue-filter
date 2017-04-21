@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var util = require('../util');
 
-let base = {};
+var base = {};
 
 ['toFixed', 'toPrecision'].forEach(function(method) {
     base[method] = function(num) {

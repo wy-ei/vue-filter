@@ -1,3 +1,5 @@
+'use strict';
+
 /*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 var filters = require('./filters');

@@ -2,7 +2,7 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": false
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -27,6 +27,7 @@
         ]
     },
 	"globals": {
-    	"Vue": true
+    	"Vue": true,
+        "__dirname": true
   	}
 }

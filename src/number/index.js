@@ -1,5 +1,3 @@
 var base = require('./base');
 
-module.exports = {
-    ...base
-};
+module.exports = base;

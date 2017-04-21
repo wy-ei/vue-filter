@@ -34,7 +34,7 @@ function trimRight(str){
 }
 
 module.exports = {
-    trim,
-    trimLeft,
-    trimRight
+    trim: trim,
+    trimLeft: trimLeft,
+    trimRight: trimRight
 };

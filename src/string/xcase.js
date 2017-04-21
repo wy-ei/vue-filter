@@ -43,7 +43,7 @@ function camelcase(str) {
 
 
 module.exports = {
-    uppercase,
-    lowercase,
-    camelcase
+    uppercase: uppercase,
+    lowercase: lowercase,
+    camelcase: camelcase
 };

@@ -13,16 +13,15 @@ module.exports = {
         libraryTarget: 'umd'
     },
     module: {
-         rules: [{
+        rules: [{
             test: /\.js$/,
             exclude: path.resolve(__dirname, 'node_modules'),
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['es2015','stage-0']
+                    presets: ['es2015', 'stage-0']
                 }
             }
         }]
-    },
-    devtool: "source-map"
+    }
 };
