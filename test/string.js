@@ -130,3 +130,11 @@ test('lowercase', function (t) {
     t.equal(lowercase('AWEsoME'),'awesome');
     t.end();
 });
+
+test('nl2br', function(t){
+    var nl2br = filters.nl2br;
+    t.equal(nl2br('first line \n\r second line'), 'first line <br/> second line');
+    t.equal(nl2br('first line \r\n second line', /\r\n/), 'first line <br/> second line');
+    t.equal(nl2br(), undefined);
+    t.end();
+});

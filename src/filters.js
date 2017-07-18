@@ -49,7 +49,8 @@ var filters = {};
     'has',
     'escape',
     'unescape',
-    'result'
+    'result',
+    'nl2br'
 ].forEach(function(key){
     filters[key] = _[key];
 });

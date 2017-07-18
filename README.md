@@ -119,6 +119,7 @@ Click the filter to see how to use it.
 + [repeat](#repeat)
 + [lowercase](#lowercase)
 + [uppercase](#uppercase)
++ [nl2br](#nl2br)
 
 ### Object Filters
 
@@ -800,6 +801,21 @@ Uppercase a string.
 ```javascript
 {{ 'Vue' | uppercase }} => 'VUE'
 ```
+
+#### nl2br
+
+Replace new lines by `<br/>` tags. This returns a string conainting html tag so in order
+to prevent vue from escaping the tags special rendering is needed: `{{{ triple handlebars }}}` in Vue 1.0, `v-html` with direct filter function in Vue 2.0
+
+
+```
+// Vue 1.0
+<p> {{{ text | nl2br }}} </p>
+
+// Vue 2.0
+<p v-html="$options.filters.nl2br(text)"></p>
+```
+ 
 
 ### Object Filters
 
