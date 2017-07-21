@@ -23,13 +23,17 @@ If you include the file with `<script>` tag, the filters will be installed autom
 ```
 
 If you use a bundle tools like webpack, you need install the filters manually.
+As from Vue 2.0 you have to install the extension using the `Vue.use()` sytax.
+
 
 ```js
 var vueFilter = require('vue-filter');
 var Vue = require('vue');
 
-Vue.install(vueFilter);
+// Vue.install(vueFilter); // Vue V1 
+Vue.use(vueFilter);        // Vue V2
 ```
+
 
 ### step 2. use filter
 
