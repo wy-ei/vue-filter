@@ -8,6 +8,7 @@ var truncate = require('./truncate');
 var xpad = require('./xpad');
 var repeat = require('./repeat');
 var xcase = require('./xcase');
+var nl2br = require('./nl2br');
 var _ = require('underscore');
 
 module.exports = _.extend({
@@ -16,5 +17,6 @@ module.exports = _.extend({
     remove: remove, // enhance
     test: test,
     truncate: truncate,
-    repeat: repeat
+    repeat: repeat,
+    nl2br: nl2br
 }, base, xcase, xpad, trimx);
