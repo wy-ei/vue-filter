@@ -1079,7 +1079,7 @@ Divides an output by a number and returns the remainder.
 #### toFixed
 
 ```javascript
-{{ 3.1415926 | toFixed(3) }} => "3.1415"
+{{ 3.1415926 | toFixed(4) }} => "3.1415"
 ```
 
 <p align="right"><small><a href="#filter-list">Back Top</a></small></p>
