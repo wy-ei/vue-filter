@@ -11,41 +11,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-
+/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -56,7 +56,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 			});
 /******/ 		}
 /******/ 	};
-
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -65,15 +65,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-
+/******/
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 30);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1696,15 +1696,15 @@ module.exports = util;
 
 
 var collection = __webpack_require__(5);
-var math = __webpack_require__(9);
-var string = __webpack_require__(21);
-var other = __webpack_require__(18);
-var number = __webpack_require__(14);
+var math = __webpack_require__(10);
+var string = __webpack_require__(22);
+var other = __webpack_require__(19);
+var number = __webpack_require__(15);
 var _ = __webpack_require__(0);
 
 var filters = {};
 
-['map', 'reduce', 'find', 'filter', 'reject', 'every', 'some', 'contains', 'pluck', 'max', 'min', 'sortBy', 'groupBy', 'indexBy', 'countBy', 'shuffle', 'sample', 'toArray', 'size', 'first', 'initial', 'last', 'rest', 'flatten', 'without', 'union', 'intersection', 'difference', 'uniq', 'keys', 'allKeys', 'values', 'pairs', 'invert', 'extend', 'pick', 'omit', 'defaults', 'has', 'escape', 'unescape', 'result'].forEach(function (key) {
+['map', 'reduce', 'find', 'filter', 'reject', 'every', 'some', 'contains', 'pluck', 'max', 'min', 'sortBy', 'groupBy', 'indexBy', 'countBy', 'shuffle', 'sample', 'toArray', 'size', 'first', 'initial', 'last', 'rest', 'flatten', 'without', 'union', 'intersection', 'difference', 'uniq', 'keys', 'allKeys', 'values', 'pairs', 'invert', 'extend', 'pick', 'omit', 'defaults', 'has', 'escape', 'unescape', 'result', 'nl2br'].forEach(function (key) {
     filters[key] = _[key];
 });
 
@@ -1873,6 +1873,34 @@ module.exports = reverse;
 "use strict";
 
 
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
+
+var filters = __webpack_require__(2);
+var _ = __webpack_require__(0);
+
+function install(Vue) {
+    _.each(filters, function (value, key) {
+        if (Vue.filter(key)) {
+            console.warn('[filter duplication]: A filter named ' + key + 'has already been installed.');
+        } else {
+            Vue.filter(key, value);
+        }
+    });
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+    Vue.use(install);
+}
+
+module.exports = install;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * 
  * @description all the method in Math without random
@@ -1900,17 +1928,17 @@ var base = {};
 module.exports = base;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var base = __webpack_require__(8);
-var operator = __webpack_require__(11);
+var base = __webpack_require__(9);
+var operator = __webpack_require__(12);
 
-var sum = __webpack_require__(12);
-var mean = __webpack_require__(10);
+var sum = __webpack_require__(13);
+var mean = __webpack_require__(11);
 
 var _ = __webpack_require__(0);
 
@@ -1920,7 +1948,7 @@ module.exports = _.extend({
 }, operator, base);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1957,7 +1985,7 @@ function mean(arr) {
 module.exports = mean;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2010,7 +2038,7 @@ var operator = {};
 module.exports = operator;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2049,7 +2077,7 @@ function sum(list, base) {
 module.exports = sum;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2077,18 +2105,18 @@ var base = {};
 module.exports = base;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var base = __webpack_require__(13);
+var base = __webpack_require__(14);
 
 module.exports = base;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2283,7 +2311,7 @@ function date(date, formatString) {
 module.exports = date;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2309,7 +2337,7 @@ function debounce(handler, delay) {
 module.exports = debounce;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2335,15 +2363,15 @@ function get(obj, accessor) {
 module.exports = get;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var date = __webpack_require__(15);
-var get = __webpack_require__(17);
-var debounce = __webpack_require__(16);
+var date = __webpack_require__(16);
+var get = __webpack_require__(18);
+var debounce = __webpack_require__(17);
 
 module.exports = {
     date: date,
@@ -2352,7 +2380,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2376,7 +2404,7 @@ function append(str, postfix) {
 module.exports = append;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2416,22 +2444,23 @@ var base = {};
 module.exports = base;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var append = __webpack_require__(19);
-var prepend = __webpack_require__(22);
-var remove = __webpack_require__(23);
-var base = __webpack_require__(20);
-var test = __webpack_require__(25);
-var trimx = __webpack_require__(26);
-var truncate = __webpack_require__(27);
-var xpad = __webpack_require__(29);
-var repeat = __webpack_require__(24);
-var xcase = __webpack_require__(28);
+var append = __webpack_require__(20);
+var prepend = __webpack_require__(24);
+var remove = __webpack_require__(25);
+var base = __webpack_require__(21);
+var test = __webpack_require__(27);
+var trimx = __webpack_require__(28);
+var truncate = __webpack_require__(29);
+var xpad = __webpack_require__(31);
+var repeat = __webpack_require__(26);
+var xcase = __webpack_require__(30);
+var nl2br = __webpack_require__(23);
 var _ = __webpack_require__(0);
 
 module.exports = _.extend({
@@ -2440,11 +2469,52 @@ module.exports = _.extend({
     remove: remove, // enhance
     test: test,
     truncate: truncate,
-    repeat: repeat
+    repeat: repeat,
+    nl2br: nl2br
 }, base, xcase, xpad, trimx);
 
 /***/ }),
-/* 22 */
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Replaces new line to br tag based on regex /\r\n/g -> this can be overwritten by passing
+ * your own regex as second param.
+ *
+ * returns a single sting best printed as raw html.
+ *
+ * Vue 1.0  <p> {{{ text | nl2br }}} </p>
+ *
+ * Vue 2.0  <p v-html="$options.filters.nl2br(text)"></p>
+ * NOTE: v-html does not support the piped filter syntax so directly access the filter function.
+ */
+
+function nl2br(text) {
+  var reg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : /\n\r/g;
+
+  if (text && text !== null) {
+    var i = void 0,
+        s = '',
+        lines = text.split(reg),
+        l = lines.length;
+
+    for (i = 0; i < l; ++i) {
+      s += lines[i];
+      i !== l - 1 && (s += '<br/>');
+    }
+
+    return s;
+  }
+  return text;
+}
+
+module.exports = nl2br;
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2468,7 +2538,7 @@ function prepend(str, prefix) {
 module.exports = prepend;
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2495,7 +2565,7 @@ function remove(str, substr) {
 module.exports = remove;
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2536,7 +2606,7 @@ function repeat(str, n) {
 module.exports = repeat;
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2556,7 +2626,7 @@ function test(str, re, flag) {
 module.exports = test;
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2604,7 +2674,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2642,7 +2712,7 @@ function truncate(str, length, ellipses) {
 module.exports = truncate;
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2692,7 +2762,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2752,34 +2822,6 @@ module.exports = {
     leftPad: leftPad,
     rightPad: rightPad
 };
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
-
-var filters = __webpack_require__(2);
-var _ = __webpack_require__(0);
-
-function install(Vue) {
-    _.each(filters, function (value, key) {
-        if (Vue.filter(key)) {
-            console.warn('[filter duplication]: A filter named ' + key + 'has already been installed.');
-        } else {
-            Vue.filter(key, value);
-        }
-    });
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-    Vue.use(install);
-}
-
-module.exports = install;
 
 /***/ })
 /******/ ]);

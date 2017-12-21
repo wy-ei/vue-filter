@@ -5,7 +5,7 @@
   "main": "dist/vue-filter.js",
   "scripts": {
     "build": "webpack",
-    "postbuild": "uglifyjs -c -m --output dist/vue-filter.min.js --source-map dist/vue-filter.min.js.map -- dist/vue-filter.js",
+    "postbuild": "uglifyjs -c -m --output dist/vue-filter.min.js -- dist/vue-filter.js",
     "test": "node test/index.js",
     "lint": "eslint src test"
   },
