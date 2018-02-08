@@ -1,4 +1,3 @@
-let webpack = require('webpack');
 let path = require('path');
 
 module.exports = {
@@ -19,7 +18,7 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['es2015', 'stage-0']
+                    presets: ['env']
                 }
             }
         }]

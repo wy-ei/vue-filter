@@ -1,6 +1,6 @@
 {
   "name": "vue-filter",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A collection of Vue.js filter.",
   "main": "dist/vue-filter.js",
   "scripts": {
@@ -28,8 +28,7 @@
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-0": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
     "babel-register": "^6.23.0",
     "eslint": "^3.19.0",
     "marked": "^0.3.6",
