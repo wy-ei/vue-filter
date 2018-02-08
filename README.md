@@ -27,11 +27,11 @@ As from Vue 2.0 you have to install the extension using the `Vue.use()` sytax.
 
 
 ```js
-var vueFilter = require('vue-filter');
-var Vue = require('vue');
+import VueFilter from 'vue-filter';
+import Vue from 'vue';
 
 // Vue.install(vueFilter); // Vue V1 
-Vue.use(vueFilter);        // Vue V2
+Vue.use(VueFilter);        // Vue V2
 ```
 
 
