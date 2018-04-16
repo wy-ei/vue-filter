@@ -2286,7 +2286,7 @@ function date(date, formatString) {
                 ret = '%m/%d/%y';
                 break;
             case '%X':
-                ret = '%h:%M:%s';
+                ret = '%H:%M:%s';
                 break;
             case '%y':
                 ret = d.getFullYear() % 100;
