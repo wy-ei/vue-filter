@@ -1,6 +1,6 @@
 # vue-filter [![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
 
-**A collection of [Vue.js](https://github.com/vuejs/vue) filter**
+**A collection of [Vue.js](https://github.com/vuejs/vue) filter, based on [underscore.js](https://github.com/jashkenas/underscore).**
 
 **Notice: Normally, you will only use few filters in your project, so you don't need to import this library entirely. Consider use a library like [Lodash](https://github.com/lodash/lodash) and write the filter you need by yourself.** 
 
