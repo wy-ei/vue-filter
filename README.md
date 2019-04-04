@@ -1,8 +1,14 @@
-# vue-filter [![](https://travis-ci.org/wy-ei/vue-filter.svg)](https://travis-ci.org/wy-ei/vue-filter)
+# vue-filter  \[Depressed\]
 
-**A collection of [Vue.js](https://github.com/vuejs/vue) filter, based on [underscore.js](https://github.com/jashkenas/underscore).**
+**A collection of [Vue.js](https://github.com/vuejs/vue) filters, based on [underscore.js](https://github.com/jashkenas/underscore).**
 
-**Notice: Normally, you will only use few filters in your project, so you don't need to import this library entirely. Consider use a library like [Lodash](https://github.com/lodash/lodash) and write the filter you need by yourself.** 
+## DO NOT USE
+
+You will only use few filters in your project, and you don't need all of those filters. Please consider using a library like [Lodash](https://github.com/lodash/lodash) and write the filter you needed by yourself.
+
+I will no longer maintain this repo, since I think that import a large colloection of filters in project but only use a few is not a good practice.
+
+---
 
 ## How to use ?
 
@@ -1146,37 +1152,35 @@ Converts a timestamp into another date format.
 
 **More date parameters are listed below:**
 
-**Notice**: In column 3 of the table below, ｜(a special symbol) is not | (used to split data and filter), because of the syntax of markdown we can't use | inside a table.
-
 | Param | Explanation | Example |
 |:-----:|:-----|:-----|
-|%a | Abbreviated weekday. | `{{ timestamp｜date "%a" }} => "Sat" ` |
-|%A |Full weekday name. |`{{ timestamp｜date "%A" }} => "Tuesday" `|
-|%b |Abbreviated month name. |`{{ timestamp｜date "%b" }} => "Jan" `|
-|%B |Full month name |`{{ timestamp｜date "%B" }} => "January" `|
-|%c |Preferred local date and time representation |`{{ timestamp｜date "%c" }} => "Tue Apr 22 11:16:09 2014" `|
-|%d |Day of the month, zero-padded (01, 02, 03, etc.). |`{{ timestamp｜date "%d" }} => "04" `|
-|%-d |Day of the month, not zero-padded (1,2,3, etc.). |`{{ timestamp｜date "%-d" }} => "4" `|
-|%D |Formats the date (dd/mm/yy). |`{{ timestamp｜date "%D" }} => "04/22/14" `|
-|%e |Day of the month, blank-padded ( 1, 2, 3, etc.). |`{{ timestamp｜date "%e" }} => "3" `|
-|%F |Returns the date in ISO 8601 format (yyyy-mm-dd). |`{{ timestamp｜date "%F" }} => "2014-04-22" `|
-|%H |Hour of the day, 24-hour clock (00 - 23). |`{{ timestamp｜date "%H" }} => "15" `|
-|%I |Hour of the day, 12-hour clock (1 - 12). |`{{ timestamp｜date "%I" }} => "7" `|
-|%j |Day of the year (001 - 366). |`{{ timestamp｜date "%j" }} => "245" `|
-|%k |Hour of the day, 24-hour clock (1 - 24). |`{{ timestamp｜date "%k" }} => "14" `|
-|%m |Month of the year (01 - 12). |`{{ timestamp｜date "%m" }} => "04" `|
-|%M |Minute of the hour (00 - 59). |`{{ timestamp｜date "%M" }} => "53" `|
-|%p |Meridian indicator (AM/PM). |`{{ timestamp｜date "%p" }} => "PM" `|
-|%r |12-hour time (%I:%M:%S %p) |`{{ timestamp｜date "%r" }} => "03:20:07 PM" `|
-|%R |24-hour time (%H:%M) |`{{ timestamp｜date "%R" }} => "15:21" `|
-|%T |24-hour time (%H:%M:%S) |`{{ timestamp｜date "%T" }} => "15:22:13" `|
-|%U |The number of the week in the current year, starting with the first Sunday as the first day of the first week. |`{{ timestamp｜date "%U" }} => "16" `|
-|%W |The number of the week in the current year, starting with the first Monday as the first day of the first week. |`{{ timestamp｜date "%W" }} => "16" `|
-|%w |Day of the week (0 - 6, with Sunday being 0). |`{{ timestamp｜date "%w" }} => "2" `|
-|%x |Preferred representation for the date alone, no time. (mm/dd/yy). |`{{ timestamp｜date "%x" }} => "04/22/14" `|
-|%X |Preferred representation for the time. (hh:mm:ss). |`{{ timestamp｜date "%X" }} => "13:17:24" `|
-|%y |Year without a century (00.99). |`{{ timestamp｜date "%y" }} => "14" `|
-|%Y |Year with a century. |`{{ timestamp｜date "%Y" }} => "2014" `|
+|%a | Abbreviated weekday. | "%a" => "Sat" |
+|%A |Full weekday name. | "%A" => "Tuesday"|
+|%b |Abbreviated month name. |"%b" => "Jan"|
+|%B |Full month name |"%B" => "January"|
+|%c |Preferred local date and time representation |"%c" => "Tue Apr 22 11:16:09 2014"|
+|%d |Day of the month, zero-padded (01, 02, 03, etc.). |"%d" => "04"|
+|%-d |Day of the month, not zero-padded (1,2,3, etc.). |"%-d" => "4"|
+|%D |Formats the date (dd/mm/yy). |"%D" => "04/22/14"|
+|%e |Day of the month, blank-padded ( 1, 2, 3, etc.). |"%e" => "3"|
+|%F |Returns the date in ISO 8601 format (yyyy-mm-dd). |"%F" => "2014-04-22"|
+|%H |Hour of the day, 24-hour clock (00 - 23). |"%H" => "15"|
+|%I |Hour of the day, 12-hour clock (1 - 12). |"%I" => "7"|
+|%j |Day of the year (001 - 366). |"%j" => "245"|
+|%k |Hour of the day, 24-hour clock (1 - 24). |"%k" => "14"|
+|%m |Month of the year (01 - 12). |"%m" => "04"|
+|%M |Minute of the hour (00 - 59). |"%M" => "53"|
+|%p |Meridian indicator (AM/PM). |"%p" => "PM"|
+|%r |12-hour time (%I:%M:%S %p) |"%r" => "03:20:07 PM"|
+|%R |24-hour time (%H:%M) |"%R" => "15:21"|
+|%T |24-hour time (%H:%M:%S) |"%T" => "15:22:13"|
+|%U |The number of the week in the current year, starting with the first Sunday as the first day of the first week. |"%U" => "16"|
+|%W |The number of the week in the current year, starting with the first Monday as the first day of the first week. |"%W" => "16"|
+|%w |Day of the week (0 - 6, with Sunday being 0). |"%w" => "2"|
+|%x |Preferred representation for the date alone, no time. (mm/dd/yy). |"%x" => "04/22/14"|
+|%X |Preferred representation for the time. (hh:mm:ss). |"%X" => "13:17:24"|
+|%y |Year without a century (00.99). |"%y" => "14"|
+|%Y |Year with a century. |"%Y" => "2014"|
 
 
 
