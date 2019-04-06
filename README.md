@@ -6,7 +6,7 @@
 
 You will only use few filters in your project, and you don't need all of those filters. Please consider using a library like [Lodash](https://github.com/lodash/lodash) and write the filter you needed by yourself.
 
-I will no longer maintain this repo, since I think that import a large colloection of filters in project but only use a few is not a good practice.
+I will no longer maintain this repo, since importing a large colloections of filters but using a few is not a good practice.  And all of those filters can be implemented with [Lodash](https://github.com/lodash/lodash) or [underscore.js](https://github.com/jashkenas/underscore) in a few lines of code.
 
 ---
 
